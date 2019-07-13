@@ -1,5 +1,7 @@
-" Plugins
-call plug#begin('~/AppData/Local/nvim/plugins-database')
+let vim_root_folder = '~/AppData/Local/nvim'
+
+" Plugins Manager
+call plug#begin(vim_root_folder . '/plugins-database')
 
 " General
 Plug 'tpope/vim-sensible'    	" a standard vimrc configuration
@@ -16,7 +18,7 @@ Plug 'junegunn/fzf.vim'
 " Syntax Checker
 " Plug 'vim-syntastic/syntastic'
 
-" Languages
+" Language Specifics
 Plug 'rust-lang/rust.vim'
 
 " Visuals
@@ -31,9 +33,9 @@ Plug 'joshdick/onedark.vim'
 call plug#end()
 
 " ------------- "
+" Vim Settings
 
-set guifont=FuraCode\ NF:h12
-execute 'GuiFont! FuraCode NF:h12'
+"set guifont=FuraCode\ NF:h12 " neovim uses 'GuiFont' at ginit.vim to set font
 
 syntax on
 colorscheme onedark
@@ -46,11 +48,13 @@ set number
 set showmatch
 
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 set autoindent
 set copyindent
 set nowrap
 set smarttab
+set expandtab
 
 set backspace=indent,eol,start
 
@@ -63,8 +67,14 @@ set noswapfile
 set history=1000
 set undolevels=1000
 set title
+set fileformat=unix
+set fileformats=unix,dos
+
+set splitbelow
+set splitright
 
 " ------------- "
+" Key Remaps
 
 " Splits
 nnoremap <C-J> <C-W><C-J>
@@ -72,9 +82,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Terminal
+tnoremap <Esc> <C-\><C-n>
+
+" Others
+nnoremap <C-Q><C-V> :call Edit(vim_root_folder . '/init.vim')<CR>
+
 " ------------- "
-
-
+" Plugins Configurations
 
 let g:lightline = {
 	\ 'active': {
@@ -103,6 +118,17 @@ let g:lightline = {
 	\ 'component_type': {
 	\	'syntastic': 'error'
 	\ },
+    \ 'component': {
+	\   'lineinfo': ' %3l:%-2v',
+    \ },
+    \ 'separator': {
+	\   'left': '',
+    \   'right': ''
+    \ },
+    \ 'subseparator': {
+	\   'left': '',
+    \   'right': '' 
+    \ }
 \ }
 
 function! Filetype()
@@ -124,3 +150,9 @@ endfunction
 "	call lightline#update()
 "endfunction
 
+" ------------- "
+" Other Configurations
+
+function! Edit(filepath)
+	execute "e " . fnameescape(a:filepath)
+endfunction
