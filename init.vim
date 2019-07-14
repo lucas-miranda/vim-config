@@ -6,7 +6,9 @@ call plug#begin(vim_root_folder . '/plugins-database')
 " General
 Plug 'tpope/vim-sensible'    	" a standard vimrc configuration
 Plug 'scrooloose/nerdtree'   	" file tree viewer
-Plug 'kassio/neoterm'			" terminal inside vim
+" Plug 'kassio/neoterm'			" terminal inside vim
+Plug 'ycm-core/YouCompleteMe'   " autocomplete as you type
+                                " langs installed: rust and C#
 
 " Git
 Plug 'tpope/vim-fugitive'		" Git integration
@@ -17,6 +19,9 @@ Plug 'junegunn/fzf.vim'
 
 " Syntax Checker
 " Plug 'vim-syntastic/syntastic'
+
+" Compile
+Plug 'neomake/neomake'
 
 " Language Specifics
 Plug 'rust-lang/rust.vim'
@@ -46,6 +51,7 @@ set showcmd
 
 set number
 set showmatch
+set cursorline
 
 set tabstop=4
 set softtabstop=4
@@ -90,6 +96,9 @@ nnoremap <C-Q><C-V> :call Edit(vim_root_folder . '/init.vim')<CR>
 
 " ------------- "
 " Plugins Configurations
+
+" Lightline
+" ------------- "
 
 let g:lightline = {
 	\ 'active': {
@@ -139,6 +148,9 @@ function! Fileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
+" Syntastic
+" ------------- "
+
 "
 " augroup AutoSyntastic
 " 	autocmd!
@@ -149,6 +161,40 @@ endfunction
 "	SyntasticCheck
 "	call lightline#update()
 "endfunction
+
+" Racer
+" ------------- "
+
+" set hidden
+" let g:racer_cmd = '~/.cargo/bin/racer.exe'
+" let g:racer_experimental_completer = 1
+" au FileType rust nmap gd <Plug>(rust-def)
+" au FileType rust nmap gs <Plug>(rust-def-split)
+" au FileType rust nmap gx <Plug>(rust-def-vertical)
+" au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+" YouCompleteMe
+" ------------- "
+
+let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-pc-windows-msvc/lib/rustlib/src/rust/src'
+
+" Neomake
+" ------------- "
+
+call neomake#configure#automake('w')
+
+" NERDTree
+" ------------- "
+
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" Open automatically when neovim is opened without a file
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Toggle NERDTree
+map <C-n> :NERDTreeToggle<CR>
 
 " ------------- "
 " Other Configurations
