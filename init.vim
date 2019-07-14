@@ -93,6 +93,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " Others
 nnoremap <C-Q><C-V> :call Edit(vim_root_folder . '/init.vim')<CR>
+nnoremap <C-Q><C-G> :call Edit(vim_root_folder . '/ginit.vim')<CR>
 
 " ------------- "
 " Plugins Configurations
