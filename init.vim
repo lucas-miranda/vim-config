@@ -1,4 +1,4 @@
-let g:vim_root_folder = '~/AppData/Local/nvim'
+﻿let g:vim_root_folder = '~/AppData/Local/nvim'
 let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python37-32/python')
 let g:python_host_prog = g:python3_host_prog
 
@@ -87,6 +87,8 @@ set fileformats=unix,dos
 set splitbelow
 set splitright
 
+set timeoutlen=10000 " help to type some very long commands
+
 " ------------- "
 " Key Remaps
 
@@ -105,12 +107,20 @@ tnoremap <Esc> <C-\><C-n>
 
 " YouCompleteMe
 nnoremap <Leader>g :YcmCompleter GoTo<CR>
+nnoremap <Leader>i :YcmCompleter GetType<CR>
+
+" NERDTree
+map <C-n>n :NERDTreeToggle<CR>
+map <C-n>z :NERDTreeFocus<CR>
 
 " Spotify.vim
 nnoremap <Leader><Leader>Si :call spotify#requests#start()<CR>
 nnoremap <Leader><Leader>Sd :call spotify#requests#stop()<CR>
 nnoremap <Leader><Leader>Ss :call CheckSpotifyStatus()<CR>
 nnoremap <Leader><Leader>Sz :exec 'echo spotify#player#display()'<CR>
+
+" Lightline
+nnoremap <Leader><Leader>Lr :call LightlineReload()<CR>
 
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
@@ -128,8 +138,8 @@ nnoremap <Leader>M :messages<CR>
 let g:lightline = {
 	\ 'active': {
 	\	'left': [
-	\		[ 'mode', 'paste' ],
-	\		[ 'readonly', 'filename', 'modified', 'syntastic' ],
+	\		[ 'mode' ],
+	\		[ 'readonly', 'filename', 'codeanalysis' ],
 	\		[ 'gitbranch' ],
 	\		[ 'lineinfo', 'ctrlpmark' ]
 	\ 	],
@@ -149,12 +159,11 @@ let g:lightline = {
 	\	'ctrlpmark': 'CrtlPMark',
 	\	'time': 'LightlineCurrentTime',
 	\	'spotify': 'spotify#player#display',
+	\	'codeanalysis': 'LightlineCodeAnalysis'
 	\ },
 	\ 'component_expand': {
-	\	'syntastic': 'SyntasticStatuslineFlag'
 	\ },
 	\ 'component_type': {
-	\	'syntastic': 'error'
 	\ },
     \ 'component': {
 	\   'lineinfo': ' %3l:%-2v',
@@ -168,6 +177,13 @@ let g:lightline = {
     \   'right': '' 
     \ }
 \ }
+
+function! LightlineCodeAnalysis()
+    let l:error_count = youcompleteme#GetErrorCount()
+    let l:warn_count = youcompleteme#GetWarningCount()
+
+    return g:ycm_error_symbol . ' ' . l:error_count . '  ' . g:ycm_warning_symbol . ' ' . l:warn_count
+endfunction
 
 let s:clock_full_display = 0
 
@@ -188,61 +204,135 @@ function! LightlineCurrentTime()
 endfunction
 
 function! LightlineModified()
-    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    if &ft =~ 'help'
+        return ''
+    elseif &modified
+        return '+'
+    elseif &modifiable
+        return ''
+    endif
+
+    return '-'
 endfunction
 
 function! LightlineReadonly()
-    return &ft !~? 'help' && &readonly ? 'RO' : ''
+    if &ft !~? 'help' && &readonly 
+        return 'RO'
+    endif
+
+    return ''
 endfunction
 
 function! LightlineFilename()
-    let fname = expand('%:t')
-    return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+    let l:fname = expand('%:t')
+
+    if l:fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+        return g:lightline.ctrlp_item
+    elseif l:fname == '__Tagbar__'
+        return g:lightline.fname
+    elseif l:fname =~ '__Gundo\|NERD_tree' 
+        return ''
+    elseif &ft == 'vimfiler'
+        return vimfiler&get_status_string()
+    elseif &ft == 'unite'
+        return unite#get_status_string()
+    elseif &ft == 'vimshell'
+        return vimshell#get_status_string()
+    endif
+
+    let l:display_fname = ''
+
+    let l:readonly = LightlineReadonly()
+    if l:readonly != ''
+        let l:display_fname .= l:readonly . ' '
+    endif
+
+    if l:fname != ''
+        let l:display_fname .= l:fname
+    else
+        let l:display_fname .= '[No Name]'
+    endif
+
+    let l:modified = LightlineModified()
+    if l:modified != ''
+        let l:display_fname .= ' ' . l:modified
+    endif
+
+    return l:display_fname
 endfunction
 
 function! LightlineFugitive()
     try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-        let mark = ''  " edit here for cool mark
-        let branch = fugitive#head()
-        return branch !=# '' ? mark.branch : ''
-    endif
+        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+            let mark = ''
+            let branch = fugitive#head()
+
+            if branch !=# ''
+                return mark . ' ' . branch
+            endif
+        endif
     catch
     endtry
+
     return ''
 endfunction
 
 function! LightlineFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+    if winwidth(0) > 70 
+        return &fileformat . ' ' . WebDevIconsGetFileFormatSymbol()
+    endif
+
+    return ''
 endfunction
 
 function! LightlineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+    if winwidth(0) > 70
+        if strlen(&filetype)
+            return &filetype . ' ' . WebDevIconsGetFileTypeSymbol()
+        else
+            return 'no ft'
+        endif
+    endif
+
+    return ''
 endfunction
 
 function! LightlineFileencoding()
-    return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+    if winwidth(0) > 70
+        if &fenc !=# ''
+            return &fenc
+        else
+            return &enc
+        endif
+    endif
+
+    return ''
 endfunction
 
 function! LightlineMode()
-    let fname = expand('%:t')
-    return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+    let l:fname = expand('%:t')
+
+    if l:fname == '__Tagbar__'
+        return 'Tagbar'
+    elseif l:fname == 'ControlP'
+        return 'CtrlP'
+    elseif l:fname == '__Gundo__'
+        return 'Gundo'
+    elseif l:fname == '__Gundo_Preview__'
+        return 'Gundo Preview'
+    elseif l:fname =~ 'NERD_tree'
+        return 'NERDTree'
+    elseif &ft == 'unite'
+        return 'Unite'
+    elseif &ft == 'vimfiler'
+        return 'VimFiler'
+    elseif &ft == 'vimshell'
+        return 'VimShell'
+    elseif winwidth(0) > 60 
+        return lightline#mode()
+    endif
+
+    return ''
 endfunction
 
 function! CtrlPMark()
@@ -250,15 +340,15 @@ function! CtrlPMark()
         call lightline#link('iR'[g:lightline.ctrlp_regex])
         return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
               \ , g:lightline.ctrlp_next], 0)
-    else
-        return ''
     endif
+
+    return ''
 endfunction
 
 let g:ctrlp_status_func = {
     \ 'main': 'CtrlPStatusFunc_1',
     \ 'prog': 'CtrlPStatusFunc_2',
-    \ }
+\ }
 
 function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
     let g:lightline.ctrlp_regex = a:regex
@@ -341,9 +431,6 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " Open automatically when neovim is opened without a file
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
 
 " FZF
 " ------------- "
