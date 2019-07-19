@@ -1,3 +1,4 @@
 plugins-database/
-.netrwhist
 autoload/secret.vim
+.netrwhist
+bash.exe.stackdump
