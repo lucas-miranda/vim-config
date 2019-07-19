@@ -135,7 +135,65 @@ nnoremap <Leader>M :messages<CR>
 " Lightline
 " ------------- "
 
+"
+" lightline detail modes will work as:
+"   0 - normal (full informations)
+"   1 - simplified (important info and some extra)
+"   2 - minimal (only most important info)
+"
+" more detail modes can be added, but it should always be
+" in descending order of detail
+"
+let g:lightline_detail_modes = [
+    \ {
+    \   'name': 'full',
+    \ }, {
+    \   'name': 'simplified',
+    \   'max-width': 70
+    \ }, {
+    \   'name': 'minimal',
+    \   'max-width': 40
+    \ }
+\ ]
+
+function! s:lightline_detail_mode(detail_mode_level)
+    let l:level = 0
+
+    for mode in g:lightline_detail_modes
+        if detail_mode_level == l:level
+            return mode
+        endif
+
+        let l:level += 1
+    endfor
+endfunction
+
+function! s:lightline_current_detail_mode()
+    let l:current_width = winwidth(0)
+    let l:detail_mode_name = ''
+    let l:detail_mode_level = 0
+
+    let l:current_detail_mode_level = 0
+    for mode in g:lightline_detail_modes
+        if has_key(mode, 'max-width') && l:current_width <= mode['max-width']
+            let l:detail_mode_name = mode.name
+            let l:detail_mode_level = l:current_detail_mode_level
+        endif
+
+        let l:current_detail_mode_level += 1
+    endfor
+
+    let l:detail_mode = g:lightline_detail_modes[l:detail_mode_level]
+
+    return { 
+        \ 'level': l:detail_mode_level, 
+        \ 'name': l:detail_mode.name, 
+        \ 'mode': l:detail_mode
+    \ }
+endfunction
+
 let g:lightline = {
+    \ 'colorscheme': 'one',
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],
@@ -144,29 +202,42 @@ let g:lightline = {
 	\		[ 'lineinfo', 'ctrlpmark' ]
 	\ 	],
 	\	'right': [
-	\		[ 'percent' ],
 	\		[ 'filetype' ],
-	\		[ 'spotify', 'time', 'fileencoding', 'fileformat' ]
+	\		[ 'time' ],
+	\		[ 'fileencoding', 'fileformat' ]
 	\	]
 	\ },
+    \ 'inactive': {
+    \   'left': [ 
+    \       [ 'inactivemodeorfilename' ],
+    \       [ ],
+    \       [ 'lineinfo' ]
+    \   ],
+    \   'right': [ 
+    \       [ 'filetype' ]
+    \   ] 
+    \ },
 	\ 'component_function': {
     \   'filename': 'LightlineFilename',
+    \   'readonly': 'LightlineReadonly',
 	\	'fileformat': 'LightlineFileformat',
 	\	'filetype': 'LightlineFiletype',
 	\	'fileencoding': 'LightlineFileencoding',
 	\	'mode': 'LightlineMode',
+	\	'inactivemode': 'LightlineInactiveMode',
 	\ 	'gitbranch': 'LightlineFugitive',
 	\	'ctrlpmark': 'CrtlPMark',
 	\	'time': 'LightlineCurrentTime',
-	\	'spotify': 'spotify#player#display',
-	\	'codeanalysis': 'LightlineCodeAnalysis'
+	\	'music': 'LightlineMusicDisplay',
+	\	'codeanalysis': 'LightlineCodeAnalysis',
+    \   'inactivemodeorfilename': 'LightlineInactiveModeOrFilename'
 	\ },
 	\ 'component_expand': {
 	\ },
 	\ 'component_type': {
 	\ },
     \ 'component': {
-	\   'lineinfo': ' %3l:%-2v',
+	\   'lineinfo': ' %l:%v',
     \ },
     \ 'separator': {
 	\   'left': '',
@@ -178,26 +249,63 @@ let g:lightline = {
     \ }
 \ }
 
+function! LightlineInactiveModeOrFilename()
+    let l:mode = LightlineInactiveMode()
+
+    if l:mode == ''
+        return LightlineFilename()
+    endif
+
+    return l:mode
+endfunction
+
 function! LightlineCodeAnalysis()
+    let l:detail_mode = s:lightline_current_detail_mode()
+
+    if l:detail_mode.name !=? 'full' 
+        return ''
+    endif
+
     let l:error_count = youcompleteme#GetErrorCount()
     let l:warn_count = youcompleteme#GetWarningCount()
 
     return g:ycm_error_symbol . ' ' . l:error_count . '  ' . g:ycm_warning_symbol . ' ' . l:warn_count
 endfunction
 
+function! LightlineMusicDisplay()
+    let l:detail_mode = s:lightline_current_detail_mode()
+    let l:music_display = spotify#player#display()
+
+    if l:detail_mode.name ==? 'minimal'
+        return ''
+    elseif l:detail_mode.name ==? 'simplified'
+        return spotify#player#status_icon() . ' ' . spotify#player#track()
+    else
+        return l:music_display
+    endif
+
+    return spotify#player#status_icon()
+endfunction
+
 let s:clock_full_display = 0
 
 function! LightlineCurrentTime()
-    if winwidth(0) <= 70
+    let l:detail_mode = s:lightline_current_detail_mode()
+
+    if l:detail_mode.name ==? 'minimal' 
         return ''
     endif
 
     let clock_text = ''
 
-    if s:clock_full_display
-        let clock_text = ' %H:%M | %A, %d de %B de %Y' 
+    if l:detail_mode.name ==? 'simplified' 
+        let clock_text = ' %H:%M'
     else
-        let clock_text = ' %H:%M | %a %d/%b'
+        if s:clock_full_display
+            let clock_text = ' %H:%M | %A, %d de %B de %Y' 
+        else
+            let clock_text = ' %H:%M | %a %d/%b'
+        endif
     endif
 
     return strftime(clock_text)
@@ -217,13 +325,19 @@ endfunction
 
 function! LightlineReadonly()
     if &ft !~? 'help' && &readonly 
-        return 'RO'
+        return ''
     endif
 
     return ''
 endfunction
 
 function! LightlineFilename()
+    let l:detail_mode = s:lightline_current_detail_mode()
+
+    if l:detail_mode.name == 'minimal'
+        return ''
+    endif
+
     let l:fname = expand('%:t')
 
     if l:fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
@@ -262,12 +376,18 @@ function! LightlineFilename()
 endfunction
 
 function! LightlineFugitive()
+    let l:detail_mode = s:lightline_current_detail_mode()
+
     try
         if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
             let mark = ''
             let branch = fugitive#head()
 
             if branch !=# ''
+                if l:detail_mode.name == 'minimal'
+                    return mark
+                endif
+
                 return mark . ' ' . branch
             endif
         endif
@@ -278,7 +398,9 @@ function! LightlineFugitive()
 endfunction
 
 function! LightlineFileformat()
-    if winwidth(0) > 70 
+    let l:detail_mode = s:lightline_current_detail_mode()
+
+    if l:detail_mode.name ==? 'full'
         return &fileformat . ' ' . WebDevIconsGetFileFormatSymbol()
     endif
 
@@ -286,19 +408,21 @@ function! LightlineFileformat()
 endfunction
 
 function! LightlineFiletype()
-    if winwidth(0) > 70
-        if strlen(&filetype)
-            return &filetype . ' ' . WebDevIconsGetFileTypeSymbol()
-        else
-            return 'no ft'
-        endif
+    let l:detail_mode = s:lightline_current_detail_mode()
+
+    if l:detail_mode.name ==? 'minimal'
+        return WebDevIconsGetFileTypeSymbol()
+    elseif strlen(&filetype)
+        return &filetype . ' ' . WebDevIconsGetFileTypeSymbol()
     endif
 
-    return ''
+    return 'no ft'
 endfunction
 
 function! LightlineFileencoding()
-    if winwidth(0) > 70
+    let l:detail_mode = s:lightline_current_detail_mode()
+
+    if l:detail_mode.name ==? 'full'
         if &fenc !=# ''
             return &fenc
         else
@@ -328,8 +452,30 @@ function! LightlineMode()
         return 'VimFiler'
     elseif &ft == 'vimshell'
         return 'VimShell'
-    elseif winwidth(0) > 60 
-        return lightline#mode()
+    endif
+
+    return lightline#mode()
+endfunction
+
+function! LightlineInactiveMode()
+    let l:fname = expand('%:t')
+
+    if l:fname == '__Tagbar__'
+        return 'Tagbar'
+    elseif l:fname == 'ControlP'
+        return 'CtrlP'
+    elseif l:fname == '__Gundo__'
+        return 'Gundo'
+    elseif l:fname == '__Gundo_Preview__'
+        return 'Gundo Preview'
+    elseif l:fname =~ 'NERD_tree'
+        return 'NERDTree'
+    elseif &ft == 'unite'
+        return 'Unite'
+    elseif &ft == 'vimfiler'
+        return 'VimFiler'
+    elseif &ft == 'vimshell'
+        return 'VimShell'
     endif
 
     return ''
@@ -443,17 +589,19 @@ let g:fzf_action = {
 
 " Spotify.vim
 
-let g:spotify_verbose = 0
-let g:spotify_auto_start_requests = 1
-let g:spotify_oauth_token = secret#spotify_oauth_token()
+if exists('g:spotify_display')
+    let g:spotify_verbose = 0
+    let g:spotify_auto_start_requests = 1
+    let g:spotify_oauth_token = secret#spotify_oauth_token()
 
-function! CheckSpotifyStatus()
-    let l:is_running = spotify#requests#is_running()
-    echo l:is_running ? 'Spotify requests are running.' : 'Spotify requests are stopped.'
-endfunction
+    function! CheckSpotifyStatus()
+        let l:is_running = spotify#requests#is_running()
+        echo l:is_running ? 'Spotify requests are running.' : 'Spotify requests are stopped.'
+    endfunction
 
-" start spotify requests
-call spotify#requests#start()
+    " start spotify requests
+    call spotify#requests#start()
+endif
 
 "------------- "
 " Other Configurations
