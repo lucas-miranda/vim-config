@@ -13,6 +13,9 @@ Plug 'ycm-core/YouCompleteMe'   " autocomplete as you type
                                 " langs installed: rust and C#
 Plug 'prabirshrestha/async.vim'
 
+" Org
+Plug 'jceb/vim-orgmode'
+
 " Git
 Plug 'tpope/vim-fugitive'		" Git integration
 
@@ -87,7 +90,11 @@ set fileformats=unix,dos
 set splitbelow
 set splitright
 
+set autowriteall
 set timeoutlen=10000 " help to type some very long commands
+
+set ssop-=options    " do not store global and local values in a session
+set ssop-=folds      " do not store folds
 
 " ------------- "
 " Key Remaps
@@ -111,6 +118,7 @@ nnoremap <Leader>i :YcmCompleter GetType<CR>
 
 " NERDTree
 map <C-n>n :NERDTreeToggle<CR>
+map <C-n><C-n> :NERDTreeToggle<CR>
 map <C-n>z :NERDTreeFocus<CR>
 
 " Spotify.vim
