@@ -597,19 +597,17 @@ let g:fzf_action = {
 
 " Spotify.vim
 
-if exists('g:spotify_display')
-    let g:spotify_verbose = 0
-    let g:spotify_auto_start_requests = 1
-    let g:spotify_oauth_token = secret#spotify_oauth_token()
+let g:spotify_verbose = 0
+let g:spotify_auto_start_requests = 1
+let g:spotify_oauth_token = secret#spotify_oauth_token()
 
-    function! CheckSpotifyStatus()
-        let l:is_running = spotify#requests#is_running()
-        echo l:is_running ? 'Spotify requests are running.' : 'Spotify requests are stopped.'
-    endfunction
+function! CheckSpotifyStatus()
+    let l:is_running = spotify#requests#is_running()
+    echo l:is_running ? 'Spotify requests are running.' : 'Spotify requests are stopped.'
+endfunction
 
-    " start spotify requests
-    call spotify#requests#start()
-endif
+" start spotify requests
+"call spotify#requests#start()
 
 "------------- "
 " Other Configurations
