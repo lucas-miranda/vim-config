@@ -9,7 +9,7 @@ call plug#begin(g:vim_root_folder . '/plugins-database')
 Plug 'tpope/vim-sensible'    	" a standard vimrc configuration
 Plug 'scrooloose/nerdtree'   	" file tree viewer
 " Plug 'kassio/neoterm'			" terminal inside vim
-Plug 'ycm-core/YouCompleteMe'   " autocomplete as you type
+Plug '~/AppData/Local/nvim/plugins-database/YouCompleteMe'   " autocomplete as you type
                                 " langs installed: rust and C#
 Plug 'prabirshrestha/async.vim'
 
@@ -23,7 +23,9 @@ Plug 'tpope/vim-fugitive'		" Git integration
 " Plug 'mattn/webapi-vim'         " handle http requests
 
 " Fuzzyfinder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
+"  FZF_DEFAULT_COMMNAND="fd --type f --hidden --follow --exclude .git"
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'sh install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Syntax Checker
@@ -136,6 +138,12 @@ nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>r :w <CR> :so %<CR>
 nnoremap <Leader>M :messages<CR>
+"
+" for scrolling up and down quickly
+nnoremap J 7j
+nnoremap K 7k
+vnoremap J 7j
+vnoremap K 7k
 
 " ------------- "
 " Plugins Configurations
@@ -595,7 +603,10 @@ let g:fzf_action = {
     \ 'ctrl-v': 'vsplit' 
 \ }
 
+set rtp+=~/.fzf
+
 " Spotify.vim
+" ------------- "
 
 let g:spotify_verbose = 0
 let g:spotify_auto_start_requests = 1
