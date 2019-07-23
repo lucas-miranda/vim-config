@@ -115,8 +115,8 @@ nnoremap <C-W><C-E> :res<CR> :vertical res<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " YouCompleteMe
-nnoremap <Leader>g :YcmCompleter GoTo<CR>
-nnoremap <Leader>i :YcmCompleter GetType<CR>
+nnoremap <Leader>f :YcmCompleter GoTo<CR>
+nnoremap <Leader>ki :YcmCompleter GetType<CR>
 
 " NERDTree
 map <C-n>n :NERDTreeToggle<CR>
@@ -132,13 +132,16 @@ nnoremap <Leader><Leader>Sz :exec 'echo spotify#player#display()'<CR>
 " Lightline
 nnoremap <Leader><Leader>Lr :call LightlineReload()<CR>
 
+" FZF
+nnoremap <Leader>g :FZF<CR>
+
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
 nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>r :w <CR> :so %<CR>
 nnoremap <Leader>M :messages<CR>
-"
+
 " for scrolling up and down quickly
 nnoremap J 7j
 nnoremap K 7k
@@ -147,6 +150,11 @@ vnoremap K 7k
 
 " ------------- "
 " Plugins Configurations
+
+" Vim DevIcons
+" ------------- "
+
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['cs'] = ''
 
 " Lightline
 " ------------- "
