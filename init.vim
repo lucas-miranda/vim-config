@@ -154,7 +154,9 @@ vnoremap K 7k
 " Vim DevIcons
 " ------------- "
 
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['cs'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
+    \ 'cs': ''
+\ }
 
 " Lightline
 " ------------- "
