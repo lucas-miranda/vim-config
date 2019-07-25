@@ -337,9 +337,9 @@ endfunction
 
 function! LightlineModified()
     if &ft =~ 'help'
-        return ''
+        return '' "
     elseif &modified
-        return '+'
+        return '﯑'
     elseif &modifiable
         return ''
     endif
@@ -349,7 +349,7 @@ endfunction
 
 function! LightlineReadonly()
     if &ft !~? 'help' && &readonly 
-        return ''
+        return ''
     endif
 
     return ''
