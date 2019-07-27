@@ -39,7 +39,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'OrangeT/vim-csharp'
 
 " Visuals
-Plug '~/AppData/Local/nvim/plugins-database/spotify.vim'
+Plug 'lucas-miranda/spotify.vim'
 Plug 'sheerun/vim-polyglot'  	" helps others plugins with language specifics support
 Plug 'itchyny/lightline.vim' 	" bottom powerline
 Plug 'ryanoasis/vim-devicons'	" tons of icons
@@ -65,6 +65,7 @@ set showcmd
 set number
 set showmatch
 set cursorline
+set hlsearch!
 
 set tabstop=4
 set softtabstop=4
@@ -141,6 +142,7 @@ nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>r :w <CR> :so %<CR>
 nnoremap <Leader>M :messages<CR>
+nnoremap <F3> :set hlsearch!<CR> 
 
 " for scrolling up and down quickly
 nnoremap J 7j
@@ -154,9 +156,11 @@ vnoremap K 7k
 " Vim DevIcons
 " ------------- "
 
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
-    \ 'cs': ''
-\ }
+if !exists('g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols')
+    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
+        \ 'cs': ''
+    \ }
+endif
 
 " Lightline
 " ------------- "
@@ -230,7 +234,7 @@ let g:lightline = {
 	\	'right': [
 	\		[ 'filetype' ],
 	\		[ 'time' ],
-	\		[ 'fileencoding', 'fileformat' ]
+	\		[ 'music', 'fileencoding', 'fileformat' ]
 	\	]
 	\ },
     \ 'inactive': {
@@ -618,9 +622,9 @@ set rtp+=~/.fzf
 " Spotify.vim
 " ------------- "
 
-let g:spotify_verbose = 0
+"let g:spotify_verbose = 1
 let g:spotify_auto_start_requests = 1
-let g:spotify_oauth_token = secret#spotify_oauth_token()
+"let g:spotify_oauth_token = secret#spotify_oauth_token()
 
 function! CheckSpotifyStatus()
     let l:is_running = spotify#requests#is_running()
@@ -628,7 +632,9 @@ function! CheckSpotifyStatus()
 endfunction
 
 " start spotify requests
-"call spotify#requests#start()
+call spotify#requests#start()
+
+"nnoremap <F5> :call spotify#providers#load(1)<CR>
 
 "------------- "
 " Other Configurations
