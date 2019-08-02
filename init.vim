@@ -108,7 +108,7 @@ let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden --follow --excl
 " ------------- "
 " Commands
 
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--all-text --numbers --color --ignore={.git,.vs} --group --width ' . (winwidth(0) - 10), <Bang>0)
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--numbers --ignore={.git,.vs} --width ' . (winwidth(0) - 10), {'options': '--delimiter : --nth 4..'} , <Bang>0)
 
 " ------------- "
 " Key Remaps
@@ -710,5 +710,6 @@ endfunction
 " Soft save when leaving a buffer or window loses focus
 augroup autoSoftSave
     autocmd!
-    autocmd BufLeave,FocusLost * wa
+    autocmd BufLeave * silent! w
+    autocmd FocusLost * silent! wa
 augroup END
