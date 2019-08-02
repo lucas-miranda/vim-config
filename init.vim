@@ -99,11 +99,16 @@ set timeoutlen=10000 " help to type some very long commands
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
 
-let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore --hidden --follow --exclude .git --color=always'
+" ------------- "
+" Path Variables
+
+let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden --follow --exclude {.git,.vs} --color=always'
 "let $FZF_DEFAULT_OPS = '--ansi'
 
 " ------------- "
 " Commands
+
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--all-text --numbers --color --ignore={.git,.vs} --group --width ' . (winwidth(0) - 10), <Bang>0)
 
 " ------------- "
 " Key Remaps
@@ -143,7 +148,7 @@ nnoremap <Leader><Leader>Lr :call LightlineReload()<CR>
 nnoremap <Leader>g :FZF<CR>
 nnoremap <Leader>t :Ag<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>rt :Filetypes<CR>
+nnoremap <Leader>Rt :Filetypes<CR>
 
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
