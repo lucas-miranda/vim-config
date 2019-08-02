@@ -99,6 +99,9 @@ set timeoutlen=10000 " help to type some very long commands
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
 
+let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore --hidden --follow --exclude .git --color=always'
+"let $FZF_DEFAULT_OPS = '--ansi'
+
 " ------------- "
 " Commands
 
@@ -138,6 +141,9 @@ nnoremap <Leader><Leader>Lr :call LightlineReload()<CR>
 
 " FZF
 nnoremap <Leader>g :FZF<CR>
+nnoremap <Leader>t :Ag<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>rt :Filetypes<CR>
 
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
@@ -622,6 +628,24 @@ let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-x': 'split',
     \ 'ctrl-v': 'vsplit' 
+\ }
+
+let g:fzf_layout = { 'window': '-tabnew' }
+
+let g:fzf_colors = {
+    \ 'fg':      ['fg', 'Normal'],
+    \ 'bg':      ['bg', 'Normal'],
+    \ 'hl':      ['fg', 'Comment'],
+    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+    \ 'hl+':     ['fg', 'Statement'],
+    \ 'info':    ['fg', 'PreProc'],
+    \ 'border':  ['fg', 'Ignore'],
+    \ 'prompt':  ['fg', 'Conditional'],
+    \ 'pointer': ['fg', 'Exception'],
+    \ 'marker':  ['fg', 'Keyword'],
+    \ 'spinner': ['fg', 'Label'],
+    \ 'header':  ['fg', 'Comment'] 
 \ }
 
 set rtp+=~/.fzf
