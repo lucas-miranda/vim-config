@@ -100,6 +100,9 @@ set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
 
 " ------------- "
+" Commands
+
+" ------------- "
 " Key Remaps
 
 let mapleader = " "
@@ -139,6 +142,8 @@ nnoremap <Leader>g :FZF<CR>
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
 nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
+nnoremap <C-Q><C-A> :call Edit('~/TODO.org')<CR>
+nnoremap <C-Q><C-T> :call Edit('TODO.org')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>r :w <CR> :so %<CR>
 nnoremap <Leader>M :messages<CR>
@@ -204,8 +209,10 @@ function! s:lightline_current_detail_mode()
     let l:detail_mode_level = 0
 
     let l:current_detail_mode_level = 0
+    let l:fname = expand('%:t')
+    let l:music_display = spotify#player#display()
     for mode in g:lightline_detail_modes
-        if has_key(mode, 'max-width') && l:current_width <= mode['max-width']
+        if has_key(mode, 'max-width') && (l:current_width - len(l:fname) - len(l:music_display)) <= mode['max-width']
             let l:detail_mode_name = mode.name
             let l:detail_mode_level = l:current_detail_mode_level
         endif
@@ -647,3 +654,32 @@ function! WrapBuf(range)
     execute a:range . 'bufdo! set wrap' 
 endfunction
 
+function! FindInFiles(pattern, ...)
+    let l:search_folder = expand('%:p:h')
+    let l:additional_args = []
+
+    if a:0 > 0
+        let l:remaining_args = a:0
+
+        " search_folder => root folder to recursive search
+        let l:search_folder = a:1
+        let l:remaining_args = l:remaining_args - 1
+
+        if l:remaining_args > 0
+            " max_count => max matches count
+            add(l:additional_args, '--max-count=' . a:1)
+            let l:remaining_args = l:remaining_args - 1
+        endif
+    endif
+
+    let l:additional_args = join(l:additional_args, ' ')
+    let l:grep_cmd = "!grep -rnI --exclude-dir={.git,.vs} " . l:additional_args . "'" . a:pattern . "' " . l:search_folder
+
+    echo execute(l:grep_cmd)
+endfunction
+
+" Soft save when leaving a buffer or window loses focus
+augroup autoSoftSave
+    autocmd!
+    autocmd BufLeave,FocusLost * wa
+augroup END
