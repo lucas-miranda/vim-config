@@ -192,13 +192,13 @@ endif
 "
 let g:lightline_detail_modes = [
     \ {
-    \   'name': 'full',
+    \   'name': 'full'
     \ }, {
     \   'name': 'simplified',
-    \   'max-width': 70
+    \   'max-width': 0.5
     \ }, {
     \   'name': 'minimal',
-    \   'max-width': 40
+    \   'max-width': 0.34
     \ }
 \ ]
 
@@ -216,14 +216,14 @@ endfunction
 
 function! s:lightline_current_detail_mode()
     let l:current_width = winwidth(0)
+    let l:window_width = &columns
     let l:detail_mode_name = ''
     let l:detail_mode_level = 0
 
     let l:current_detail_mode_level = 0
-    let l:fname = expand('%:t')
-    let l:music_display = spotify#player#display()
+
     for mode in g:lightline_detail_modes
-        if has_key(mode, 'max-width') && (l:current_width - len(l:fname) - len(l:music_display)) <= mode['max-width']
+        if has_key(mode, 'max-width') && l:current_width / (l:window_width * 1.0) <= mode['max-width']
             let l:detail_mode_name = mode.name
             let l:detail_mode_level = l:current_detail_mode_level
         endif
@@ -323,6 +323,24 @@ endfunction
 function! LightlineMusicDisplay()
     let l:detail_mode = s:lightline_current_detail_mode()
     let l:music_display = spotify#player#display()
+
+    " impose some width limits to music_display
+    let l:display_length = len(l:music_display)
+    if l:display_length > 70 " max width to make detail mode decay one level
+        if l:detail_mode.level - 1 >= 0
+            let l:previous_mode = s:lightline_detail_mode(l:detail_mode.level - 1)
+            let l:detail_mode.level = l:new_mode.level - 1
+            let l:detail_mode.name = l:new_mode.name
+            let l:detail_mode.mode = l:new_mode
+        endif
+    elseif l:display_length > 50 " max width to make detail mode decay two level
+        if l:detail_mode.level - 2 >= 0
+            let l:new_mode = s:lightline_detail_mode(l:detail_mode.level - 2)
+            let l:detail_mode.level = l:new_mode.level - 2
+            let l:detail_mode.name = l:new_mode.name
+            let l:detail_mode.mode = l:new_mode
+        endif
+    endif
 
     if l:detail_mode.name ==? 'minimal'
         return ''
