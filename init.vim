@@ -153,8 +153,8 @@ nnoremap <Leader>Rt :Filetypes<CR>
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
 nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
-nnoremap <C-Q><C-A> :call Edit('~/TODO.org')<CR>
-nnoremap <C-Q><C-T> :call Edit('TODO.org')<CR>
+nnoremap <C-Q><C-A> :call EditTodo('~/TODO.org')<CR>
+nnoremap <C-Q><C-T> :call EditTodo('TODO.org')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>r :w <CR> :so %<CR>
 nnoremap <Leader>M :messages<CR>
@@ -681,6 +681,11 @@ endfunction
 
 function! WrapBuf(range)
     execute a:range . 'bufdo! set wrap' 
+endfunction
+
+function! EditTodo(filepath)
+	execute 'e ' . fnameescape(a:filepath)
+	execute bufnr('%') . 'bufdo! set wrap'
 endfunction
 
 function! FindInFiles(pattern, ...)
