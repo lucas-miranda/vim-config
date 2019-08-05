@@ -314,10 +314,16 @@ function! LightlineCodeAnalysis()
         return ''
     endif
 
-    let l:error_count = youcompleteme#GetErrorCount()
-    let l:warn_count = youcompleteme#GetWarningCount()
+    let l:code_analysis = ''
 
-    return g:ycm_error_symbol . ' ' . l:error_count . '  ' . g:ycm_warning_symbol . ' ' . l:warn_count
+    try 
+        let l:error_count = youcompleteme#GetErrorCount()
+        let l:warn_count = youcompleteme#GetWarningCount()
+        let l:code_analysis = g:ycm_error_symbol . ' ' . l:error_count . '  ' . g:ycm_warning_symbol . ' ' . l:warn_count
+    catch
+    endtry
+
+    return l:code_analysis
 endfunction
 
 function! LightlineMusicDisplay()
