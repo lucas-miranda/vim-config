@@ -113,7 +113,8 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--numbers --ignore={.git,.
 " ------------- "
 " Key Remaps
 
-let mapleader = " "
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 " Splits
 nnoremap <C-J> <C-W><C-J>
@@ -206,7 +207,7 @@ function! s:lightline_detail_mode(detail_mode_level)
     let l:level = 0
 
     for mode in g:lightline_detail_modes
-        if detail_mode_level == l:level
+        if a:detail_mode_level == l:level
             return mode
         endif
 
@@ -335,14 +336,14 @@ function! LightlineMusicDisplay()
     if l:display_length > 70 " max width to make detail mode decay one level
         if l:detail_mode.level - 1 >= 0
             let l:previous_mode = s:lightline_detail_mode(l:detail_mode.level - 1)
-            let l:detail_mode.level = l:new_mode.level - 1
+            let l:detail_mode.level = l:detail_mode.level - 1
             let l:detail_mode.name = l:new_mode.name
             let l:detail_mode.mode = l:new_mode
         endif
     elseif l:display_length > 50 " max width to make detail mode decay two level
         if l:detail_mode.level - 2 >= 0
             let l:new_mode = s:lightline_detail_mode(l:detail_mode.level - 2)
-            let l:detail_mode.level = l:new_mode.level - 2
+            let l:detail_mode.level = l:detail_mode.level - 2
             let l:detail_mode.name = l:new_mode.name
             let l:detail_mode.mode = l:new_mode
         endif
@@ -709,7 +710,7 @@ endfunction
 
 function! EditTodo(filepath)
 	execute 'e ' . fnameescape(a:filepath)
-	execute bufnr('%') . 'bufdo! set wrap'
+	"execute bufnr('%') . 'bufdo! set wrap'
 endfunction
 
 function! FindInFiles(pattern, ...)
