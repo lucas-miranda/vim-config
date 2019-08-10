@@ -12,6 +12,7 @@ Plug 'scrooloose/nerdtree'   	" file tree viewer
 Plug '~/AppData/Local/nvim/plugins-database/YouCompleteMe'   " autocomplete as you type
                                 " langs installed: rust and C#
 Plug 'prabirshrestha/async.vim'
+Plug 'chaoren/vim-wordmotion'   " Modify lowercase motions
 
 " Org
 Plug 'jceb/vim-orgmode'
@@ -95,6 +96,8 @@ set splitright
 
 set autowriteall
 set timeoutlen=10000 " help to type some very long commands
+
+set foldmethod=syntax
 
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
@@ -337,8 +340,8 @@ function! LightlineMusicDisplay()
         if l:detail_mode.level - 1 >= 0
             let l:previous_mode = s:lightline_detail_mode(l:detail_mode.level - 1)
             let l:detail_mode.level = l:detail_mode.level - 1
-            let l:detail_mode.name = l:new_mode.name
-            let l:detail_mode.mode = l:new_mode
+            let l:detail_mode.name = l:previous_mode.name
+            let l:detail_mode.mode = l:previous_mode
         endif
     elseif l:display_length > 50 " max width to make detail mode decay two level
         if l:detail_mode.level - 2 >= 0
