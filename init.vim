@@ -13,6 +13,8 @@ Plug '~/AppData/Local/nvim/plugins-database/YouCompleteMe'   " autocomplete as y
                                 " langs installed: rust and C#
 Plug 'prabirshrestha/async.vim'
 Plug 'chaoren/vim-wordmotion'   " Modify lowercase motions
+Plug 'RRethy/vim-illuminate'    " Automatically hightlights matching words under cursor
+"Plug 'scrooloose/nerdcommenter' " Toggles comments on several languages
 
 " Org
 Plug 'jceb/vim-orgmode'
@@ -40,6 +42,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'OrangeT/vim-csharp'
 
 " Visuals
+Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
 Plug 'lucas-miranda/spotify.vim'
 Plug 'sheerun/vim-polyglot'  	" helps others plugins with language specifics support
 Plug 'itchyny/lightline.vim' 	" bottom powerline
@@ -76,7 +79,6 @@ set copyindent
 set nowrap
 set smarttab
 set expandtab
-
 set backspace=indent,eol,start
 
 set hlsearch
@@ -699,6 +701,16 @@ endfunction
 call spotify#requests#start()
 
 "nnoremap <F5> :call spotify#providers#load(1)<CR>
+
+" Vim Illuminate
+" ------------- "
+
+let g:illuminate_ftblacklist = ['nerdtree']
+
+" NERD Commenter
+" ------------- "
+
+let g:NERDSpaceDelims = 1
 
 "------------- "
 " Other Configurations
