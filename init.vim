@@ -66,7 +66,7 @@ set termguicolors
 set noshowmode " lightline plugin already handles mode
 set showcmd
 
-set number
+"set number
 set showmatch
 set cursorline
 set hlsearch!
@@ -76,7 +76,7 @@ set softtabstop=4
 set shiftwidth=4
 set autoindent
 set copyindent
-set nowrap
+"set nowrap
 set smarttab
 set expandtab
 set backspace=indent,eol,start
@@ -100,6 +100,7 @@ set autowriteall
 set timeoutlen=10000 " help to type some very long commands
 
 set foldmethod=syntax
+filetype plugin indent on
 
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
