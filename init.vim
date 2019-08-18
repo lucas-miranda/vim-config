@@ -31,10 +31,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'sh install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Linters
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " Syntax Checker
-" Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 
 " Compile
 Plug 'neomake/neomake'
@@ -42,7 +42,8 @@ Plug 'neomake/neomake'
 " Language Specifics
 Plug 'rust-lang/rust.vim'
 "Plug 'OmniSharp/omnisharp-vim'
-Plug 'OrangeT/vim-csharp'
+"Plug 'lucas-miranda/vim-cs'
+"Plug 'OrangeT/vim-csharp'
 
 " Visuals
 Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
@@ -104,6 +105,7 @@ set timeoutlen=10000 " help to type some very long commands
 
 set foldmethod=syntax
 filetype plugin indent on
+filetype plugin on
 
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
@@ -166,55 +168,10 @@ augroup autoSoftSave
     autocmd FocusLost * silent! wa
 augroup END
 
-" Language Specifics
-augroup langsSpecifics
+augroup specialCommands
     autocmd!
-
-    "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-    " Follow symbol
-    autocmd FileType cs nnoremap <Leader>f :YcmCompleter GoTo<CR>
-
-    " Get type signature
-    autocmd FileType cs nnoremap <Leader>ki :YcmCompleter GetType<CR>
-
-    autocmd FileType cs nnoremap <Leader>Fi :YcmCompleter GoToReferences<CR>
-
-    autocmd FileType cs nnoremap <Leader>ks :YcmCompleter GetDoc<CR>
-
-    autocmd FileType cs nnoremap <Ctrl>. :YcmCompleter FixIt<CR>
-
-    autocmd FileType cs nnoremap <Leader>c :YcmCompleter RefactorRename
-
-    autocmd FileType cs nnoremap <Leader>R :YcmCompleter RestartServer<CR>
-
-    "autocmd FileType cs nnoremap <Leader>ki :YcmCompleter GoToReferences<CR>
-
-
-
-    " The following commands are contextual, based on the cursor position.
-    "autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-    "autocmd FileType cs nnoremap <buffer> <Leader>Fi :OmniSharpFindImplementations<CR>
-    "autocmd FileType cs nnoremap <buffer> <Leader>Fs :OmniSharpFindSymbol<CR>
-    "autocmd FileType cs nnoremap <buffer> <Leader>Fu :GoToRefe<CR>
-
-    " Finds members in the current buffer
-    "autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
-
-    "autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-    "autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-    "autocmd FileType cs nnoremap <buffer> <Leader>sd :OmniSharpDocumentation<CR>
-    "autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-    "autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
-
-    " Navigate up and down by method/property/field
-    "autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-    "autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
-
-    " Find all code errors/warnings for the current solution and populate the quickfix window
-    "autocmd FileType cs nnoremap <buffer> <Leader>se :OmniSharpGlobalCodeCheck<CR>
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 augroup END
-
 
 " ------------- "
 " Commands
@@ -259,10 +216,8 @@ nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>Rt :Filetypes<CR>
 
 " OmniSharp
-"nnoremap <Leader><Leader>Oss :OmniSharpStartServer<CR>
-"nnoremap <Leader><Leader>Osp :OmniSharpStopServer<CR>
-"nnoremap <Leader>r :OmniSharpRename<CR>
-"nnoremap <Leader> :OmniSharpRename<CR>
+nnoremap <Leader><Leader>Oss :OmniSharpStartServer<CR>
+nnoremap <Leader><Leader>Osp :OmniSharpStopServer<CR>
 
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
@@ -270,7 +225,6 @@ nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
 nnoremap <C-Q><C-A> :call EditTodo('~/TODO.org')<CR>
 nnoremap <C-Q><C-T> :call EditTodo('TODO.org')<CR>
 nnoremap <Leader>N :noh<CR>
-nnoremap <Leader>r :w <CR> :so %<CR>
 nnoremap <Leader>M :messages<CR>
 nnoremap <F3> :set hlsearch!<CR> 
 
@@ -297,30 +251,16 @@ endif
 
 call LoadPluginSettings('lightline')
 
-" Syntastic
-" ------------- "
-
-"
-" augroup AutoSyntastic
-" 	autocmd!
-" 	autocmd BufWritePost *.rs,*.toml call s:syntastic()
-" augroup END
-
-" function! s:syntastic()
-"	SyntasticCheck
-"	call lightline#update()
-"endfunction
-
 " Racer
 " ------------- "
 
-" set hidden
-" let g:racer_cmd = '~/.cargo/bin/racer.exe'
-" let g:racer_experimental_completer = 1
-" au FileType rust nmap gd <Plug>(rust-def)
-" au FileType rust nmap gs <Plug>(rust-def-split)
-" au FileType rust nmap gx <Plug>(rust-def-vertical)
-" au FileType rust nmap <leader>gd <Plug>(rust-doc)
+"set hidden
+"let g:racer_cmd = '~/.cargo/bin/racer.exe'
+"let g:racer_experimental_completer = 1
+"au FileType rust nmap gd <Plug>(rust-def)
+"au FileType rust nmap gs <Plug>(rust-def-split)
+"au FileType rust nmap gx <Plug>(rust-def-vertical)
+"au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " YouCompleteMe
 " ------------- "
@@ -328,7 +268,8 @@ call LoadPluginSettings('lightline')
 let g:ycm_error_symbol = ''
 let g:ycm_warning_symbol = ''
 let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-pc-windows-msvc/lib/rustlib/src/rust/src'
-"let g:ycm_auto_start_csharp_server = 1
+
+let g:ycm_auto_start_csharp_server = 1
 
 " Neomake
 " ------------- "
@@ -342,8 +283,8 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Open automatically when neovim is opened without a file
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " FZF
 " ------------- "
@@ -404,14 +345,20 @@ let g:NERDSpaceDelims = 1
 " OmniSharp
 " ------------- "
 
-let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_server_stdio = 0
 let g:OmniSharp_timeout = 5
 let g:OmniSharp_selector_ui = 'fzf'
 let g:OmniSharp_highlight_types = 2
 let g:OmniSharp_start_server = 0
-"let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp-roslyn/OmniSharp.exe')
-let g:OmniSharp_server_path = expand('~/AppData/Local/nvim/plugins-database/YouCompleteMe/third_party/omnisharp-roslyn/OmniSharp.exe')
-"set previewheight=3
+let g:OmniSharp_translate_cygwin_wsl = 0
+"let g:OmniSharp_typeLookupInPreview = 1
+"let g:OmniSharp_loglevel = 'debug'
+
+"let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp.http-win-x64/OmniSharp.exe')
+"let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp-win-x64/OmniSharp.exe')
+
+set previewheight=3
+set completeopt=longest,menuone,preview
 
 let g:OmniSharp_highlight_groups = {
     \ 'csUserIdentifier': [
@@ -427,10 +374,12 @@ let g:OmniSharp_highlight_groups = {
 " ------------- "
 
 let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'always'
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 
 let g:ale_linters = {
-    \ 'cs': [ 'OmniSharp' ] 
+    \ 'cs': [ 'OmniSharp', 'csc' ] 
 \ }
+
 
