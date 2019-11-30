@@ -1,0 +1,3 @@
+[submodule "bundle/syntax/hlsl"]
+	path = bundle/syntax/hlsl
+	url = https://github.com/beyondmarc/hlsl.vim.git
