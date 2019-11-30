@@ -1,5 +1,5 @@
 ﻿let g:vim_root_folder = '~/AppData/Local/nvim'
-let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python37-32/python')
+let g:python3_host_prog = expand('C:/Program Files/Python37/python')
 let g:python_host_prog = g:python3_host_prog
 
 " Plugins Manager
@@ -9,7 +9,7 @@ call plug#begin(g:vim_root_folder . '/plugins-database')
 Plug 'tpope/vim-sensible'    	" a standard vimrc configuration
 Plug 'scrooloose/nerdtree'   	" file tree viewer
 " Plug 'kassio/neoterm'			" terminal inside vim
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --cs-completer' }     " autocomplete as you type
+Plug 'ycm-core/YouCompleteMe',  "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
 Plug 'prabirshrestha/async.vim'
 Plug 'chaoren/vim-wordmotion'   " Modify lowercase motions
 Plug 'RRethy/vim-illuminate'    " Automatically hightlights matching words under cursor
@@ -31,7 +31,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'sh install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Linters
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 
 " Syntax Checker
 "Plug 'vim-syntastic/syntastic'
@@ -40,10 +40,13 @@ Plug 'w0rp/ale'
 Plug 'neomake/neomake'
 
 " Language Specifics
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
+"Plug 'racer-rust/vim-racer'
 "Plug 'OmniSharp/omnisharp-vim'
 "Plug 'lucas-miranda/vim-cs'
 "Plug 'OrangeT/vim-csharp'
+
+Plug 'beyondmarc/hlsl.vim'
 
 " Visuals
 Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
@@ -228,14 +231,10 @@ nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>M :messages<CR>
 nnoremap <F3> :set hlsearch!<CR> 
 
-" for scrolling up and down quickly
-nnoremap J 7j
-nnoremap K 7k
-vnoremap J 7j
-vnoremap K 7k
-
 " ------------- "
 " Plugins Configurations
+
+let g:cs_use = 'ycm'
 
 " Vim DevIcons
 " ------------- "
@@ -255,19 +254,19 @@ call LoadPluginSettings('lightline')
 " ------------- "
 
 "set hidden
-"let g:racer_cmd = '~/.cargo/bin/racer.exe'
+let g:racer_cmd = '~/.cargo/bin/racer.exe'
 "let g:racer_experimental_completer = 1
-"au FileType rust nmap gd <Plug>(rust-def)
-"au FileType rust nmap gs <Plug>(rust-def-split)
-"au FileType rust nmap gx <Plug>(rust-def-vertical)
-"au FileType rust nmap <leader>gd <Plug>(rust-doc)
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " YouCompleteMe
 " ------------- "
 
 let g:ycm_error_symbol = ''
 let g:ycm_warning_symbol = ''
-let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-pc-windows-msvc/lib/rustlib/src/rust/src'
+let g:ycm_rust_src_path = '~/.rustup/toolchains/nightly-x86_64-pc-windows-msvc/lib/rustlib/src/rust/src'
 
 let g:ycm_auto_start_csharp_server = 1
 
