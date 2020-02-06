@@ -1,6 +1,13 @@
-﻿let g:vim_root_folder = '~/AppData/Local/nvim'
-let g:python3_host_prog = expand('C:/Program Files/Python37/python')
-let g:python_host_prog = g:python3_host_prog
+﻿if has('win32')
+    let g:vim_root_folder = '~/AppData/Local/nvim'
+    let g:python3_host_prog = expand('C:/Program Files/Python37/python')
+    let g:python_host_prog = g:python3_host_prog
+else
+    let g:vim_root_folder = '/home/luke/.config/nvim'
+    "let g:python3_host_prog = '/usr/bin/python3'
+    "let g:python_host_prog = '/usr/bin/python'
+endif
+
 
 " Plugins Manager
 call plug#begin(g:vim_root_folder . '/plugins-database')
@@ -27,7 +34,13 @@ Plug 'tpope/vim-fugitive'		" Git integration
 " Fuzzyfinder
 "  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
 "  FZF_DEFAULT_COMMNAND="fd --type f --hidden --follow --exclude .git"
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'sh install --all' }
+set rtp+=~/.fzf
+if has('win32')
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'sh install --all' }
+else
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+endif
+
 Plug 'junegunn/fzf.vim'
 
 " Linters
@@ -49,7 +62,7 @@ Plug 'neomake/neomake'
 Plug 'beyondmarc/hlsl.vim'
 
 " Visuals
-Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
+"Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
 Plug 'lucas-miranda/spotify.vim'
 Plug 'sheerun/vim-polyglot'  	" helps others plugins with language specifics support
 Plug 'itchyny/lightline.vim' 	" bottom powerline
@@ -72,6 +85,8 @@ set termguicolors
 
 set noshowmode " lightline plugin already handles mode
 set showcmd
+
+"set wrap linebreak nolist
 
 "set number
 set showmatch
@@ -116,7 +131,7 @@ set ssop-=folds      " do not store folds
 " ------------- "
 " Path Variables
 
-let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden --follow --exclude {.git,.vs} --color=always'
+"let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden --follow --exclude {.git,.vs} --color=always'
 "let $FZF_DEFAULT_OPS = '--ansi'
 
 "------------- "
@@ -171,10 +186,10 @@ augroup autoSoftSave
     autocmd FocusLost * silent! wa
 augroup END
 
-augroup specialCommands
-    autocmd!
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-augroup END
+"augroup specialCommands
+"    autocmd!
+"    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+"augroup END
 
 " ------------- "
 " Commands
@@ -273,7 +288,7 @@ let g:ycm_auto_start_csharp_server = 1
 " Neomake
 " ------------- "
 
-call neomake#configure#automake('w')
+"call neomake#configure#automake('w')
 
 " NERDTree
 " ------------- "
@@ -312,8 +327,6 @@ let g:fzf_colors = {
     \ 'header':  ['fg', 'Comment'] 
 \ }
 
-set rtp+=~/.fzf
-
 " Spotify.vim
 " ------------- "
 
@@ -327,7 +340,7 @@ function! CheckSpotifyStatus()
 endfunction
 
 " start spotify requests
-call spotify#requests#start()
+"call spotify#requests#start()
 
 "nnoremap <F5> :call spotify#providers#load(1)<CR>
 
@@ -357,7 +370,7 @@ let g:OmniSharp_translate_cygwin_wsl = 0
 "let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp-win-x64/OmniSharp.exe')
 
 set previewheight=3
-set completeopt=longest,menuone,preview
+set completeopt=longest,menuone
 
 let g:OmniSharp_highlight_groups = {
     \ 'csUserIdentifier': [
@@ -382,3 +395,15 @@ let g:ale_linters = {
 \ }
 
 
+" Specifics
+" ------------- "
+
+" Unix
+" ------------- "
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+
+" .org
+" ------------- "
+
+autocmd FileType org setlocal shiftwidth=4 softtabstop=4 expandtab

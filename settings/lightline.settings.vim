@@ -97,7 +97,6 @@ let g:lightline = {
 	\ 	'gitbranch': 'LightlineFugitive',
 	\	'ctrlpmark': 'CrtlPMark',
 	\	'time': 'LightlineCurrentTime',
-	\	'music': 'LightlineMusicDisplay',
 	\	'codeanalysis': 'LightlineCodeAnalysis',
     \   'inactivemodeorfilename': 'LightlineInactiveModeOrFilename'
 	\ },
@@ -117,6 +116,8 @@ let g:lightline = {
     \   'right': '' 
     \ }
 \ }
+
+"	'music': 'LightlineMusicDisplay',
 
 function! LightlineInactiveModeOrFilename()
     let l:mode = LightlineInactiveMode()
