@@ -62,7 +62,7 @@ Plug 'neomake/neomake'
 Plug 'beyondmarc/hlsl.vim'
 
 " Visuals
-"Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
+Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
 Plug 'lucas-miranda/spotify.vim'
 Plug 'sheerun/vim-polyglot'  	" helps others plugins with language specifics support
 Plug 'itchyny/lightline.vim' 	" bottom powerline
@@ -285,6 +285,12 @@ let g:ycm_rust_src_path = '~/.rustup/toolchains/nightly-x86_64-pc-windows-msvc/l
 
 let g:ycm_auto_start_csharp_server = 1
 
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+set previewheight=3
+set completeopt=longest,preview,menuone,popup
+
 " Neomake
 " ------------- "
 
@@ -340,7 +346,7 @@ function! CheckSpotifyStatus()
 endfunction
 
 " start spotify requests
-"call spotify#requests#start()
+call spotify#requests#start()
 
 "nnoremap <F5> :call spotify#providers#load(1)<CR>
 
@@ -363,14 +369,11 @@ let g:OmniSharp_selector_ui = 'fzf'
 let g:OmniSharp_highlight_types = 2
 let g:OmniSharp_start_server = 0
 let g:OmniSharp_translate_cygwin_wsl = 0
-"let g:OmniSharp_typeLookupInPreview = 1
+let g:OmniSharp_typeLookupInPreview = 1
 "let g:OmniSharp_loglevel = 'debug'
 
 "let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp.http-win-x64/OmniSharp.exe')
 "let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp-win-x64/OmniSharp.exe')
-
-set previewheight=3
-set completeopt=longest,menuone
 
 let g:OmniSharp_highlight_groups = {
     \ 'csUserIdentifier': [
