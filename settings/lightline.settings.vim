@@ -93,6 +93,7 @@ let g:lightline = {
 	\	'filetype': 'LightlineFiletype',
 	\	'fileencoding': 'LightlineFileencoding',
 	\	'mode': 'LightlineMode',
+    \   'music': 'LightlineMusicDisplay',
 	\	'inactivemode': 'LightlineInactiveMode',
 	\ 	'gitbranch': 'LightlineFugitive',
 	\	'ctrlpmark': 'CrtlPMark',
@@ -116,8 +117,6 @@ let g:lightline = {
     \   'right': '' 
     \ }
 \ }
-
-"	'music': 'LightlineMusicDisplay',
 
 function! LightlineInactiveModeOrFilename()
     let l:mode = LightlineInactiveMode()
