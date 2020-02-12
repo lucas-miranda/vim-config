@@ -21,6 +21,7 @@ Plug 'prabirshrestha/async.vim'
 Plug 'chaoren/vim-wordmotion'   " Modify lowercase motions
 Plug 'RRethy/vim-illuminate'    " Automatically hightlights matching words under cursor
 "Plug 'scrooloose/nerdcommenter' " Toggles comments on several languages
+Plug 'ncm2/float-preview.nvim'  " Uses neovim float window to preview
 
 " Org
 Plug 'jceb/vim-orgmode'
@@ -127,6 +128,9 @@ filetype plugin on
 
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
+
+set previewheight=10
+set completeopt=longest,menuone
 
 " ------------- "
 " Path Variables
@@ -285,11 +289,8 @@ let g:ycm_rust_src_path = '~/.rustup/toolchains/nightly-x86_64-pc-windows-msvc/l
 
 let g:ycm_auto_start_csharp_server = 1
 
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
-set previewheight=3
-set completeopt=longest,preview,menuone,popup
+"let g:ycm_add_preview_to_completeopt = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " Neomake
 " ------------- "
@@ -397,6 +398,12 @@ let g:ale_linters = {
     \ 'cs': [ 'OmniSharp', 'csc' ] 
 \ }
 
+" float-preview
+" ------------- "
+
+let g:float_preview#docked = 0
+let g:float_preview#max_width = 100
+let g:float_preview#max_height = 10
 
 " Specifics
 " ------------- "
