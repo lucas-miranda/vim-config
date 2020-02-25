@@ -214,6 +214,26 @@ nnoremap <C-H> <C-W><C-H>
 " set split to the maximum width and height possible
 nnoremap <C-W><C-E> :res<CR> :vertical res<CR> 
 
+" Tabs
+nnoremap <A-h> :tabprevious<CR>
+nnoremap <A-l> :tabnext<CR>
+nnoremap <A-t> :tabnew<CR>
+nnoremap <A-x> :tabclose<CR>
+inoremap <A-h> <Esc>:tabprevious<CR>i
+inoremap <A-l> <Esc>:tabnext<CR>i
+inoremap <A-t> <Esc>:tabnew<CR>i
+inoremap <A-x> <Esc>:tabclose<CR>
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
+nnoremap <A-0> 10gt
+
 " Terminal
 tnoremap <Esc> <C-\><C-n>
 
