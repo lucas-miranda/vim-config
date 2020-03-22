@@ -63,7 +63,7 @@ Plug 'neomake/neomake'
 Plug 'beyondmarc/hlsl.vim'
 
 " Visuals
-Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
+"Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
 Plug 'lucas-miranda/spotify.vim'
 Plug 'sheerun/vim-polyglot'  	" helps others plugins with language specifics support
 Plug 'itchyny/lightline.vim' 	" bottom powerline
