@@ -123,6 +123,8 @@ set autowriteall
 set timeoutlen=10000 " help to type some very long commands
 
 set foldmethod=syntax
+"set foldlevelstart=1
+set foldlevel=20
 filetype plugin indent on
 filetype plugin on
 
