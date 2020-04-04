@@ -25,6 +25,7 @@ Plug 'ncm2/float-preview.nvim'  " Uses neovim float window to preview
 
 " Org
 Plug 'jceb/vim-orgmode'
+Plug 'vimwiki/vimwiki'                  " A personal wiki
 
 " Git
 Plug 'tpope/vim-fugitive'		" Git integration
@@ -84,6 +85,7 @@ syntax on
 colorscheme onedark
 set termguicolors
 
+set nocompatible
 set noshowmode " lightline plugin already handles mode
 set showcmd
 
@@ -426,6 +428,15 @@ let g:ale_linters = {
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 100
 let g:float_preview#max_height = 10
+
+" vimwiki
+" ------------- "
+
+let g:vimwiki_list = [{
+    \ 'path': '~/reference-wiki/',
+    \ 'syntax': 'default', 
+    \ 'ext': '.wiki'
+\ }]
 
 " Specifics
 " ------------- "
