@@ -13,25 +13,26 @@ endif
 call plug#begin(g:vim_root_folder . '/plugins-database')
 
 " General
-Plug 'tpope/vim-sensible'    	" a standard vimrc configuration
-Plug 'scrooloose/nerdtree'   	" file tree viewer
-" Plug 'kassio/neoterm'			" terminal inside vim
-Plug 'ycm-core/YouCompleteMe',  "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
+Plug 'tpope/vim-sensible'    	        " A standard vimrc configuration
+Plug 'ycm-core/YouCompleteMe', "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
 Plug 'prabirshrestha/async.vim'
-Plug 'chaoren/vim-wordmotion'   " Modify lowercase motions
-Plug 'RRethy/vim-illuminate'    " Automatically hightlights matching words under cursor
-"Plug 'scrooloose/nerdcommenter' " Toggles comments on several languages
-Plug 'ncm2/float-preview.nvim'  " Uses neovim float window to preview
+Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
+Plug 'RRethy/vim-illuminate'            " Automatically hightlights matching words under cursor
+Plug 'ncm2/float-preview.nvim'          " Uses neovim float window to preview
 
 " Org
 Plug 'jceb/vim-orgmode'
 Plug 'vimwiki/vimwiki'                  " A personal wiki
 
 " Git
-Plug 'tpope/vim-fugitive'		" Git integration
+Plug 'tpope/vim-fugitive'		        " Git integration
+
+" File manager interface
+"Plug 'scrooloose/nerdtree'   	        " File tree viewer
+Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
 
 " HTTP
-" Plug 'mattn/webapi-vim'         " handle http requests
+"Plug 'mattn/webapi-vim'                " Handle http requests
 
 " Fuzzyfinder
 "  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
@@ -52,29 +53,24 @@ Plug 'junegunn/fzf.vim'
 "Plug 'vim-syntastic/syntastic'
 
 " Compile
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 
-" Language Specifics
-"Plug 'rust-lang/rust.vim'
-"Plug 'racer-rust/vim-racer'
-"Plug 'OmniSharp/omnisharp-vim'
-"Plug 'lucas-miranda/vim-cs'
-"Plug 'OrangeT/vim-csharp'
-
+" Language Syntax
 Plug 'beyondmarc/hlsl.vim'
 
 " Visuals
-"Plug 'TaDaa/vimade'             " Makes inactive buffers fades a bit
-Plug 'lucas-miranda/spotify.vim'
-Plug 'sheerun/vim-polyglot'  	" helps others plugins with language specifics support
-Plug 'itchyny/lightline.vim' 	" bottom powerline
-Plug 'ryanoasis/vim-devicons'	" tons of icons
+"Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
+Plug 'lucas-miranda/spotify.vim'        " Retrieve info from Spotify to be displayed somewhere
+Plug 'sheerun/vim-polyglot'  	        " Helps others plugins with language specifics support
+Plug 'itchyny/lightline.vim' 	        " Bottom powerline
+Plug 'ryanoasis/vim-devicons'	        " Tons of icons
 
 " Themes
-" Plug 'junegunn/seoul256.vim'
+"Plug 'junegunn/seoul256.vim'
 Plug 'joshdick/onedark.vim'
 
 call plug#end()
+
 
 " ------------- "
 " Vim Settings
@@ -144,6 +140,10 @@ set completeopt=longest,menuone
 
 "------------- "
 " Functions
+
+function! PlugLoaded(name)
+    return has_key(g:plugs, a:name)
+endfunction
 
 function! Edit(filepath)
 	execute 'e ' . fnameescape(a:filepath)
@@ -242,9 +242,11 @@ nnoremap <A-0> 10gt
 tnoremap <Esc> <C-\><C-n>
 
 " NERDTree
-map <C-n>n :NERDTreeToggle<CR>
-map <C-n><C-n> :NERDTreeToggle<CR>
-map <C-n>z :NERDTreeFocus<CR>
+if PlugLoaded('nerdtree')
+    map <C-n>n :NERDTreeToggle<CR>
+    map <C-n><C-n> :NERDTreeToggle<CR>
+    map <C-n>z :NERDTreeFocus<CR>
+endif
 
 " Spotify.vim
 nnoremap <Leader><Leader>Si :call spotify#requests#start()<CR>
@@ -264,6 +266,19 @@ nnoremap <Leader>Rt :Filetypes<CR>
 " OmniSharp
 nnoremap <Leader><Leader>Oss :OmniSharpStartServer<CR>
 nnoremap <Leader><Leader>Osp :OmniSharpStopServer<CR>
+
+" Ranger.vim
+if PlugLoaded('ranger.vim')
+    map <leader>rr  :RangerEdit<cr>
+    map <leader>rv  :RangerVSplit<cr>
+    map <leader>rs  :RangerSplit<cr>
+    map <leader>rt  :RangerTab<cr>
+    map <leader>ri  :RangerInsert<cr>
+    map <leader>ra  :RangerAppend<cr>
+    map <leader>rc  :set operatorfunc=RangerChangeOperator<cr>g@
+    map <leader>rd  :RangerCD<cr>
+    map <leader>rld :RangerLCD<cr>
+endif
 
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
@@ -324,12 +339,14 @@ let g:ycm_auto_start_csharp_server = 1
 " NERDTree
 " ------------- "
 
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+if PlugLoaded('nerdtree')
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
 
-" Open automatically when neovim is opened without a file
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    " Open automatically when neovim is opened without a file
+    "autocmd StdinReadPre * let s:std_in=1
+    "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+endif
 
 " FZF
 " ------------- "
