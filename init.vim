@@ -4,8 +4,6 @@
     let g:python_host_prog = g:python3_host_prog
 else
     let g:vim_root_folder = '/home/luke/.config/nvim'
-    "let g:python3_host_prog = '/usr/bin/python3'
-    "let g:python_host_prog = '/usr/bin/python'
 endif
 
 
@@ -15,24 +13,20 @@ call plug#begin(g:vim_root_folder . '/plugins-database')
 " General
 Plug 'tpope/vim-sensible'    	        " A standard vimrc configuration
 Plug 'ycm-core/YouCompleteMe', "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
-Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/async.vim'         " Normalize async job control api between vim and neovim
 Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
 Plug 'RRethy/vim-illuminate'            " Automatically hightlights matching words under cursor
 Plug 'ncm2/float-preview.nvim'          " Uses neovim float window to preview
 
 " Org
-Plug 'jceb/vim-orgmode'
+"Plug 'jceb/vim-orgmode'
 Plug 'vimwiki/vimwiki'                  " A personal wiki
 
 " Git
 Plug 'tpope/vim-fugitive'		        " Git integration
 
 " File manager interface
-"Plug 'scrooloose/nerdtree'   	        " File tree viewer
 Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
-
-" HTTP
-"Plug 'mattn/webapi-vim'                " Handle http requests
 
 " Fuzzyfinder
 "  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
@@ -46,15 +40,6 @@ endif
 
 Plug 'junegunn/fzf.vim'
 
-" Linters
-"Plug 'w0rp/ale'
-
-" Syntax Checker
-"Plug 'vim-syntastic/syntastic'
-
-" Compile
-"Plug 'neomake/neomake'
-
 " Language Syntax
 Plug 'beyondmarc/hlsl.vim'
 
@@ -66,7 +51,6 @@ Plug 'itchyny/lightline.vim' 	        " Bottom powerline
 Plug 'ryanoasis/vim-devicons'	        " Tons of icons
 
 " Themes
-"Plug 'junegunn/seoul256.vim'
 Plug 'joshdick/onedark.vim'
 
 call plug#end()
@@ -74,14 +58,12 @@ call plug#end()
 " ------------- "
 " Vim Settings
 
-"set guifont=FuraCode\ NF:h12 " neovim uses 'GuiFont' at ginit.vim to set font
-
 syntax on
 colorscheme onedark
 set termguicolors
 
 set nocompatible
-set noshowmode " lightline plugin already handles mode
+set noshowmode " lightline.vim plugin already handles mode
 set showcmd
 
 "set wrap linebreak nolist
@@ -257,11 +239,11 @@ call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
 call plugins#load_settings('ranger.vim')
 call plugins#load_settings('fzf.vim')
-"call plugins#load_settings('ale')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')
 call plugins#load_settings('vim-devicons')
 call plugins#load_settings('float-preview.nvim')
+"call plugins#load_settings('ale')
 "call LoadPluginSettings('nerdcommenter')
 "call LoadPluginSettings('nerdtree')
 "call LoadPluginSettings('racer')
