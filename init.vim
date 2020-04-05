@@ -249,9 +249,6 @@ nnoremap <F3> :set hlsearch!<CR>
 
 "let g:cs_use = 'ycm'
 
-echomsg "Loading plugins settings..."
-echomsg " "
-
 call plugins#load_settings_with_dependents('YouCompleteMe', 'omnisharp')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
@@ -265,9 +262,6 @@ call plugins#load_settings('float-preview.nvim')
 "call LoadPluginSettings('nerdcommenter')
 "call LoadPluginSettings('nerdtree')
 "call LoadPluginSettings('racer')
-
-echomsg " "
-echomsg "Plugin settings loaded!"
 
 " .org
 " ------------- "

@@ -13,6 +13,12 @@ if exists('g:loaded_plugins')
 endif
 let g:loaded_plugins = 1
 
+" ------------------
+
+let g:plugins_verbose = 0
+
+" ------------------
+
 function! s:exists_file(filepath)
     return !empty(glob(a:filepath))
 endfunction
@@ -32,9 +38,12 @@ function! plugins#load_settings(plugin_name, ...)
     endif
 
     if !l:force && !plugins#is_plugin_loaded(a:plugin_name)
-        echohl WarningMsg
-        echomsg "Warning: Plugin '" . a:plugin_name . "' isn't loaded"
-        echohl None
+        if g:plugins_verbose != 0
+            echohl WarningMsg
+            echomsg "Warning: Plugin '" . a:plugin_name . "' isn't loaded"
+            echohl None
+        endif
+
         return 0
     endif
 
@@ -55,12 +64,17 @@ function! plugins#load_settings_with_dependents(plugin_name, ...)
         return 0
     endif
 
-    echomsg "Loading '" . a:plugin_name . "' dependents..."
+    if g:plugins_verbose != 0
+        echomsg "Loading '" . a:plugin_name . "' dependents..."
+    endif
 
     for arg in a:000
         call plugins#load_settings(arg, 1)
     endfor
 
-    echomsg "Dependents from '" . a:plugin_name . "' loaded!"
+    if g:plugins_verbose != 0
+        echomsg "Dependents from '" . a:plugin_name . "' loaded!"
+    endif
+
     return 1
 endfunction
