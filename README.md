@@ -10,7 +10,6 @@ Plugins
 
 - [junegunn/Vim-plug](https://github.com/junegunn/vim-plug)
 - [tpope/vim-sensible](https://github.com/tpope/vim-sensible)
-- [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 - [ycm-core/YouCompleteMe](https://github.com/ycm-core/YouCompleteMe)
 - [prabirshrestha/async.vim](https://github.com/prabirshrestha/async.vim)
 - [chaoren/vim-wordmotion](https://github.com/chaoren/vim-wordmotion)
