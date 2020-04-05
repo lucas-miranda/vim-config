@@ -71,7 +71,6 @@ Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
-
 " ------------- "
 " Vim Settings
 
@@ -132,18 +131,15 @@ set ssop-=folds      " do not store folds
 set previewheight=10
 set completeopt=longest,menuone
 
+" Unix
 " ------------- "
-" Path Variables
 
-"let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden --follow --exclude {.git,.vs} --color=always'
-"let $FZF_DEFAULT_OPS = '--ansi'
+if has('unix')
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+endif
 
 "------------- "
 " Functions
-
-function! PlugLoaded(name)
-    return has_key(g:plugs, a:name)
-endfunction
 
 function! Edit(filepath)
 	execute 'e ' . fnameescape(a:filepath)
@@ -156,11 +152,6 @@ endfunction
 function! EditTodo(filepath)
 	execute 'e ' . fnameescape(a:filepath)
 	"execute bufnr('%') . 'bufdo! set wrap'
-endfunction
-
-function! LoadPluginSettings(plugin_name)
-    let l:full_path = g:vim_root_folder . '/settings/' . a:plugin_name . '.settings.vim'
-    execute 'so ' . l:full_path
 endfunction
 
 function! FindInFiles(pattern, ...)
@@ -186,6 +177,9 @@ function! FindInFiles(pattern, ...)
 
     echo execute(l:grep_cmd)
 endfunction
+
+" Autocmds
+"------------- "
 
 " Soft save when leaving a buffer or window loses focus
 augroup autoSoftSave
@@ -241,45 +235,6 @@ nnoremap <A-0> 10gt
 " Terminal
 tnoremap <Esc> <C-\><C-n>
 
-" NERDTree
-if PlugLoaded('nerdtree')
-    map <C-n>n :NERDTreeToggle<CR>
-    map <C-n><C-n> :NERDTreeToggle<CR>
-    map <C-n>z :NERDTreeFocus<CR>
-endif
-
-" Spotify.vim
-nnoremap <Leader><Leader>Si :call spotify#requests#start()<CR>
-nnoremap <Leader><Leader>Sd :call spotify#requests#stop()<CR>
-nnoremap <Leader><Leader>Ss :call CheckSpotifyStatus()<CR>
-nnoremap <Leader><Leader>Sz :exec 'echo spotify#player#display()'<CR>
-
-" Lightline
-nnoremap <Leader><Leader>Lr :call LightlineReload()<CR>
-
-" FZF
-nnoremap <Leader>g :FZF<CR>
-nnoremap <Leader>t :Ag<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>Rt :Filetypes<CR>
-
-" OmniSharp
-nnoremap <Leader><Leader>Oss :OmniSharpStartServer<CR>
-nnoremap <Leader><Leader>Osp :OmniSharpStopServer<CR>
-
-" Ranger.vim
-if PlugLoaded('ranger.vim')
-    map <leader>rr  :RangerEdit<cr>
-    map <leader>rv  :RangerVSplit<cr>
-    map <leader>rs  :RangerSplit<cr>
-    map <leader>rt  :RangerTab<cr>
-    map <leader>ri  :RangerInsert<cr>
-    map <leader>ra  :RangerAppend<cr>
-    map <leader>rc  :set operatorfunc=RangerChangeOperator<cr>g@
-    map <leader>rd  :RangerCD<cr>
-    map <leader>rld :RangerLCD<cr>
-endif
-
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
 nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
@@ -289,179 +244,30 @@ nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>M :messages<CR>
 nnoremap <F3> :set hlsearch!<CR> 
 
-" ------------- "
-" Plugins Configurations
-
-let g:cs_use = 'ycm'
-
-" Vim DevIcons
+" Plugins
 " ------------- "
 
-if !exists('g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols')
-    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
-        \ 'cs': ''
-    \ }
-endif
+"let g:cs_use = 'ycm'
 
-" Lightline
-" ------------- "
+echomsg "Loading plugins settings..."
+echomsg " "
 
-call LoadPluginSettings('lightline')
+call plugins#load_settings_with_dependents('YouCompleteMe', 'omnisharp')
+call plugins#load_settings('vim-illuminate')
+call plugins#load_settings('vimwiki')
+call plugins#load_settings('ranger.vim')
+call plugins#load_settings('fzf.vim')
+call plugins#load_settings('ale')
+call plugins#load_settings('spotify.vim')
+call plugins#load_settings('lightline.vim')
+call plugins#load_settings('vim-devicons')
+call plugins#load_settings('float-preview.nvim')
+"call LoadPluginSettings('nerdcommenter')
+"call LoadPluginSettings('nerdtree')
+"call LoadPluginSettings('racer')
 
-" Racer
-" ------------- "
-
-"set hidden
-let g:racer_cmd = '~/.cargo/bin/racer.exe'
-"let g:racer_experimental_completer = 1
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
-
-" YouCompleteMe
-" ------------- "
-
-let g:ycm_error_symbol = ''
-let g:ycm_warning_symbol = ''
-let g:ycm_rust_src_path = '~/.rustup/toolchains/nightly-x86_64-pc-windows-msvc/lib/rustlib/src/rust/src'
-
-let g:ycm_auto_start_csharp_server = 1
-
-"let g:ycm_add_preview_to_completeopt = 1
-"let g:ycm_autoclose_preview_window_after_insertion = 1
-
-" Neomake
-" ------------- "
-
-"call neomake#configure#automake('w')
-
-" NERDTree
-" ------------- "
-
-if PlugLoaded('nerdtree')
-    let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollapsible = '▾'
-
-    " Open automatically when neovim is opened without a file
-    "autocmd StdinReadPre * let s:std_in=1
-    "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-endif
-
-" FZF
-" ------------- "
-
-let g:fzf_action = {
-    \ 'ctrl-t': 'tab split',
-    \ 'ctrl-x': 'split',
-    \ 'ctrl-v': 'vsplit' 
-\ }
-
-let g:fzf_layout = { 'window': '-tabnew' }
-
-let g:fzf_colors = {
-    \ 'fg':      ['fg', 'Normal'],
-    \ 'bg':      ['bg', 'Normal'],
-    \ 'hl':      ['fg', 'Comment'],
-    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-    \ 'hl+':     ['fg', 'Statement'],
-    \ 'info':    ['fg', 'PreProc'],
-    \ 'border':  ['fg', 'Ignore'],
-    \ 'prompt':  ['fg', 'Conditional'],
-    \ 'pointer': ['fg', 'Exception'],
-    \ 'marker':  ['fg', 'Keyword'],
-    \ 'spinner': ['fg', 'Label'],
-    \ 'header':  ['fg', 'Comment'] 
-\ }
-
-" Spotify.vim
-" ------------- "
-
-"let g:spotify_verbose = 1
-let g:spotify_auto_start_requests = 1
-"let g:spotify_oauth_token = secret#spotify_oauth_token()
-
-function! CheckSpotifyStatus()
-    let l:is_running = spotify#requests#is_running()
-    echo l:is_running ? 'Spotify requests are running.' : 'Spotify requests are stopped.'
-endfunction
-
-" start spotify requests
-call spotify#requests#start()
-
-"nnoremap <F5> :call spotify#providers#load(1)<CR>
-
-" Vim Illuminate
-" ------------- "
-
-let g:illuminate_ftblacklist = ['nerdtree']
-
-" NERD Commenter
-" ------------- "
-
-let g:NERDSpaceDelims = 1
-
-" OmniSharp
-" ------------- "
-
-let g:OmniSharp_server_stdio = 0
-let g:OmniSharp_timeout = 5
-let g:OmniSharp_selector_ui = 'fzf'
-let g:OmniSharp_highlight_types = 2
-let g:OmniSharp_start_server = 0
-let g:OmniSharp_translate_cygwin_wsl = 0
-let g:OmniSharp_typeLookupInPreview = 1
-"let g:OmniSharp_loglevel = 'debug'
-
-"let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp.http-win-x64/OmniSharp.exe')
-"let g:OmniSharp_server_path = expand('~/.omnisharp/omnisharp-win-x64/OmniSharp.exe')
-
-let g:OmniSharp_highlight_groups = {
-    \ 'csUserIdentifier': [
-    \   'constant name', 'enum member name', 'field name', 'identifier',
-    \   'local name', 'parameter name', 'property name', 'static symbol'
-    \ ],
-    \ 'csUserInterface': [ 'interface name' ],
-    \ 'csUserMethod': [ 'extension method name', 'method name' ],
-    \ 'csUserType': [ 'class name', 'enum name', 'namespace name', 'struct name' ]
-\ }
-
-" ALE - Asynchronous Lint Engine
-" ------------- "
-
-let g:ale_sign_column_always = 1
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
-
-let g:ale_linters = {
-    \ 'cs': [ 'OmniSharp', 'csc' ] 
-\ }
-
-" float-preview
-" ------------- "
-
-let g:float_preview#docked = 0
-let g:float_preview#max_width = 100
-let g:float_preview#max_height = 10
-
-" vimwiki
-" ------------- "
-
-let g:vimwiki_list = [{
-    \ 'path': '~/reference-wiki/',
-    \ 'syntax': 'default', 
-    \ 'ext': '.wiki'
-\ }]
-
-" Specifics
-" ------------- "
-
-" Unix
-" ------------- "
-
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+echomsg " "
+echomsg "Plugin settings loaded!"
 
 " .org
 " ------------- "

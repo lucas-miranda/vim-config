@@ -1,6 +1,10 @@
-" Keymaps
+" Key Bindings
+" -------------"
 
-" Specifics
+nnoremap <Leader><Leader>Lr :call LightlineReload()<CR>
+
+" Config
+" -------------"
 
 "
 " lightline detail modes will work as:
