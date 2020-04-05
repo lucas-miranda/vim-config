@@ -244,17 +244,20 @@ nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>M :messages<CR>
 nnoremap <F3> :set hlsearch!<CR> 
 
-" Plugins
+" Language Opts
 " ------------- "
 
-"let g:cs_use = 'ycm'
+let g:cs_keybinds_scheme = 'ycm'
+
+" Plugins
+" ------------- "
 
 call plugins#load_settings_with_dependents('YouCompleteMe', 'omnisharp')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
 call plugins#load_settings('ranger.vim')
 call plugins#load_settings('fzf.vim')
-call plugins#load_settings('ale')
+"call plugins#load_settings('ale')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')
 call plugins#load_settings('vim-devicons')

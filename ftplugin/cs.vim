@@ -4,11 +4,11 @@ endif
 
 let b:format_plugin_type = 'cs'
 
-if !exists('g:cs_use')
+if !exists('g:cs_keybinds_scheme')
     exit
 endif
 
-if g:cs_use == 'ycm'
+if g:cs_keybinds_scheme == 'ycm'
     nnoremap <Leader>f :YcmCompleter GoTo<CR>
     nnoremap <Leader>ki :YcmCompleter GetType<CR>
     nnoremap <Leader>Fi :YcmCompleter GoToReferences<CR>
@@ -16,7 +16,7 @@ if g:cs_use == 'ycm'
     nnoremap <Ctrl>. :YcmCompleter FixIt<CR>
     nnoremap <Leader>c :YcmCompleter RefactorRename
     nnoremap <Leader>R :YcmCompleter RestartServer<CR>
-elseif g:cs_use == "omni"
+elseif g:cs_keybinds_scheme == "omni"
     nnoremap <buffer> <Leader>r :OmniSharpRename<CR>
 
     nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
