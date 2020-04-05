@@ -70,7 +70,7 @@ let g:lightline = {
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],
-	\		[ 'readonly', 'filename', 'codeanalysis' ],
+	\		[ 'filename', 'codeanalysis' ],
 	\		[ 'gitbranch' ],
 	\		[ 'lineinfo', 'ctrlpmark' ]
 	\ 	],
@@ -92,7 +92,6 @@ let g:lightline = {
     \ },
 	\ 'component_function': {
     \   'filename': 'LightlineFilename',
-    \   'readonly': 'LightlineReadonly',
 	\	'fileformat': 'LightlineFileformat',
 	\	'filetype': 'LightlineFiletype',
 	\	'fileencoding': 'LightlineFileencoding',
@@ -260,13 +259,13 @@ function! LightlineFilename()
         return ''
     endif
 
-    let l:fname = expand('%:t')
+    let l:fname = expand("%")
 
     if l:fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
         return g:lightline.ctrlp_item
     elseif l:fname == '__Tagbar__'
         return g:lightline.fname
-    elseif l:fname =~ '__Gundo\|NERD_tree' 
+    elseif l:fname =~ '__Gundo\|NERD_tree\|ranger'
         return ''
     elseif &ft == 'vimfiler'
         return vimfiler&get_status_string()
@@ -276,23 +275,36 @@ function! LightlineFilename()
         return vimshell#get_status_string()
     endif
 
-    let l:display_fname = ''
+    let l:fname = expand('%:t')
+    let l:display = []
 
     let l:readonly = LightlineReadonly()
     if l:readonly != ''
-        let l:display_fname .= l:readonly . ' '
+        call add(l:display, l:readonly)
     endif
 
-    if l:fname != ''
-        let l:display_fname .= l:fname
-    else
-        let l:display_fname .= '[No Name]'
+    let l:tab_count = tabpagenr('$')
+    if l:tab_count == 1
+        if l:fname != ''
+            call add(l:display, l:fname)
+        else
+            call add(l:display, '[No Name]')
+        endif
     endif
 
     let l:modified = LightlineModified()
     if l:modified != ''
-        let l:display_fname .= ' ' . l:modified
+        call add(l:display, l:modified)
     endif
+
+    let l:display_fname = ''
+    for display_data in l:display
+        if len(l:display_fname) > 0
+            let l:display_fname .= ' '
+        endif
+
+        let l:display_fname .= display_data
+    endfor
 
     return l:display_fname
 endfunction
