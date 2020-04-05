@@ -368,6 +368,7 @@ function! LightlineFileencoding()
 endfunction
 
 function! LightlineMode()
+    let l:full_filename = expand('%')
     let l:fname = expand('%:t')
 
     if l:fname == '__Tagbar__'
@@ -386,6 +387,10 @@ function! LightlineMode()
         return 'VimFiler'
     elseif &ft == 'vimshell'
         return 'VimShell'
+    elseif l:full_filename =~ 'term://'
+        if l:full_filename =~ 'ranger'
+            return 'Ranger'
+        endif
     endif
 
     return lightline#mode()
