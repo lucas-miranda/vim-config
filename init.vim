@@ -231,6 +231,7 @@ nnoremap <C-Q><C-T> :call EditTodo('TODO.org')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>M :messages<CR>
 nnoremap <F3> :set hlsearch!<CR> 
+nnoremap <buffer> <Leader>r :e <CR>
 
 " Language Opts
 " ------------- "
