@@ -22,6 +22,7 @@ Plugins
 - [junegunn/fzf](https://github.com/junegunn/fzf)
 - [neomake/neomake](https://github.com/neomake/neomake)
 - [beyondmarc/hlsl.vim](https://github.com/beyondmarc/hlsl.vim)
+- [chrisbra/Colorizer](https://github.com/chrisbra/Colorizer)
 - [TaDaa/vimade](https://github.com/TaDaa/vimade)
 - [lucas-miranda/spotify.vim](https://github.com/lucas-miranda/spotify.vim)
 - [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)

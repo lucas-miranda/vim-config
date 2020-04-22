@@ -43,6 +43,9 @@ Plug 'junegunn/fzf.vim'
 " Language Syntax
 Plug 'beyondmarc/hlsl.vim'
 
+" Utilities
+Plug 'chrisbra/Colorizer'               " Colorize colors definitions
+
 " Visuals
 "Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
 Plug 'lucas-miranda/spotify.vim'        " Retrieve info from Spotify to be displayed somewhere
