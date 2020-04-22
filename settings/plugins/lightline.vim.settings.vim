@@ -76,8 +76,8 @@ let g:lightline = {
 	\ 	],
 	\	'right': [
 	\		[ 'filetype' ],
-	\		[ 'time' ],
-	\		[ 'music', 'fileencoding', 'fileformat' ]
+	\		[ 'fileencoding', 'fileformat' ],
+	\		[ 'music' ]
 	\	]
 	\ },
     \ 'inactive': {
@@ -125,7 +125,7 @@ function! LightlineInactiveModeOrFilename()
     let l:mode = LightlineInactiveMode()
 
     if l:mode == ''
-        return LightlineFilename()
+        return GetFilename()
     endif
 
     return l:mode
@@ -234,7 +234,7 @@ endfunction
 
 function! LightlineModified()
     if &ft =~ 'help'
-        return '' "
+        return ''
     elseif &modified
         return '﯑'
     elseif &modifiable
@@ -252,13 +252,7 @@ function! LightlineReadonly()
     return ''
 endfunction
 
-function! LightlineFilename()
-    let l:detail_mode = s:lightline_current_detail_mode()
-
-    if l:detail_mode.name == 'minimal'
-        return ''
-    endif
-
+function! GetFilename()
     let l:fname = expand("%")
 
     if l:fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
@@ -307,6 +301,16 @@ function! LightlineFilename()
     endfor
 
     return l:display_fname
+endfunction
+
+function! LightlineFilename()
+    let l:detail_mode = s:lightline_current_detail_mode()
+
+    if l:detail_mode.name == 'minimal'
+        return ''
+    endif
+
+    return GetFilename()
 endfunction
 
 function! LightlineFugitive()
