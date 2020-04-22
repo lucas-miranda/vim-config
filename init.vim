@@ -195,6 +195,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <Leader>v :vsp<CR>
+nnoremap <Leader>h :sp<CR>
 " set split to the maximum width and height possible
 nnoremap <C-W><C-E> :res<CR> :vertical res<CR> 
 
