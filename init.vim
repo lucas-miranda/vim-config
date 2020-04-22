@@ -86,7 +86,8 @@ set smarttab
 set expandtab
 set backspace=indent,eol,start
 
-set hlsearch
+set ignorecase
+set smartcase
 set incsearch
 
 set nobackup
