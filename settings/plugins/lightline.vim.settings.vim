@@ -125,7 +125,8 @@ function! LightlineInactiveModeOrFilename()
     let l:mode = LightlineInactiveMode()
 
     if l:mode == ''
-        return GetFilename()
+        let l:can_show_filename = 1
+        return GetSpecialModeOrFilename(l:can_show_filename)
     endif
 
     return l:mode
@@ -252,7 +253,7 @@ function! LightlineReadonly()
     return ''
 endfunction
 
-function! GetFilename()
+function! GetSpecialModeOrFilename(can_show_filename)
     let l:fname = expand("%")
 
     if l:fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
@@ -277,8 +278,7 @@ function! GetFilename()
         call add(l:display, l:readonly)
     endif
 
-    let l:tab_count = tabpagenr('$')
-    if l:tab_count == 1
+    if a:can_show_filename
         if l:fname != ''
             call add(l:display, l:fname)
         else
@@ -310,7 +310,9 @@ function! LightlineFilename()
         return ''
     endif
 
-    return GetFilename()
+    let l:tab_count = tabpagenr('$')
+    let l:can_show_filename = l:tab_count == 1
+    return GetSpecialModeOrFilename(l:can_show_filename)
 endfunction
 
 function! LightlineFugitive()
