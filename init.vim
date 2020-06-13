@@ -240,8 +240,8 @@ nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
 nnoremap <A-0> 10gt
-nnoremap <A-t>s <C-W>T
-nnoremap <A-t><A-t> <C-W>T
+nnoremap <C-W>t <C-W>T
+"nnoremap <A-t><A-t> <C-W>T
 
 " Terminal
 tnoremap <Esc> <C-\><C-n>
