@@ -51,6 +51,7 @@ Plug 'nickspoons/vim-sharpenup'
 Plug 'chrisbra/Colorizer'               " Colorize colors definitions
 Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 Plug 'Shougo/echodoc.vim'
+Plug 'dense-analysis/ale'
 
 " Visuals
 "Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
@@ -277,6 +278,7 @@ let g:cs_keybinds_scheme = 'omni'
 " Plugins
 " ------------- "
 
+call plugins#load_settings('ale')
 call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')

@@ -28,6 +28,7 @@ Plugins
 - [chrisbra/Colorizer](https://github.com/chrisbra/Colorizer)
 - [KabbAmine/zeavim.vim](https://github.com/KabbAmine/zeavim.vim)
 - [Shougo/echodoc.vim](https://github.com/Shougo/echodoc.vim)
+- [dense-analysis/ale](https://github.com/dense-analysis/ale)
 - [TaDaa/vimade](https://github.com/TaDaa/vimade)
 - [lucas-miranda/spotify.vim](https://github.com/lucas-miranda/spotify.vim)
 - [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)
