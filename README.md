@@ -23,6 +23,8 @@ Plugins
 - [neomake/neomake](https://github.com/neomake/neomake)
 - [beyondmarc/hlsl.vim](https://github.com/beyondmarc/hlsl.vim)
 - [juliosueiras/cakebuild.vim](https://github.com/juliosueiras/cakebuild.vim)
+- [OmniSharp/omnisharp-vim](https://github.com/OmniSharp/omnisharp-vim)
+- [nickspoons/vim-sharpenup](https://github.com/nickspoons/vim-sharpenup)
 - [chrisbra/Colorizer](https://github.com/chrisbra/Colorizer)
 - [KabbAmine/zeavim.vim](https://github.com/KabbAmine/zeavim.vim)
 - [TaDaa/vimade](https://github.com/TaDaa/vimade)

@@ -40,9 +40,12 @@ endif
 
 Plug 'junegunn/fzf.vim'
 
-" Language Syntax
+" Languages
 Plug 'beyondmarc/hlsl.vim'
 Plug 'juliosueiras/cakebuild.vim'
+" -> C#
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'nickspoons/vim-sharpenup'
 
 " Utilities
 Plug 'chrisbra/Colorizer'               " Colorize colors definitions
@@ -259,16 +262,18 @@ nnoremap <buffer> <Leader>r :e <CR>
 " Language Opts
 " ------------- "
 
-let g:cs_keybinds_scheme = 'ycm'
+let g:cs_keybinds_scheme = 'omni'
 
 " Plugins
 " ------------- "
 
-call plugins#load_settings_with_dependents('YouCompleteMe', 'omnisharp')
+call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
 call plugins#load_settings('ranger.vim')
 call plugins#load_settings('fzf.vim')
+call plugins#load_settings('omnisharp-vim')
+call plugins#load_settings('vim-sharpenup')
 call plugins#load_settings('zeavim.vim')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')

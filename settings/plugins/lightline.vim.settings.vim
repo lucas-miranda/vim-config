@@ -65,14 +65,16 @@ function! s:lightline_current_detail_mode()
     \ }
 endfunction
 
+
+" colorscheme options: 'ayu', 'onedark'
 let g:lightline = {
-    \ 'colorscheme': 'one',
+    \ 'colorscheme': 'onedark',
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],
 	\		[ 'filename', 'codeanalysis' ],
 	\		[ 'gitbranch' ],
-	\		[ 'lineinfo', 'ctrlpmark' ]
+	\		[ 'lineinfo', 'ctrlpmark', 'languageserver' ]
 	\ 	],
 	\	'right': [
 	\		[ 'filetype' ],
@@ -102,7 +104,8 @@ let g:lightline = {
 	\	'ctrlpmark': 'CrtlPMark',
 	\	'time': 'LightlineCurrentTime',
 	\	'codeanalysis': 'LightlineCodeAnalysis',
-    \   'inactivemodeorfilename': 'LightlineInactiveModeOrFilename'
+    \   'inactivemodeorfilename': 'LightlineInactiveModeOrFilename',
+	\   'languageserver': 'LightlineLanguageServer',
 	\ },
 	\ 'component_expand': {
 	\ },
@@ -451,6 +454,27 @@ endfunction
 
 function! CtrlPStatusFunc_2(str)
     return lightline#statusline(0)
+endfunction
+
+function! g:LightlineLanguageServer()
+    let l:extension = expand('%:e')
+
+    if l:extension == 'cs' || l:extension == 'csproj'
+        let l:status = ''
+        let l:build = sharpenup#statusline#Build()
+        let l:start = 0
+
+        while l:start < len(l:build)
+            let l:m = matchstrpos(l:build, '%{.\{-1,}}', l:start)
+            execute('let l:result = ' . l:m[0][2:-2])
+            let l:status = l:status . l:result
+            let l:start = l:m[2]
+        endwhile
+
+        return l:status
+    endif
+
+    return ''
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'
