@@ -190,15 +190,18 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--all-types --numbers --ig
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
+" Text
+nnoremap U <C-R>
+
 " Splits
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-tnoremap <C-J> <C-\><C-N><C-W><C-J>
-tnoremap <C-K> <C-\><C-N><C-W><C-K>
-tnoremap <C-L> <C-\><C-N><C-W><C-L>
-tnoremap <C-H> <C-\><C-N><C-W><C-H>
+"tnoremap <C-J> <C-\><C-N><C-W><C-J>
+"tnoremap <C-K> <C-\><C-N><C-W><C-K>
+"tnoremap <C-L> <C-\><C-N><C-W><C-L>
+"tnoremap <C-H> <C-\><C-N><C-W><C-H>
 nnoremap <C-W><C-J> <C-W>J
 nnoremap <C-W><C-K> <C-W>K
 nnoremap <C-W><C-L> <C-W>L
