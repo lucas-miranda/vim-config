@@ -50,6 +50,7 @@ Plug 'nickspoons/vim-sharpenup'
 " Utilities
 Plug 'chrisbra/Colorizer'               " Colorize colors definitions
 Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
+Plug 'Shougo/echodoc.vim'
 
 " Visuals
 "Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
@@ -284,14 +285,11 @@ call plugins#load_settings('fzf.vim')
 call plugins#load_settings('omnisharp-vim')
 call plugins#load_settings('vim-sharpenup')
 call plugins#load_settings('zeavim.vim')
+call plugins#load_settings('echodoc.vim')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')
 call plugins#load_settings('vim-devicons')
 call plugins#load_settings('float-preview.nvim')
-"call plugins#load_settings('ale')
-"call LoadPluginSettings('nerdcommenter')
-"call LoadPluginSettings('nerdtree')
-"call LoadPluginSettings('racer')
 
 " .org
 " ------------- "
