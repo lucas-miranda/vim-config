@@ -60,6 +60,7 @@ Plug 'ryanoasis/vim-devicons'	        " Tons of icons
 
 " Themes
 Plug 'joshdick/onedark.vim'
+Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
 
@@ -67,8 +68,16 @@ call plug#end()
 " Vim Settings
 
 syntax on
-colorscheme onedark
+syntax enable
+
 set termguicolors
+
+" onedark
+colorscheme onedark
+
+" ayu
+"let ayucolor = "light"
+"colorscheme ayu
 
 set nocompatible
 set noshowmode " lightline.vim plugin already handles mode
