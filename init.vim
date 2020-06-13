@@ -42,6 +42,7 @@ Plug 'junegunn/fzf.vim'
 
 " Language Syntax
 Plug 'beyondmarc/hlsl.vim'
+Plug 'juliosueiras/cakebuild.vim'
 
 " Utilities
 Plug 'chrisbra/Colorizer'               " Colorize colors definitions
@@ -276,3 +277,4 @@ call plugins#load_settings('float-preview.nvim')
 " ------------- "
 
 autocmd FileType org setlocal shiftwidth=4 softtabstop=4 expandtab
+autocmd FileType cake setlocal shiftwidth=4 softtabstop=4 expandtab
