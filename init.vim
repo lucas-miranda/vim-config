@@ -46,6 +46,7 @@ Plug 'juliosueiras/cakebuild.vim'
 
 " Utilities
 Plug 'chrisbra/Colorizer'               " Colorize colors definitions
+Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 
 " Visuals
 "Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
@@ -264,6 +265,7 @@ call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
 call plugins#load_settings('ranger.vim')
 call plugins#load_settings('fzf.vim')
+call plugins#load_settings('zeavim.vim')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')
 call plugins#load_settings('vim-devicons')
