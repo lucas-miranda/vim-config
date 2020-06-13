@@ -16,7 +16,7 @@ if g:cs_keybinds_scheme == 'ycm'
     nnoremap <Ctrl>. :YcmCompleter FixIt<CR>
     nnoremap <Leader>c :YcmCompleter RefactorRename
     nnoremap <Leader>R :YcmCompleter RestartServer<CR>
-elseif g:cs_keybinds_scheme == "omni"
+elseif g:cs_keybinds_scheme == 'omni'
     nnoremap <buffer> <Leader>r :OmniSharpRename<CR>
 
     nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
