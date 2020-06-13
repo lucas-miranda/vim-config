@@ -122,8 +122,12 @@ set completeopt=longest,menuone
 " Unix
 " ------------- "
 
-if has('unix')
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+if has('nvim')
+    let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+
+    if has('unix')
+        let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+    endif
 endif
 
 "------------- "
