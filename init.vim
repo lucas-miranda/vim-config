@@ -15,8 +15,9 @@ Plug 'tpope/vim-sensible'    	        " A standard vimrc configuration
 Plug 'ycm-core/YouCompleteMe', "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
 Plug 'prabirshrestha/async.vim'         " Normalize async job control api between vim and neovim
 Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
-Plug 'RRethy/vim-illuminate'            " Automatically hightlights matching words under cursor
+"Plug 'RRethy/vim-illuminate'            " Automatically hightlights matching words under cursor
 Plug 'ncm2/float-preview.nvim'          " Uses neovim float window to preview
+Plug 'mhinz/vim-startify'
 
 " Org
 "Plug 'jceb/vim-orgmode'
@@ -44,25 +45,31 @@ Plug 'junegunn/fzf.vim'
 Plug 'beyondmarc/hlsl.vim'
 Plug 'juliosueiras/cakebuild.vim'
 " -> C#
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'nickspoons/vim-sharpenup'
+"Plug 'OmniSharp/omnisharp-vim'
+"Plug 'nickspoons/vim-sharpenup'
 
 " Utilities
-Plug 'chrisbra/Colorizer'               " Colorize colors definitions
 Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 Plug 'Shougo/echodoc.vim'
 Plug 'dense-analysis/ale'
 
 " Visuals
 "Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
-Plug 'lucas-miranda/spotify.vim'        " Retrieve info from Spotify to be displayed somewhere
+"Plug 'lucas-miranda/spotify.vim'        " Retrieve info from Spotify to be displayed somewhere
 Plug 'sheerun/vim-polyglot'  	        " Helps others plugins with language specifics support
 Plug 'itchyny/lightline.vim' 	        " Bottom powerline
 Plug 'ryanoasis/vim-devicons'	        " Tons of icons
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
+" Comfort
+"Plug 'psliwka/vim-smoothie'             " Smooth scroll
 
 " Themes
-Plug 'joshdick/onedark.vim'
-Plug 'ayu-theme/ayu-vim'
+"Plug 'joshdick/onedark.vim'
+"Plug 'ayu-theme/ayu-vim'
+"Plug 'rafalbromirski/vim-aurora'
+"Plug 'flrnd/candid.vim'
+Plug 'bluz71/vim-moonfly-colors'
 
 call plug#end()
 
@@ -74,12 +81,22 @@ syntax enable
 
 set termguicolors
 
+"set background=dark
+"colorscheme candid
+
+" vim-aurora
+"set background=dark
+"colorscheme aurora
+
 " onedark
-colorscheme onedark
+"colorscheme onedark
 
 " ayu
 "let ayucolor = "light"
 "colorscheme ayu
+
+" moonfly
+colorscheme moonfly 
 
 set nocompatible
 set noshowmode " lightline.vim plugin already handles mode
@@ -187,11 +204,16 @@ endfunction
 " Autocmds
 "------------- "
 
-" Soft save when leaving a buffer or window loses focus
-augroup autoSoftSave
+" routines to execute when window loses it's focus or leaving a buffer
+augroup onLostFocus
     autocmd!
+    " Soft save
     autocmd BufLeave * silent! w
     autocmd FocusLost * silent! wa
+
+    " Return to normal mode
+    "autocmd BufLeave * silent! stopinsert
+    "autocmd FocusLost * silent! stopinsert 
 augroup END
 
 "augroup specialCommands
@@ -212,6 +234,13 @@ let maplocalleader = "\<Space>"
 
 " Text
 nnoremap U <C-R>
+
+" Editor
+nnoremap <Leader>qq :q<CR>
+nnoremap <Leader>qw :wq<CR>
+
+" Movement
+nnoremap <A-0> ^
 
 " Splits
 nnoremap <C-J> <C-W><C-J>
@@ -236,6 +265,8 @@ nnoremap <A-h> :tabprevious<CR>
 nnoremap <A-l> :tabnext<CR>
 nnoremap <A-t> :tabnew<CR>
 nnoremap <A-x> :tabclose<CR>
+nnoremap <A-j> :tabm -1<CR>
+nnoremap <A-k> :tabm +1<CR>
 inoremap <A-h> <Esc>:tabprevious<CR>i
 inoremap <A-l> <Esc>:tabnext<CR>i
 inoremap <A-t> <Esc>:tabnew<CR>i
@@ -244,6 +275,8 @@ tnoremap <A-h> <C-\><C-N>:tabprevious<CR>
 tnoremap <A-l> <C-\><C-N>:tabnext<CR>
 tnoremap <A-t> <C-\><C-N>:tabnew<CR>
 tnoremap <A-x> <C-\><C-N>:tabclose<CR>
+tnoremap <A-j> :tabm -1<CR>
+tnoremap <A-k> :tabm +1<CR>
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -253,9 +286,8 @@ nnoremap <A-6> 6gt
 nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
-nnoremap <A-0> 10gt
 nnoremap <C-W>t <C-W>T
-"nnoremap <A-t><A-t> <C-W>T
+nnoremap <C-W><C-T> <C-W>T
 
 " Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -273,7 +305,7 @@ nnoremap <buffer> <Leader>r :e <CR>
 " Language Opts
 " ------------- "
 
-let g:cs_keybinds_scheme = 'omni'
+let g:cs_keybinds_scheme = 'ycm' " values: omni or ycm
 
 " Plugins
 " ------------- "
@@ -290,8 +322,10 @@ call plugins#load_settings('zeavim.vim')
 call plugins#load_settings('echodoc.vim')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')
+call plugins#load_settings('vim-hexokinase')
 call plugins#load_settings('vim-devicons')
 call plugins#load_settings('float-preview.nvim')
+call plugins#load_settings('vim-startify')
 
 " .org
 " ------------- "

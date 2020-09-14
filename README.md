@@ -1,9 +1,7 @@
-My personal NeoVim configuration.
-
 Version
 --------
 
-[NeoVim 0.4.3](https://github.com/neovim/neovim/releases/tag/v0.4.3)
+[NeoVim 0.5.0 (nightly)](https://github.com/neovim/neovim/releases/tag/nightly)
 
 Plugins
 --------
@@ -13,19 +11,16 @@ Plugins
 - [ycm-core/YouCompleteMe](https://github.com/ycm-core/YouCompleteMe)
 - [prabirshrestha/async.vim](https://github.com/prabirshrestha/async.vim)
 - [chaoren/vim-wordmotion](https://github.com/chaoren/vim-wordmotion)
-- [RRethy/vim-illuminate](https://github.com/RRethy/vim-illuminate)
 - [ncm2/float-preview.nvim](https://github.com/ncm2/float-preview.nvim)
-- [jceb/vim-orgmode](https://github.com/jceb/vim-orgmode)
+- [mhinz/vim-startify](https://github.com/mhinz/vim-startify)
 - [vimwiki/vimwiki](https://github.com/vimwiki/vimwiki)
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 - [rafaqz/ranger.vim](https://github.com/rafaqz/ranger.vim)
 - [junegunn/fzf](https://github.com/junegunn/fzf)
-- [neomake/neomake](https://github.com/neomake/neomake)
 - [beyondmarc/hlsl.vim](https://github.com/beyondmarc/hlsl.vim)
 - [juliosueiras/cakebuild.vim](https://github.com/juliosueiras/cakebuild.vim)
 - [OmniSharp/omnisharp-vim](https://github.com/OmniSharp/omnisharp-vim)
 - [nickspoons/vim-sharpenup](https://github.com/nickspoons/vim-sharpenup)
-- [chrisbra/Colorizer](https://github.com/chrisbra/Colorizer)
 - [KabbAmine/zeavim.vim](https://github.com/KabbAmine/zeavim.vim)
 - [Shougo/echodoc.vim](https://github.com/Shougo/echodoc.vim)
 - [dense-analysis/ale](https://github.com/dense-analysis/ale)
@@ -34,8 +29,9 @@ Plugins
 - [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)
 - [itchyny/lightline.vim](https://github.com/itchyny/lightline.vim)
 - [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons)
+- [RRethy/vim-hexokinase](https://github.com/RRethy/vim-hexokinase)
 
 Theme
 ------
 
-- [joshdick/onedark.vim](https://github.com/joshdick/onedark.vim)
+- [bluz71/vim-moonfly-colors](https://github.com/bluz71/vim-moonfly-colors)

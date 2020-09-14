@@ -35,6 +35,9 @@ elseif g:cs_keybinds_scheme == 'omni'
     nnoremap <buffer> <Leader>kh :OmniSharpSignatureHelp<CR>
     inoremap <buffer> <C-h>:OmniSharpSignatureHelp<CR>
 
+    nnoremap <buffer> <Leader>R :OmniSharpRestartServer<CR>
+    nnoremap <buffer> <Leader><Leader>R :OmniSharpRestartAllServers<CR>
+
     " Navigate up and down by method/property/field
     "nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
     "nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>

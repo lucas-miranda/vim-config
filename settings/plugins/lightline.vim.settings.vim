@@ -68,18 +68,17 @@ endfunction
 
 " colorscheme options: 'ayu', 'onedark'
 let g:lightline = {
-    \ 'colorscheme': 'onedark',
+    \ 'colorscheme': 'moonfly',
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],
 	\		[ 'filename', 'codeanalysis' ],
 	\		[ 'gitbranch' ],
-	\		[ 'lineinfo', 'ctrlpmark', 'languageserver' ]
+	\		[ 'lineinfo', 'ctrlpmark' ]
 	\ 	],
 	\	'right': [
 	\		[ 'filetype' ],
 	\		[ 'fileencoding', 'fileformat' ],
-	\		[ 'music' ]
 	\	]
 	\ },
     \ 'inactive': {
