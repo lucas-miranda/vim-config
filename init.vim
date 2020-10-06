@@ -12,7 +12,7 @@ call plug#begin(g:vim_root_folder . '/plugins-database')
 
 " General
 Plug 'tpope/vim-sensible'    	        " A standard vimrc configuration
-Plug 'ycm-core/YouCompleteMe', "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
+"Plug 'ycm-core/YouCompleteMe', "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
 Plug 'prabirshrestha/async.vim'         " Normalize async job control api between vim and neovim
 Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
 "Plug 'RRethy/vim-illuminate'            " Automatically hightlights matching words under cursor
@@ -28,6 +28,9 @@ Plug 'tpope/vim-fugitive'		        " Git integration
 
 " File manager interface
 Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
+
+" Code Completion
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Fuzzyfinder
 "  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
@@ -51,7 +54,7 @@ Plug 'juliosueiras/cakebuild.vim'
 " Utilities
 Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 Plug 'Shougo/echodoc.vim'
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 
 " Visuals
 "Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
@@ -69,7 +72,8 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rafalbromirski/vim-aurora'
 "Plug 'flrnd/candid.vim'
-Plug 'bluz71/vim-moonfly-colors'
+"Plug 'bluz71/vim-moonfly-colors'
+Plug 'ghifarit53/tokyonight-vim'
 
 call plug#end()
 
@@ -92,11 +96,16 @@ set termguicolors
 "colorscheme onedark
 
 " ayu
-"let ayucolor = "light"
+"let ayucolor = 'light'
 "colorscheme ayu
 
 " moonfly
-colorscheme moonfly 
+"colorscheme moonfly 
+
+" tokyonight
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight 
 
 set nocompatible
 set noshowmode " lightline.vim plugin already handles mode
@@ -118,12 +127,14 @@ set copyindent
 set smarttab
 set expandtab
 set backspace=indent,eol,start
+set hidden
 
 set ignorecase
 set smartcase
 set incsearch
 
 set nobackup
+set nowritebackup
 set noswapfile
 
 set history=1000
@@ -149,6 +160,19 @@ set ssop-=folds      " do not store folds
 
 set previewheight=10
 set completeopt=longest,menuone
+set cmdheight=1
+
+set updatetime=300
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
 
 " Unix
 " ------------- "
@@ -234,7 +258,8 @@ let maplocalleader = "\<Space>"
 
 " Text
 nnoremap U <C-R>
-
+nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
+  
 " Editor
 nnoremap <Leader>qq :q<CR>
 nnoremap <Leader>qw :wq<CR>
@@ -310,8 +335,8 @@ let g:cs_keybinds_scheme = 'ycm' " values: omni or ycm
 " Plugins
 " ------------- "
 
-call plugins#load_settings('ale')
-call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
+"call plugins#load_settings('ale')
+"call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
 call plugins#load_settings('ranger.vim')
@@ -326,9 +351,15 @@ call plugins#load_settings('vim-hexokinase')
 call plugins#load_settings('vim-devicons')
 call plugins#load_settings('float-preview.nvim')
 call plugins#load_settings('vim-startify')
+call plugins#load_settings('coc.nvim')
 
 " .org
 " ------------- "
 
 autocmd FileType org setlocal shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType cake setlocal shiftwidth=4 softtabstop=4 expandtab
+
+"
+"
+
+let loaded_matchparen = 1
