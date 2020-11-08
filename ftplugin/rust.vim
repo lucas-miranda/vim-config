@@ -1,5 +1,3 @@
-finish
-
 if exists('b:format_plugin_type')
     finish
 endif

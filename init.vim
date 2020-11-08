@@ -17,7 +17,7 @@ Plug 'prabirshrestha/async.vim'         " Normalize async job control api betwee
 Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
 "Plug 'RRethy/vim-illuminate'            " Automatically hightlights matching words under cursor
 Plug 'ncm2/float-preview.nvim'          " Uses neovim float window to preview
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 
 " Org
 "Plug 'jceb/vim-orgmode'
@@ -48,13 +48,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'beyondmarc/hlsl.vim'
 Plug 'juliosueiras/cakebuild.vim'
 " -> C#
-"Plug 'OmniSharp/omnisharp-vim'
+Plug 'OmniSharp/omnisharp-vim'
 "Plug 'nickspoons/vim-sharpenup'
 
 " Utilities
 Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 Plug 'Shougo/echodoc.vim'
-"Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
+
+" Sessions
+Plug 'tpope/vim-obsession'
 
 " Visuals
 "Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
@@ -67,45 +70,58 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Comfort
 "Plug 'psliwka/vim-smoothie'             " Smooth scroll
 
+" Color Theme Tools
+Plug 'lifepillar/vim-colortemplate'
+
 " Themes
 "Plug 'joshdick/onedark.vim'
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rafalbromirski/vim-aurora'
 "Plug 'flrnd/candid.vim'
 "Plug 'bluz71/vim-moonfly-colors'
-Plug 'ghifarit53/tokyonight-vim'
+"Plug 'ghifarit53/tokyonight-vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
 " ------------- "
-" Vim Settings
+" Theme Settings
 
 syntax on
 syntax enable
 
 set termguicolors
 
+" * candid
 "set background=dark
 "colorscheme candid
 
-" vim-aurora
+" * vim-aurora
 "set background=dark
 "colorscheme aurora
 
-" onedark
+" * onedark
 "colorscheme onedark
 
-" ayu
+" * ayu
 "let ayucolor = 'light'
 "colorscheme ayu
 
-" moonfly
+" * moonfly
 "colorscheme moonfly 
 
-" tokyonight
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-colorscheme tokyonight 
+" * tokyonight
+"let g:tokyonight_style = 'night' " available: night, storm
+"let g:tokyonight_enable_italic = 1
+"colorscheme tokyonight 
+
+" * papercolor
+
+set background=dark " light or dark
+colorscheme PaperColor
+
+" ------------- "
+" Vim Settings
 
 set nocompatible
 set noshowmode " lightline.vim plugin already handles mode
@@ -158,8 +174,14 @@ filetype plugin on
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
 
+if has('patch-8.1.1880')
+    set completeopt=longest,menuone,popuphidden
+    set completepopup=highlight:Pmenu,border:off
+else
+    set completeopt=longest,menuone
+endif
+
 set previewheight=10
-set completeopt=longest,menuone
 set cmdheight=1
 
 set updatetime=300
@@ -259,6 +281,7 @@ let maplocalleader = "\<Space>"
 " Text
 nnoremap U <C-R>
 nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
+nnoremap Y yyp
   
 " Editor
 nnoremap <Leader>qq :q<CR>
@@ -330,12 +353,12 @@ nnoremap <buffer> <Leader>r :e <CR>
 " Language Opts
 " ------------- "
 
-let g:cs_keybinds_scheme = 'ycm' " values: omni or ycm
+let g:cs_keybinds_scheme = 'omni' " values: omni or ycm
 
 " Plugins
 " ------------- "
 
-"call plugins#load_settings('ale')
+call plugins#load_settings('ale')
 "call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
@@ -347,6 +370,7 @@ call plugins#load_settings('zeavim.vim')
 call plugins#load_settings('echodoc.vim')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')
+call plugins#load_settings('vim-obsession')
 call plugins#load_settings('vim-hexokinase')
 call plugins#load_settings('vim-devicons')
 call plugins#load_settings('float-preview.nvim')

@@ -66,9 +66,9 @@ function! s:lightline_current_detail_mode()
 endfunction
 
 
-" colorscheme options: 'ayu', 'onedark', 'moonfly'
+" colorscheme options: 'ayu', 'onedark', 'moonfly', 'tokyonight'
 let g:lightline = {
-    \ 'colorscheme': 'tokyonight',
+    \ 'colorscheme': 'PaperColor',
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],
@@ -147,32 +147,55 @@ function! LightlineCodeAnalysis()
     let l:error_count = 0
     let l:warn_count = 0
 
-    try 
-        " ALE
-        let l:ale_counts = ale#statusline#Count(bufnr(''))
+    " symbols
+    "let l:error_symbol = 'x'
+    "let l:warning_symbol = '!'
 
-        let l:ale_errors = l:ale_counts.error + l:ale_counts.style_error
-        let l:ale_non_errors = l:ale_counts.total - l:ale_errors
+    " YCM
+    if plugins#is_plugin_loaded('YouCompleteMe')
+        try
+            let l:error_count += youcompleteme#GetErrorCount()
+            let l:warn_count += youcompleteme#GetWarningCount()
 
-        let l:error_count += l:ale_errors
-        let l:warn_count += l:ale_non_errors
+            let l:is_some_analyzer_working = 1
+        catch
+        endtry
 
-        let l:is_some_analyzer_working = 1
-    catch
-    endtry
+        if !exists('l:error_symbol')
+            let l:error_symbol = g:ycm_error_symbol
+        endif
 
-    try
-        " YCM
+        if !exists('l:warning_symbol')
+            let l:warning_symbol = g:ycm_warning_symbol
+        endif
+    endif
 
-        let l:error_count += youcompleteme#GetErrorCount()
-        let l:warn_count += youcompleteme#GetWarningCount()
+    if plugins#is_plugin_loaded('ale')
+        try 
+            " ALE
+            let l:ale_counts = ale#statusline#Count(bufnr(''))
 
-        let l:is_some_analyzer_working = 1
-    catch
-    endtry
+            let l:ale_errors = l:ale_counts.error + l:ale_counts.style_error
+            let l:ale_non_errors = l:ale_counts.total - l:ale_errors
+
+            let l:error_count += l:ale_errors
+            let l:warn_count += l:ale_non_errors
+
+            let l:is_some_analyzer_working = 1
+        catch
+        endtry
+
+        if !exists('l:error_symbol')
+            let l:error_symbol = g:ale_sign_error
+        endif
+
+        if !exists('l:warning_symbol')
+            let l:warning_symbol = g:ale_sign_warning
+        endif
+    endif
 
     if l:is_some_analyzer_working == 1
-        let l:code_analysis = g:ycm_error_symbol . ' ' . l:error_count . '  ' . g:ycm_warning_symbol . ' ' . l:warn_count
+        let l:code_analysis = l:error_symbol . ' ' . l:error_count . '  ' . l:warning_symbol . ' ' . l:warn_count
     endif
 
     return l:code_analysis

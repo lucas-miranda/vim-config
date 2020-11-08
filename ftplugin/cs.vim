@@ -1,5 +1,3 @@
-finish 
-
 if exists('b:format_plugin_type')
     finish
 endif
@@ -19,31 +17,31 @@ if g:cs_keybinds_scheme == 'ycm'
     nnoremap <Leader>c :YcmCompleter RefactorRename
     nnoremap <Leader>R :YcmCompleter RestartServer<CR>
 elseif g:cs_keybinds_scheme == 'omni'
-    nnoremap <buffer> <Leader>r :OmniSharpRename<CR>
+    nmap <buffer> <Leader>f :OmniSharpGotoDefinition<CR>
+    nmap <buffer> <Leader>Fu :OmniSharpFindUsages<CR>
+    nmap <buffer> <Leader>Fs :OmniSharpFindSymbol<CR>
+    nmap <buffer> <Leader>Fi :OmniSharpFindImplementations<CR>
+    nmap <buffer> <Leader>Fm :OmniSharpFindMembers<CR>
 
-    nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-    nnoremap <buffer> <Leader>f :OmniSharpGotoDefinition<CR>
-    nnoremap <buffer> <Leader>Fi :OmniSharpFindImplementations<CR>
-    nnoremap <buffer> <Leader>Fs :OmniSharpFindSymbol<CR>
-    nnoremap <buffer> <Leader>Fu :OmniSharpFindUsages<CR>
+    nmap <buffer> <Leader>pd :OmniSharpPreviewDefinition<CR>
+    nmap <buffer> <Leader>pi :OmniSharpPreviewImplementations<CR>
 
-    " Finds members in the current buffer
-    "nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
+    nmap <buffer> K :OmniSharpTypeLookup<CR>
+    nmap <buffer> <Leader>ki :OmniSharpTypeLookup<CR>
+    nmap <buffer> <Leader>kd :OmniSharpDocumentation<CR>
+    nmap <buffer> <Leader>ru :OmniSharpFixUsings<CR>
 
-    "nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-    nnoremap <buffer> <Leader>ki :OmniSharpTypeLookup<CR>
-    "nnoremap <buffer> <Leader>ki :OmniSharpPreviewDefinition<CR>
-    nnoremap <buffer> <Leader>kd :OmniSharpDocumentation<CR>
-    nnoremap <buffer> <Leader>kh :OmniSharpSignatureHelp<CR>
-    inoremap <buffer> <C-h>:OmniSharpSignatureHelp<CR>
-
-    nnoremap <buffer> <Leader>R :OmniSharpRestartServer<CR>
-    nnoremap <buffer> <Leader><Leader>R :OmniSharpRestartAllServers<CR>
+    nmap <buffer> <C-\>:OmniSharpSignatureHelp<CR>
+    imap <buffer> <C-\>:OmniSharpSignatureHelp<CR>
 
     " Navigate up and down by method/property/field
-    "nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-    "nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
+    nmap <silent> <buffer> [[ :OmniSharpNavigateUp
+    nmap <silent> <buffer> ]] :OmniSharpNavigateDown
 
-    " Find all code errors/warnings for the current solution and populate the quickfix window
-    "nnoremap <buffer> <Leader>se :OmniSharpGlobalCodeCheck<CR>
+    nmap <silent> <buffer> <Leader>cc :OmniSharpGlobalCodeCheck
+    nmap <buffer> <Leader>rn :OmniSharpRename
+
+    nmap <buffer> <Leader>Osr :OmniSharpRestartServer<CR>
+    nmap <buffer> <Leader>Oss :OmniSharpStartServer<CR>
+    nmap <buffer> <Leader>Osp :OmniSharpStopServer<CR>
 endif

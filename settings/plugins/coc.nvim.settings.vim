@@ -1,8 +1,7 @@
 
-let g:coc_global_extensions = [ 
-\     'coc-omnisharp'
-\ ]
-
+"let g:coc_global_extensions = [ 
+"\     'coc-omnisharp'
+"\ ]
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -33,13 +32,13 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> <Leader>f <Plug>(coc-definition)
-nmap <silent> <Leader>y <Plug>(coc-type-definition)
-nmap <silent> <Leader>i <Plug>(coc-implementation)
-nmap <silent> <Leader>r <Plug>(coc-references)
+"nmap <buffer><silent> <Leader>f <Plug>(coc-definition)
+"nmap <buffer><silent> <Leader>y <Plug>(coc-type-definition)
+"nmap <buffer><silent> <Leader>i <Plug>(coc-implementation)
+"nmap <buffer><silent> <Leader>r <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"nnoremap <buffer><silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
