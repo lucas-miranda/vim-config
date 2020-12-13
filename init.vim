@@ -381,8 +381,6 @@ tnoremap <Esc> <C-\><C-n>
 " Others
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
 nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
-nnoremap <C-Q><C-A> :call EditTodo('~/TODO.org')<CR>
-nnoremap <C-Q><C-T> :call EditTodo('TODO.org')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>M :messages<CR>
 nnoremap <F3> :set hlsearch!<CR> 
