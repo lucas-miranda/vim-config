@@ -303,7 +303,9 @@ nnoremap <Leader>qw :wq<CR>
 " Movement
 nnoremap <A-0> ^
 
-" Splits
+" =====================
+"   Splits
+" =====================
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -318,35 +320,58 @@ nnoremap <C-W><C-L> <C-W>L
 nnoremap <C-W><C-H> <C-W>H
 nnoremap <Leader>v :vsp<CR>
 nnoremap <Leader>h :sp<CR>
-" set split to the maximum width and height possible
+" set buffer split to the maximum width and height possible
 nnoremap <C-W><C-E> :res<CR> :vertical res<CR> 
 
-" Tabs
-nnoremap <A-h> :tabprevious<CR>
-nnoremap <A-l> :tabnext<CR>
-nnoremap <A-t> :tabnew<CR>
-nnoremap <A-x> :tabclose<CR>
-nnoremap <A-j> :tabm -1<CR>
-nnoremap <A-k> :tabm +1<CR>
-inoremap <A-h> <Esc>:tabprevious<CR>i
-inoremap <A-l> <Esc>:tabnext<CR>i
-inoremap <A-t> <Esc>:tabnew<CR>i
-inoremap <A-x> <Esc>:tabclose<CR>
-tnoremap <A-h> <C-\><C-N>:tabprevious<CR>
-tnoremap <A-l> <C-\><C-N>:tabnext<CR>
-tnoremap <A-t> <C-\><C-N>:tabnew<CR>
-tnoremap <A-x> <C-\><C-N>:tabclose<CR>
-tnoremap <A-j> :tabm -1<CR>
-tnoremap <A-k> :tabm +1<CR>
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> 9gt
+" =====================
+"   Buffers
+" =====================
+
+nnoremap <Leader>b :ls<CR>
+
+" * movements
+nnoremap <A-h> :bprevious<CR>
+nnoremap <A-l> :bnext<CR>
+
+" * split and move
+nnoremap <Leader><A-h> :sbprevious<CR>
+nnoremap <Leader><A-l> :sbnext<CR>
+
+" * edit
+"nnoremap <A-t> :tabnew<CR>
+nnoremap <A-x> :bd<CR>
+
+" * reallocate buffers
+"nnoremap <A-j> :tabm -1<CR>
+"nnoremap <A-k> :tabm +1<CR>
+
+" =====================
+"   Tabs
+" =====================
+
+" * movements
+nnoremap <C-A-h> :tabprevious<CR>
+nnoremap <C-A-l> :tabnext<CR>
+inoremap <C-A-h> <Esc>:tabprevious<CR>i
+inoremap <C-A-l> <Esc>:tabnext<CR>i
+tnoremap <C-A-h> <C-\><C-N>:tabprevious<CR>
+tnoremap <C-A-l> <C-\><C-N>:tabnext<CR>
+
+" * edit
+nnoremap <C-A-t> :tabnew<CR>
+nnoremap <C-A-x> :tabclose<CR>
+inoremap <C-A-t> <Esc>:tabnew<CR>i
+inoremap <C-A-x> <Esc>:tabclose<CR>
+tnoremap <C-A-t> <C-\><C-N>:tabnew<CR>
+tnoremap <C-A-x> <C-\><C-N>:tabclose<CR>
+
+" * reallocate tabs
+nnoremap <C-A-j> :tabm -1<CR>
+nnoremap <C-A-k> :tabm +1<CR>
+tnoremap <C-A-j> :tabm -1<CR>
+tnoremap <C-A-k> :tabm +1<CR>
+
+" * sends current buffer to a new tab
 nnoremap <C-W>t <C-W>T
 nnoremap <C-W><C-T> <C-W>T
 
