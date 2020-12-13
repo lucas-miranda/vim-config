@@ -71,7 +71,7 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 "Plug 'psliwka/vim-smoothie'             " Smooth scroll
 
 " Color Theme Tools
-Plug 'lifepillar/vim-colortemplate'
+"Plug 'lifepillar/vim-colortemplate'
 
 " Themes
 "Plug 'joshdick/onedark.vim'
