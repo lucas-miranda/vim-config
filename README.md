@@ -39,5 +39,4 @@
 - [vim-moonfly-colors](https://github.com/bluz71/vim-moonfly-colors)
 - [tokyonight-vim](https://github.com/ghifarit53/tokyonight-vim)
 - [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
-- [vim-moonfly-colors](https://github.com/bluz71/vim-moonfly-colors)
 
