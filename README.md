@@ -9,12 +9,12 @@
 - [async.vim](https://github.com/prabirshrestha/async.vim) — Normalize async job control API for vim and neovim
 - [vim-wordmotion](https://github.com/chaoren/vim-wordmotion) — A much better behavior to vim motion controls word and WORD
 - [float-preview.nvim](https://github.com/ncm2/float-preview.nvim) — Nice float preview window
-- [vimwiki](https://github.com/vimwiki/vimwiki) — Provides a way to create a local wiki, also handles .md files very nicely
+- [vimwiki](https://github.com/vimwiki/vimwiki) — Provides a way to create a local wiki, it handles markdown files very nicely also
 - [vim-fugitive](https://github.com/tpope/vim-fugitive) — Handles git commands
 - [ranger.vim](https://github.com/rafaqz/ranger.vim) — Allows [ranger](https://github.com/ranger/ranger) to run inside a vim buffer, helps a lot to move through bigger projects
 - [coc.nvim](https://github.com/neoclide/coc.nvim) — Provides code completions, mediate communication with language servers and has some extensions also (mostly to aid vim with specific languages)
 - [fzf](https://github.com/junegunn/fzf) — An insanely fast file fuzzy finder
-- [fzf.vim](https://github.com/junegunn/fzf.vim) — Provides an interface to FZF be able to run in a vim buffer, it has interface to [Ag](https://github.com/ggreer/the_silver_searcher), to search a pattern through files contents, it's also incredible fast
+- [fzf.vim](https://github.com/junegunn/fzf.vim) — Provides an interface to [FZF](https://github.com/junegunn/fzf) be able to run in a vim buffer, it has interface to [Ag](https://github.com/ggreer/the_silver_searcher), to search a pattern through files contents, it's also incredible fast
 - [hlsl.vim](https://github.com/beyondmarc/hlsl.vim) — HLSL syntax highlight
 - [cakebuild.vim](https://github.com/juliosueiras/cakebuild.vim) — Cake files syntax highlight
 - [omnisharp-vim](https://github.com/OmniSharp/omnisharp-vim) — A must have to work with C# at vim, provides several cool features
