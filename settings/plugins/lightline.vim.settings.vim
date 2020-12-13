@@ -66,9 +66,9 @@ function! s:lightline_current_detail_mode()
 endfunction
 
 
-" colorscheme options: 'ayu', 'onedark', 'moonfly', 'tokyonight'
+" colorscheme options: 'ayu', 'onedark', 'moonfly', 'tokyonight', 'PaperColor'
 let g:lightline = {
-    \ 'colorscheme': 'PaperColor',
+    \ 'colorscheme': 'srcery',
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],

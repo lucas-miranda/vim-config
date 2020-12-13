@@ -31,7 +31,20 @@ Plugins
 - [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons)
 - [RRethy/vim-hexokinase](https://github.com/RRethy/vim-hexokinase)
 
-Theme
+Current Theme
 ------
 
+[srcery-colors/srcery-vim](https://github.com/srcery-colors/srcery-vim)
+
+Nice Themes
+------
+
+- [joshdick/onedark.vim](https://github.com/joshdick/onedark.vim)
+- [ayu-theme/ayu-vim](https://github.com/ayu-theme/ayu-vim)
+- [rafalbromirski/vim-aurora](https://github.com/rafalbromirski/vim-aurora)
+- [flrnd/candid.vim](https://github.com/flrnd/candid.vim)
 - [bluz71/vim-moonfly-colors](https://github.com/bluz71/vim-moonfly-colors)
+- [ghifarit53/tokyonight-vim](https://github.com/ghifarit53/tokyonight-vim)
+- [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
+- [bluz71/vim-moonfly-colors](https://github.com/bluz71/vim-moonfly-colors)
+

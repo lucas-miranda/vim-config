@@ -80,7 +80,8 @@ Plug 'lifepillar/vim-colortemplate'
 "Plug 'flrnd/candid.vim'
 "Plug 'bluz71/vim-moonfly-colors'
 "Plug 'ghifarit53/tokyonight-vim'
-Plug 'NLKNguyen/papercolor-theme'
+"Plug 'NLKNguyen/papercolor-theme'
+Plug 'srcery-colors/srcery-vim'
 
 call plug#end()
 
@@ -116,9 +117,12 @@ set termguicolors
 "colorscheme tokyonight 
 
 " * papercolor
+"set background=dark " light or dark
+"colorscheme PaperColor
 
-set background=dark " light or dark
-colorscheme PaperColor
+" * srcery-vim
+let g:srcery_italic = 1
+colorscheme srcery
 
 " ------------- "
 " Vim Settings
