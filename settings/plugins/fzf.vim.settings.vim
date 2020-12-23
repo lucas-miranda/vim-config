@@ -5,7 +5,7 @@ nnoremap <Leader>g :call fzf#run(fzf#wrap({'sink': 'e!'}))<CR>
 nnoremap <Leader><Leader>g :call fzf#run(fzf#wrap({'sink': 'tabedit'}))<CR>
 nnoremap <Leader>t :Ag<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>Rt :Filetypes<CR>
+nnoremap <Leader>F :Filetypes<CR>
 
 " Config
 " -------------"

@@ -1,6 +1,7 @@
 " Key Bindings
 " -------------"
 
+map <leader>R   :RangerTab<cr>
 map <leader>rr  :RangerEdit<cr>
 map <leader>rv  :RangerVSplit<cr>
 map <leader>rs  :RangerSplit<cr>
