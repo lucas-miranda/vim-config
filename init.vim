@@ -358,7 +358,7 @@ tnoremap <C-A-h> <C-\><C-N>:tabprevious<CR>
 tnoremap <C-A-l> <C-\><C-N>:tabnext<CR>
 
 " * edit
-nnoremap <C-A-t> :tabnew<CR>
+nnoremap <C-A-t> :call fzf#run(fzf#wrap({'sink': 'tabedit!'}))<CR>
 nnoremap <C-A-x> :tabclose<CR>
 inoremap <C-A-t> <Esc>:tabnew<CR>i
 inoremap <C-A-x> <Esc>:tabclose<CR>
