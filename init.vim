@@ -19,6 +19,9 @@ Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
 Plug 'ncm2/float-preview.nvim'          " Uses neovim float window to preview
 "Plug 'mhinz/vim-startify'
 
+" Buffer Handling
+Plug 'Asheq/close-buffers.vim'
+
 " Org
 "Plug 'jceb/vim-orgmode'
 Plug 'vimwiki/vimwiki'                  " A personal wiki
@@ -394,6 +397,7 @@ let g:cs_keybinds_scheme = 'omni' " values: omni or ycm
 " Plugins
 " ------------- "
 
+call plugins#load_settings('close-buffers.vim')
 call plugins#load_settings('ale')
 "call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
 call plugins#load_settings('vim-illuminate')

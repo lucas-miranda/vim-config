@@ -9,6 +9,7 @@
 - [async.vim](https://github.com/prabirshrestha/async.vim) — Normalize async job control API for vim and neovim
 - [vim-wordmotion](https://github.com/chaoren/vim-wordmotion) — A much better behavior to vim motion controls word and WORD
 - [float-preview.nvim](https://github.com/ncm2/float-preview.nvim) — Nice float preview window
+- [close-buffers-vim](https://github.com/Asheq/close-buffers.vim) — Helps to close unused hidden buffers (Good to enforce minimal tab usage)
 - [vimwiki](https://github.com/vimwiki/vimwiki) — Provides a way to create a local wiki, it handles markdown files very nicely also
 - [vim-fugitive](https://github.com/tpope/vim-fugitive) — Handles git commands
 - [ranger.vim](https://github.com/rafaqz/ranger.vim) — Allows [ranger](https://github.com/ranger/ranger) to run inside a vim buffer, helps a lot to move through bigger projects
