@@ -84,7 +84,8 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 "Plug 'bluz71/vim-moonfly-colors'
 "Plug 'ghifarit53/tokyonight-vim'
 "Plug 'NLKNguyen/papercolor-theme'
-Plug 'srcery-colors/srcery-vim'
+"Plug 'srcery-colors/srcery-vim'
+Plug 'sainnhe/forest-night'
 
 call plug#end()
 
@@ -124,8 +125,12 @@ set termguicolors
 "colorscheme PaperColor
 
 " * srcery-vim
-let g:srcery_italic = 1
-colorscheme srcery
+"let g:srcery_italic = 1
+"colorscheme srcery
+
+" * forest-night
+let g:forest_night_enable_italic = 1
+colorscheme forest-night
 
 " ------------- "
 " Vim Settings
