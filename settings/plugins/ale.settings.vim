@@ -6,3 +6,6 @@ let g:ale_sign_warning = ''
 let g:ale_linters = {
     \ 'cs': [ 'OmniSharp' ] 
 \ }
+
+nmap <silent> <C-A-n> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
