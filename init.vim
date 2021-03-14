@@ -378,6 +378,7 @@ nnoremap <C-W><C-T> <C-W>T
 tnoremap <Esc> <C-\><C-n>
 
 " Others
+nnoremap <C-z> <nop>
 nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
 nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
 nnoremap <Leader>N :noh<CR>
