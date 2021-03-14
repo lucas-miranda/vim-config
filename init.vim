@@ -259,13 +259,6 @@ function! FindInFiles(pattern, ...)
     echo execute(l:grep_cmd)
 endfunction
 
-function! RecreateCsprojReferences()
-    let l:path = expand('%:h')
-    let l:files = globpath(l:path, '**/*.cs', 0, 1)
-    let l:files = map(l:files, '"<Compile Include=\"" . substitute(strpart(v:val, len(l:path) + 1), "/", "\\", "g") . "\" />"')
-    call append(".", l:files)
-endfunction
-
 " Autocmds
 "------------- "
 
@@ -290,8 +283,6 @@ augroup END
 " Commands
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--all-types --numbers --ignore={.git,.vs} --width ' . (winwidth(0) - 10), {'options': '--delimiter : --nth 4..'} , <Bang>0)
-
-command! RecreateCsprojReferences call RecreateCsprojReferences()
 
 " ------------- "
 " Key Remaps
