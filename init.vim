@@ -33,7 +33,7 @@ Plug 'tpope/vim-fugitive'		        " Git integration
 Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
 
 " Code Completion
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+"Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Fuzzyfinder
 "  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
@@ -48,15 +48,19 @@ endif
 Plug 'junegunn/fzf.vim'
 
 " Languages
+Plug 'autozimu/LanguageClient-neovim'
 Plug 'beyondmarc/hlsl.vim'
 Plug 'juliosueiras/cakebuild.vim'
 " -> C#
 Plug 'OmniSharp/omnisharp-vim'
 "Plug 'nickspoons/vim-sharpenup'
+" -> Rust
+"Plug 'rust-lang/rust.vim'
 
 " Utilities
 Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'dense-analysis/ale'
 
 " Sessions
@@ -398,6 +402,7 @@ let g:cs_keybinds_scheme = 'omni' " values: omni or ycm
 " Plugins
 " ------------- "
 
+call plugins#load_settings('LanguageClient-neovim')
 call plugins#load_settings('close-buffers.vim')
 call plugins#load_settings('ale')
 "call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
@@ -409,6 +414,7 @@ call plugins#load_settings('omnisharp-vim')
 call plugins#load_settings('vim-sharpenup')
 call plugins#load_settings('zeavim.vim')
 call plugins#load_settings('echodoc.vim')
+call plugins#load_settings('deoplete.nvim')
 call plugins#load_settings('spotify.vim')
 call plugins#load_settings('lightline.vim')
 call plugins#load_settings('vim-obsession')
@@ -422,7 +428,19 @@ call plugins#load_settings('coc.nvim')
 " ------------- "
 
 autocmd FileType org setlocal shiftwidth=4 softtabstop=4 expandtab
+
+" cake
+" ------------- "
+
 autocmd FileType cake setlocal shiftwidth=4 softtabstop=4 expandtab
+
+" rust
+" ------------- "
+
+augroup filetype_rust
+    autocmd!
+    autocmd BufReadPost *.rs setlocal filetype=rust
+augroup END
 
 "
 "
