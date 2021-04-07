@@ -67,9 +67,9 @@ endfunction
 
 
 " colorscheme options: 'ayu', 'onedark', 'moonfly', 'tokyonight',
-" 'PaperColor', 'srcery'
+" 'PaperColor', 'srcery', 'forest_night'
 let g:lightline = {
-    \ 'colorscheme': 'forest_night',
+    \ 'colorscheme': 'spaceduck',
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],
