@@ -57,6 +57,9 @@ Plug 'OmniSharp/omnisharp-vim'
 " -> Rust
 "Plug 'rust-lang/rust.vim'
 
+" Navigation
+Plug 'chimay/wheel'
+
 " Utilities
 Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 Plug 'Shougo/echodoc.vim'
@@ -332,16 +335,16 @@ nnoremap <C-W><C-E> :res<CR> :vertical res<CR>
 nnoremap <Leader>b :ls<CR>
 
 " * movements
-nnoremap <A-h> :bprevious<CR>
-nnoremap <A-l> :bnext<CR>
+"nnoremap <A-h> :bprevious<CR>
+"nnoremap <A-l> :bnext<CR>
 
 " * split and move
-nnoremap <Leader><A-h> :sbprevious<CR>
-nnoremap <Leader><A-l> :sbnext<CR>
+"nnoremap <Leader><A-h> :sbprevious<CR>
+"nnoremap <Leader><A-l> :sbnext<CR>
 
 " * edit
 "nnoremap <A-t> :tabnew<CR>
-nnoremap <A-x> :bd<CR>
+"nnoremap <A-x> :bd<CR>
 
 " * reallocate buffers
 "nnoremap <A-j> :tabm -1<CR>
@@ -418,6 +421,7 @@ call plugins#load_settings('vim-devicons')
 call plugins#load_settings('float-preview.nvim')
 call plugins#load_settings('vim-startify')
 call plugins#load_settings('coc.nvim')
+call plugins#load_settings('wheel')
 
 " .org
 " ------------- "
