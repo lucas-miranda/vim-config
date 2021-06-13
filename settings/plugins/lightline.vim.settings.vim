@@ -66,10 +66,8 @@ function! s:lightline_current_detail_mode()
 endfunction
 
 
-" colorscheme options: 'ayu', 'onedark', 'moonfly', 'tokyonight',
-" 'PaperColor', 'srcery', 'forest_night'
 let g:lightline = {
-    \ 'colorscheme': 'spaceduck',
+    \ 'colorscheme': 'moonfly',
 	\ 'active': {
 	\	'left': [
 	\		[ 'mode' ],

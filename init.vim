@@ -78,19 +78,21 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 "Plug 'psliwka/vim-smoothie'             " Smooth scroll
 
 " Color Theme Tools
-"Plug 'lifepillar/vim-colortemplate'
+Plug 'lifepillar/vim-colortemplate'
 
 " Themes
+
+" * Dark
 "Plug 'joshdick/onedark.vim'
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rafalbromirski/vim-aurora'
-"Plug 'flrnd/candid.vim'
-"Plug 'bluz71/vim-moonfly-colors'
-"Plug 'ghifarit53/tokyonight-vim'
-"Plug 'NLKNguyen/papercolor-theme'
+Plug 'bluz71/vim-moonfly-colors'
 "Plug 'srcery-colors/srcery-vim'
+"Plug 'aonemd/kuroi.vim'
+
+" * Light
+"Plug 'NLKNguyen/papercolor-theme'
 "Plug 'sainnhe/forest-night'
-Plug 'pineapplegiant/spaceduck'
 
 call plug#end()
 
@@ -101,10 +103,6 @@ syntax on
 syntax enable
 
 set termguicolors
-
-" * candid
-"set background=dark
-"colorscheme candid
 
 " * vim-aurora
 "set background=dark
@@ -118,27 +116,24 @@ set termguicolors
 "colorscheme ayu
 
 " * moonfly
-"colorscheme moonfly 
-
-" * tokyonight
-"let g:tokyonight_style = 'night' " available: night, storm
-"let g:tokyonight_enable_italic = 1
-"colorscheme tokyonight 
-
-" * papercolor
-"set background=dark " light or dark
-"colorscheme PaperColor
+colorscheme moonfly 
 
 " * srcery-vim
 "let g:srcery_italic = 1
 "colorscheme srcery
 
+" * kuroi
+"set t_Co=256
+"set background=dark
+"colorscheme kuroi
+
+" * papercolor
+"set background=dark " light or dark
+"colorscheme PaperColor
+
 " * forest-night
 "let g:forest_night_enable_italic = 1
 "colorscheme forest-night
-
-" * spaceduck
-colorscheme spaceduck
 
 " ------------- "
 " Vim Settings
@@ -152,7 +147,7 @@ set showcmd
 "set number
 set showmatch
 set cursorline
-set hlsearch!
+set hlsearch
 
 set tabstop=4
 set softtabstop=4
@@ -167,7 +162,7 @@ set hidden
 
 set ignorecase
 set smartcase
-set incsearch
+set noincsearch
 
 set nobackup
 set nowritebackup
