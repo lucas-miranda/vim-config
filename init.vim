@@ -300,6 +300,7 @@ let maplocalleader = "\<Space>"
 nnoremap U <C-R>
 nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
 nnoremap Y yyp
+map <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
   
 " Editor
 nnoremap <Leader>qq :q<CR>
