@@ -41,7 +41,7 @@ elseif g:cs_keybinds_scheme == 'omni'
     nmap <silent> <buffer> <Leader>cc :OmniSharpGlobalCodeCheck
     nmap <buffer> <Leader>rn :OmniSharpRename
 
-    nmap <buffer> <Leader>Osr :OmniSharpRestartServer<CR>
+    nmap <buffer> <Leader>Osr :OmniSharpRestartAllServers<CR>
     nmap <buffer> <Leader>Oss :OmniSharpStartServer<CR>
-    nmap <buffer> <Leader>Osp :OmniSharpStopServer<CR>
+    nmap <buffer> <Leader>Osp :OmniSharpStopAllServers<CR>
 endif
