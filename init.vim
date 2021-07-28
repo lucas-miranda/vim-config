@@ -12,18 +12,14 @@ call plug#begin(g:vim_root_folder . '/plugins-database')
 
 " General
 Plug 'tpope/vim-sensible'    	        " A standard vimrc configuration
-"Plug 'ycm-core/YouCompleteMe', "{ 'do': 'python install.py --cs-completer' }      autocomplete as you type
 Plug 'prabirshrestha/async.vim'         " Normalize async job control api between vim and neovim
 Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
-"Plug 'RRethy/vim-illuminate'            " Automatically hightlights matching words under cursor
 Plug 'ncm2/float-preview.nvim'          " Uses neovim float window to preview
-"Plug 'mhinz/vim-startify'
 
 " Buffer Handling
 Plug 'Asheq/close-buffers.vim'
 
 " Org
-"Plug 'jceb/vim-orgmode'
 Plug 'vimwiki/vimwiki'                  " A personal wiki
 
 " Git
@@ -50,12 +46,9 @@ Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'kabouzeid/nvim-lspinstall'
 
 " Linters
-""Plug 'dense-analysis/ale'
 
 " Languages
-"Plug 'autozimu/LanguageClient-neovim'
 Plug 'beyondmarc/hlsl.vim'
-"Plug 'juliosueiras/cakebuild.vim'
 
 " -> C#
 Plug 'nickspoons/vim-cs'
@@ -79,15 +72,11 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'tpope/vim-obsession'
 
 " Visuals
-"Plug 'TaDaa/vimade'                    " Makes inactive buffers fades a bit
 "Plug 'lucas-miranda/spotify.vim'        " Retrieve info from Spotify to be displayed somewhere
 Plug 'sheerun/vim-polyglot'  	        " Helps others plugins with language specifics support
 Plug 'itchyny/lightline.vim' 	        " Bottom powerline
 Plug 'ryanoasis/vim-devicons'	        " Tons of icons
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
-
-" Comfort
-"Plug 'psliwka/vim-smoothie'             " Smooth scroll
 
 " Color Theme Tools
 "Plug 'lifepillar/vim-colortemplate'
