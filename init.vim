@@ -63,7 +63,7 @@ Plug 'chimay/wheel'
 Plug 'hrsh7th/nvim-compe'
 
 " Utilities
-"Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/echodoc.vim'
 
 " Sessions
 Plug 'tpope/vim-obsession'
