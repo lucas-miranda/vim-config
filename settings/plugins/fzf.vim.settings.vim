@@ -1,11 +1,11 @@
 " Key Bindings
 " -------------"
 
-nnoremap <Leader>g :call fzf#run(fzf#wrap({'sink': 'e!'}))<CR>
-nnoremap <Leader><Leader>g :call fzf#run(fzf#wrap({'sink': 'tabedit'}))<CR>
-nnoremap <Leader>t :Ag<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>F :Filetypes<CR>
+nmap <silent> <Leader>g :call fzf#run(fzf#wrap({'sink': 'e!'}))<CR>
+nmap <silent> <Leader><Leader>g :call fzf#run(fzf#wrap({'sink': 'tabedit'}))<CR>
+nmap <silent> <Leader>t :Ag<CR>
+nmap <silent> <Leader>b :Buffers<CR>
+nmap <silent> <Leader>F :Filetypes<CR>
 
 " Config
 " -------------"

@@ -32,9 +32,6 @@ Plug 'tpope/vim-fugitive'		        " Git integration
 " File manager interface
 Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
 
-" Code Completion
-"Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
 " Fuzzyfinder
 "  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
 "  FZF_DEFAULT_COMMNAND="fd --type f --hidden --follow --exclude .git"
@@ -47,24 +44,36 @@ endif
 
 Plug 'junegunn/fzf.vim'
 
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'kabouzeid/nvim-lspinstall'
+
+" Linters
+""Plug 'dense-analysis/ale'
+
 " Languages
-Plug 'autozimu/LanguageClient-neovim'
+"Plug 'autozimu/LanguageClient-neovim'
 Plug 'beyondmarc/hlsl.vim'
-Plug 'juliosueiras/cakebuild.vim'
+"Plug 'juliosueiras/cakebuild.vim'
+
 " -> C#
-Plug 'OmniSharp/omnisharp-vim'
-"Plug 'nickspoons/vim-sharpenup'
+Plug 'nickspoons/vim-cs'
+
 " -> Rust
-"Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'arzg/vim-rust-syntax-ext'
+Plug 'simrat39/rust-tools.nvim'
 
 " Navigation
 Plug 'chimay/wheel'
 
+" Autocomplete
+Plug 'hrsh7th/nvim-compe'
+
 " Utilities
-Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'dense-analysis/ale'
+"Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
+"Plug 'Shougo/echodoc.vim'
 
 " Sessions
 Plug 'tpope/vim-obsession'
@@ -81,7 +90,7 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 "Plug 'psliwka/vim-smoothie'             " Smooth scroll
 
 " Color Theme Tools
-Plug 'lifepillar/vim-colortemplate'
+"Plug 'lifepillar/vim-colortemplate'
 
 " Themes
 
@@ -92,6 +101,7 @@ Plug 'lifepillar/vim-colortemplate'
 Plug 'bluz71/vim-moonfly-colors'
 "Plug 'srcery-colors/srcery-vim'
 "Plug 'aonemd/kuroi.vim'
+Plug '~/repos/vim-purple-martin'
 
 " * Light
 "Plug 'NLKNguyen/papercolor-theme'
@@ -119,7 +129,7 @@ set termguicolors
 "colorscheme ayu
 
 " * moonfly
-colorscheme moonfly 
+"colorscheme moonfly 
 
 " * srcery-vim
 "let g:srcery_italic = 1
@@ -137,6 +147,9 @@ colorscheme moonfly
 " * forest-night
 "let g:forest_night_enable_italic = 1
 "colorscheme forest-night
+
+" * purplefy
+colorscheme purple_martin
 
 " ------------- "
 " Vim Settings
@@ -296,6 +309,10 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--all-types --numbers --ig
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
+" worthless command history navigation
+" I *always* type it isn't of :q
+map q: <Nop>
+
 " Text
 nnoremap U <C-R>
 nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
@@ -401,7 +418,7 @@ let g:cs_keybinds_scheme = 'omni' " values: omni or ycm
 " Plugins
 " ------------- "
 
-call plugins#load_settings('LanguageClient-neovim')
+"call plugins#load_settings('LanguageClient-neovim')
 call plugins#load_settings('close-buffers.vim')
 call plugins#load_settings('ale')
 "call plugins#load_settings('YouCompleteMe') ", 'omnisharp-vim')
@@ -423,6 +440,9 @@ call plugins#load_settings('float-preview.nvim')
 call plugins#load_settings('vim-startify')
 call plugins#load_settings('coc.nvim')
 call plugins#load_settings('wheel')
+call plugins#load_settings('nvim-lspconfig')
+call plugins#load_settings('completion-nvim')
+call plugins#load_settings('nvim-compe')
 
 " .org
 " ------------- "

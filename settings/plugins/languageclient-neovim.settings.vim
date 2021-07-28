@@ -1,9 +1,10 @@
 
-set completefunc=LanguageClient#complete
+"set completefunc=LanguageClient#complete
 
 let g:LanguageClient_hideVirtualTextsOnInsert = 1
 let g:LanguageClient_useFloatingHover = 1
-let g:LanguageClient_hoverPreview = "Always"
+let g:LanguageClient_usePopupHover = 1
+let g:LanguageClient_hoverPreview = "Never"
 let g:LanguageClient_preferredMarkupKind = ['markdown', 'plaintext']
 
 "\   'command': ['rustup', 'run', 'stable', 'rls'],

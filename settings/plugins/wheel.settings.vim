@@ -58,12 +58,13 @@ let g:wheel_config.debug = 0
 
 " * Keybindings 
 
-nmap <A-h> <plug>(wheel-previous-location)
-nmap <A-l> <plug>(wheel-next-location)
-nmap <A-k> <plug>(wheel-previous-circle)
-nmap <A-j> <plug>(wheel-next-circle)
+nmap <A-h> <plug>(wheel-previous-circle)
+nmap <A-l> <plug>(wheel-next-circle)
+nmap <A-k> <plug>(wheel-previous-location)
+nmap <A-j> <plug>(wheel-next-location)
 nmap <A-tab> <plug>(wheel-alternate-anywhere)
 
+nmap <Leader>wm <plug>(wheel-menu-main)
 nmap <Leader>waa <plug>(wheel-add-here)
 nmap <Leader>wac <plug>(wheel-add-circle)
 nmap <Leader>wat <plug>(wheel-add-torus)
