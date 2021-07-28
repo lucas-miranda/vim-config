@@ -1,9 +1,9 @@
 ﻿if has('win32')
-    let g:vim_root_folder = '~/AppData/Local/nvim'
+    let g:vim_root_folder = expand('~/AppData/Local/nvim')
     let g:python3_host_prog = expand('C:/Program Files/Python37/python')
     let g:python_host_prog = g:python3_host_prog
 else
-    let g:vim_root_folder = '/home/luke/.config/nvim'
+    let g:vim_root_folder = expand('~/.config/nvim')
 endif
 
 
