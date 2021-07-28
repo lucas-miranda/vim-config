@@ -12,9 +12,7 @@ call plug#begin(g:vim_root_folder . '/plugins-database')
 
 " General
 Plug 'tpope/vim-sensible'    	        " A standard vimrc configuration
-Plug 'prabirshrestha/async.vim'         " Normalize async job control api between vim and neovim
 Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
-Plug 'ncm2/float-preview.nvim'          " Uses neovim float window to preview
 
 " Buffer Handling
 Plug 'Asheq/close-buffers.vim'
@@ -65,7 +63,6 @@ Plug 'chimay/wheel'
 Plug 'hrsh7th/nvim-compe'
 
 " Utilities
-"Plug 'KabbAmine/zeavim.vim'             " Allows to call zeal through vim
 "Plug 'Shougo/echodoc.vim'
 
 " Sessions
