@@ -112,6 +112,16 @@ let g:lightline = {
     \ 'component': {
 	\   'lineinfo': ' %l:%v',
     \ },
+    \ 'tab': {
+    \   'active': [ 'folderwithfilename', 'modified' ],
+    \   'inactive': [ 'filename', 'modified' ]
+    \ },
+    \ 'tab_component_function': {
+    \   'folderwithfilename': 'LightlineFolderWithFilename',
+    \   'filename': 'lightline#tab#filename',
+    \   'modified': 'lightline#tab#modified',
+    \   'readonly': 'lightline#tab#readonly'
+    \ },
     \ 'separator': {
 	\   'left': '',
     \   'right': ''
@@ -294,7 +304,6 @@ function! GetSpecialModeOrFilename(can_show_filename)
         return vimshell#get_status_string()
     endif
 
-    let l:fname = expand('%:t')
     let l:display = []
 
     let l:readonly = LightlineReadonly()
@@ -303,7 +312,14 @@ function! GetSpecialModeOrFilename(can_show_filename)
     endif
 
     if a:can_show_filename
+        let l:fname = expand('%:t')
         if l:fname != ''
+            " try to show file folder also
+            let l:folder_name = expand('%:h:t')
+            if l:folder_name != ''
+                let l:fname = l:folder_name . '/' . l:fname
+            endif
+
             call add(l:display, l:fname)
         else
             call add(l:display, '[No Name]')
@@ -496,6 +512,24 @@ function! g:LightlineLanguageServer()
     endif
 
     return ''
+endfunction
+
+function! LightlineFolderWithFilename(tab_n)
+    let buflist = tabpagebuflist(a:tab_n)
+    let n = buflist[tabpagewinnr(a:tab_n) - 1]
+    let fname = expand('#' . n . ':t')
+
+    if fname != ''
+        " try to show file folder also
+        let folder_name = expand('#' . n . ':h:t')
+        if folder_name != ''
+            return folder_name . '/' . fname
+        endif
+
+        return fname
+    endif
+
+    return '[No Name]'
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'

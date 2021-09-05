@@ -1,5 +1,6 @@
 lua <<EOF
 local nvim_lsp = require('lspconfig')
+local util = require 'lspconfig/util'
 
 -- borders
 vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
@@ -47,11 +48,11 @@ for i, kind in ipairs(kinds) do
 end
 
 -- diagnostics symbols
-local signs = { 
-    Error = " ", 
-    Warning = " ", 
-    Hint = " ", 
-    Information = " " 
+local signs = {
+    Error = " ",
+    Warning = " ",
+    Hint = " ",
+    Information = " "
 }
 
 for type, icon in pairs(signs) do
@@ -104,14 +105,24 @@ nvim_lspinstall.post_install_hook = function ()
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
+-- nvim-cmp capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 -- * Csharp
 nvim_lsp.omnisharp.setup {
+    capabilities = capabilities,
     cmd = {
-        "/home/luke/.cache/omnisharp-vim/omnisharp-roslyn/run",
-        "--languageserver",
+        "mono",
+        "--assembly-loader=strict",
+        "/home/luke/.omnisharp/omnisharp-roslyn/mono/OmniSharp.exe",
+        "-lsp",
         "--hostPID",
         tostring(vim.fn.getpid())
-    }
+    },
+    flags = {
+        debounce_text_changes = 500,
+    },
 }
 
 -- * Rust
@@ -185,8 +196,13 @@ require('rust-tools').setup {
     -- these override the defaults set by rust-tools.nvim
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
     server = {
+        capabilities = capabilities,
+        flags = {
+            debounce_text_changes = 300,
+        },
+
         -- rust-analyzer options
-        cmd = { 
+        cmd = {
             require("lspinstall/util").install_path("rust") .. "/rust-analyzer"
         },
         on_attach = function(client, bufnr)
@@ -239,7 +255,7 @@ EOF
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+    \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " Code navigation shortcuts
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>

@@ -1,4 +1,4 @@
-set completeopt+=noinsert,noselect
+set completeopt+=noinsert,noselect,preview
 
 lua << EOF
 -- Compe setup

@@ -7,6 +7,11 @@ nmap <silent> <Leader>t :Ag<CR>
 nmap <silent> <Leader>b :Buffers<CR>
 nmap <silent> <Leader>F :Filetypes<CR>
 
+" Commands
+" ------------- "
+
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--all-types --numbers --ignore={.git,.vs} --width ' . (winwidth(0) - 10), {'options': '--delimiter : --nth 4..'} , <Bang>0)
+
 " Config
 " -------------"
 

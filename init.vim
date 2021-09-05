@@ -10,6 +10,10 @@ endif
 " Plugins Manager
 call plug#begin(g:vim_root_folder . '/plugins-database')
 
+" NeoVim Lua
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+
 " General
 Plug 'tpope/vim-sensible'    	        " A standard vimrc configuration
 Plug 'chaoren/vim-wordmotion'           " Modify lowercase motions
@@ -27,16 +31,18 @@ Plug 'tpope/vim-fugitive'		        " Git integration
 Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
 
 " Fuzzyfinder
+Plug 'nvim-telescope/telescope.nvim'
 "  Note!  Install 'fd' and set FZF_DEFAULT_COMMAND
 "  FZF_DEFAULT_COMMNAND="fd --type f --hidden --follow --exclude .git"
-set rtp+=~/.fzf
-if has('win32')
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'sh install --all' }
-else
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-endif
 
-Plug 'junegunn/fzf.vim'
+"set rtp+=~/.fzf
+"if has('win32')
+    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'sh install --all' }
+"else
+    "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"endif
+
+"Plug 'junegunn/fzf.vim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -60,7 +66,13 @@ Plug 'simrat39/rust-tools.nvim'
 Plug 'chimay/wheel'
 
 " Autocomplete
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
+
+" Snippet
+Plug 'hrsh7th/vim-vsnip'
 
 " Utilities
 Plug 'Shougo/echodoc.vim'
@@ -74,6 +86,7 @@ Plug 'sheerun/vim-polyglot'  	        " Helps others plugins with language speci
 Plug 'itchyny/lightline.vim' 	        " Bottom powerline
 Plug 'ryanoasis/vim-devicons'	        " Tons of icons
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'onsails/lspkind-nvim'
 
 " Color Theme Tools
 "Plug 'lifepillar/vim-colortemplate'
@@ -85,8 +98,9 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rafalbromirski/vim-aurora'
 Plug 'bluz71/vim-moonfly-colors'
-"Plug 'srcery-colors/srcery-vim'
+Plug 'srcery-colors/srcery-vim'
 "Plug 'aonemd/kuroi.vim'
+Plug 'folke/tokyonight.nvim'
 Plug '~/repos/vim-purple-martin'
 
 " * Light
@@ -115,7 +129,7 @@ set termguicolors
 "colorscheme ayu
 
 " * moonfly
-"colorscheme moonfly 
+"colorscheme moonfly
 
 " * srcery-vim
 "let g:srcery_italic = 1
@@ -136,6 +150,9 @@ set termguicolors
 
 " * purplefy
 colorscheme purple_martin
+
+" * tokyonight
+"colorscheme tokyonight
 
 " ------------- "
 " Vim Settings
@@ -232,7 +249,7 @@ function! Edit(filepath)
 endfunction
 
 function! WrapBuf(range)
-    execute a:range . 'bufdo! set wrap' 
+    execute a:range . 'bufdo! set wrap'
 endfunction
 
 function! EditTodo(filepath)
@@ -267,16 +284,37 @@ endfunction
 " Autocmds
 "------------- "
 
+function! <SID>StripTrailingWhitespaces()
+    if !&binary && &filetype != 'diff'
+        let l:save = winsaveview()
+        keeppatterns %s/\s\+$//e
+        call winrestview(l:save)
+    endif
+endfun
+
+autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
 " routines to execute when window loses it's focus or leaving a buffer
+function! StripTrailingWhitespacesAndSave()
+    call <SID>StripTrailingWhitespaces()
+    write
+endfun
+
+function! StripTrailingWhitespacesAndSaveAll()
+    call <SID>StripTrailingWhitespaces()
+    wall
+endfun
+
 augroup onLostFocus
     autocmd!
+
     " Soft save
-    autocmd BufLeave * silent! w
-    autocmd FocusLost * silent! wa
+    autocmd BufLeave * silent! :call StripTrailingWhitespacesAndSave()
+    autocmd FocusLost * silent! :call StripTrailingWhitespacesAndSaveAll()
 
     " Return to normal mode
     "autocmd BufLeave * silent! stopinsert
-    "autocmd FocusLost * silent! stopinsert 
+    "autocmd FocusLost * silent! stopinsert
 augroup END
 
 "augroup specialCommands
@@ -287,7 +325,6 @@ augroup END
 " ------------- "
 " Commands
 
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--all-types --numbers --ignore={.git,.vs} --width ' . (winwidth(0) - 10), {'options': '--delimiter : --nth 4..'} , <Bang>0)
 
 " ------------- "
 " Key Remaps
@@ -304,7 +341,7 @@ nnoremap U <C-R>
 nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
 nnoremap Y yyp
 map <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-  
+
 " Editor
 nnoremap <Leader>qq :q<CR>
 nnoremap <Leader>qw :wq<CR>
@@ -330,7 +367,7 @@ nnoremap <C-W><C-H> <C-W>H
 nnoremap <Leader>v :vsp<CR>
 nnoremap <Leader>h :sp<CR>
 " set buffer split to the maximum width and height possible
-nnoremap <C-W><C-E> :res<CR> :vertical res<CR> 
+nnoremap <C-W><C-E> :res<CR> :vertical res<CR>
 
 " =====================
 "   Buffers
@@ -393,7 +430,7 @@ nnoremap <C-Q><C-V> :call Edit(g:vim_root_folder . '/init.vim')<CR>
 nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>M :messages<CR>
-nnoremap <F3> :set hlsearch!<CR> 
+nnoremap <F3> :set hlsearch!<CR>
 nnoremap <buffer> <Leader>r :e <CR>
 
 " Language Opts
@@ -411,7 +448,7 @@ call plugins#load_settings('ale')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vimwiki')
 call plugins#load_settings('ranger.vim')
-call plugins#load_settings('fzf.vim')
+"call plugins#load_settings('fzf.vim')
 call plugins#load_settings('omnisharp-vim')
 call plugins#load_settings('vim-sharpenup')
 call plugins#load_settings('zeavim.vim')
@@ -429,6 +466,8 @@ call plugins#load_settings('wheel')
 call plugins#load_settings('nvim-lspconfig')
 call plugins#load_settings('completion-nvim')
 call plugins#load_settings('nvim-compe')
+call plugins#load_settings('telescope.nvim')
+call plugins#load_settings('nvim-cmp')
 
 " .org
 " ------------- "
