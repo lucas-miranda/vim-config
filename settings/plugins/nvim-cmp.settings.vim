@@ -10,7 +10,7 @@ cmp.setup {
         autocomplete = {
             types.cmp.TriggerEvent.TextChanged,
         },
-        completeopt = 'longest,menu,menuone,noselect,preview',
+        completeopt = 'longest,menu,menuone,noselect,noinsert,preview',
         --completeopt = 'menu,menuone,noselect',
         keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
         keyword_length = 1,
@@ -35,8 +35,6 @@ cmp.setup {
         }),
         ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
-        ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-        ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
     },
 
     formatting = {
