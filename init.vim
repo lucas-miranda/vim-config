@@ -89,7 +89,7 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'onsails/lspkind-nvim'
 
 " Color Theme Tools
-"Plug 'lifepillar/vim-colortemplate'
+Plug 'lifepillar/vim-colortemplate'
 
 " Themes
 
@@ -101,6 +101,7 @@ Plug 'bluz71/vim-moonfly-colors'
 Plug 'srcery-colors/srcery-vim'
 "Plug 'aonemd/kuroi.vim'
 Plug 'folke/tokyonight.nvim'
+"Plug 'lucas-miranda/vim-purple-martin'
 Plug '~/repos/vim-purple-martin'
 
 " * Light
@@ -468,6 +469,7 @@ call plugins#load_settings('completion-nvim')
 call plugins#load_settings('nvim-compe')
 call plugins#load_settings('telescope.nvim')
 call plugins#load_settings('nvim-cmp')
+call plugins#load_settings('vim-colortemplate')
 
 " .org
 " ------------- "
