@@ -382,7 +382,7 @@ nnoremap <Leader>b :ls<CR>
 
 " * edit
 "nnoremap <A-t> :tabnew<CR>
-"nnoremap <A-x> :bd<CR>
+nnoremap <A-x> :bd<CR>
 
 " * reallocate buffers
 "nnoremap <A-j> :tabm -1<CR>
