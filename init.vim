@@ -47,7 +47,6 @@ Plug 'nvim-telescope/telescope.nvim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'kabouzeid/nvim-lspinstall'
 
 " Linters
 

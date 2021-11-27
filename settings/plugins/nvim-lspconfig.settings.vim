@@ -69,41 +69,6 @@ end
 
 
 -- LSPs
-local nvim_lspinstall = require("lspinstall")
-
-local nvim_lspinstall_skip_setup = {
-    "rust", -- auto setup through rust-tools
-    "rust_analyzer", -- auto setup through rust-tools
-    "omnisharp", -- need to be manually setup
-    "csharp" -- need to be manually setup
-}
-
-local function setup_servers()
-  require("lspinstall").setup()
-  local servers = require("lspinstall").installed_servers()
-  for _, server in pairs(servers) do
-    local skip_setup = false
-
-    for _, skip_server in pairs(nvim_lspinstall_skip_setup) do
-        if server == skip_server then
-            skip_setup = true
-            break
-        end
-    end
-
-    if not skip_setup then
-        nvim_lsp[server].setup {}
-    end
-  end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-nvim_lspinstall.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
 
 -- nvim-cmp capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
