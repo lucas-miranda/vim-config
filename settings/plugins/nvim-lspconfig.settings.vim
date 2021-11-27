@@ -115,8 +115,8 @@ nvim_lsp.omnisharp.setup {
     cmd = {
         "mono",
         "--assembly-loader=strict",
-        "/home/luke/.omnisharp/omnisharp-roslyn/mono/OmniSharp.exe",
-        "-lsp",
+        "/home/luke/.omnisharp/omnisharp-mono/OmniSharp.exe",
+        "--languageserver",
         "--hostPID",
         tostring(vim.fn.getpid())
     },
