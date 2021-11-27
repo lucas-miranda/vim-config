@@ -337,6 +337,8 @@ map q: <Nop>
 nnoremap U <C-R>
 nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
 nnoremap Y yyp
+"nnoremap <C-S-k> ddkP
+"nnoremap <C-S-j> ddp
 map <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Editor
@@ -349,10 +351,10 @@ nnoremap <A-0> ^
 " =====================
 "   Splits
 " =====================
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-j> <C-W><C-J>
+nnoremap <C-k> <C-W><C-K>
+nnoremap <C-l> <C-W><C-L>
+nnoremap <C-h> <C-W><C-H>
 "tnoremap <C-J> <C-\><C-N><C-W><C-J>
 "tnoremap <C-K> <C-\><C-N><C-W><C-K>
 "tnoremap <C-L> <C-\><C-N><C-W><C-L>

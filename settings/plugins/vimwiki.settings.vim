@@ -1,5 +1,5 @@
 let g:vimwiki_list = [{
     \ 'path': '~/reference-wiki/',
-    \ 'syntax': 'default', 
+    \ 'syntax': 'default',
     \ 'ext': '.wiki'
 \ }]

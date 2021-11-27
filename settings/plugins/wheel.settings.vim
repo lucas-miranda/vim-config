@@ -56,7 +56,7 @@ let g:wheel_config.maxim.vertical = 4
 
 let g:wheel_config.debug = 0
 
-" * Keybindings 
+" * Keybindings
 
 nmap <A-h> <plug>(wheel-previous-circle)
 nmap <A-l> <plug>(wheel-next-circle)
