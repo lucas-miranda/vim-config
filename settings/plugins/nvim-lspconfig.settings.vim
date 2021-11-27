@@ -215,7 +215,7 @@ require('rust-tools').setup {
     }
 }
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, context, _)
     local config = { -- your config
         underline = true,
         virtual_text = {
@@ -226,14 +226,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, cli
         update_in_insert = false
     }
 
-    local uri = params.uri
+    local uri = result.uri
     local bufnr = vim.uri_to_bufnr(uri)
 
     if not bufnr then
         return
     end
 
-    local diagnostics = params.diagnostics
+    local client_id = context.client_id
+    local diagnostics = result.diagnostics
 
     for i, v in ipairs(diagnostics) do
         diagnostics[i].message = string.format("%s: %s", v.source, v.message)
