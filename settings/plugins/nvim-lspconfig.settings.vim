@@ -198,12 +198,12 @@ require('rust-tools').setup {
     server = {
         capabilities = capabilities,
         flags = {
-            debounce_text_changes = 300,
+            debounce_text_changes = 500,
         },
 
         -- rust-analyzer options
         cmd = {
-            require("lspinstall/util").install_path("rust") .. "/rust-analyzer"
+            "rust-analyzer"
         },
         on_attach = function(client, bufnr)
             --require("compe").setup({ enabled = true }, bufnr)
