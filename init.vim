@@ -61,9 +61,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'arzg/vim-rust-syntax-ext'
 Plug 'simrat39/rust-tools.nvim'
 
-" Navigation
-Plug 'chimay/wheel'
-
 " Autocomplete
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
