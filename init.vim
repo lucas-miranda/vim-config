@@ -6,7 +6,6 @@ else
     let g:vim_root_folder = expand('~/.config/nvim')
 endif
 
-
 " Plugins Manager
 call plug#begin(g:vim_root_folder . '/plugins-database')
 

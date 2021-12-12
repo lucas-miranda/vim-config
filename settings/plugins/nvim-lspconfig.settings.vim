@@ -48,16 +48,10 @@ for i, kind in ipairs(kinds) do
 end
 
 -- diagnostics symbols
-local signs = {
-    Error = " ",
-    Warning = " ",
-    Hint = " ",
-    Information = " "
-}
-
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-    local hl = "LspDiagnosticsSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 -- events
@@ -180,39 +174,19 @@ require('rust-tools').setup {
     }
 }
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, context, _)
-    local config = { -- your config
-        underline = true,
-        virtual_text = {
-            prefix = "■ ",
-            spacing = 4,
-        },
-        signs = true,
-        update_in_insert = false
-    }
+vim.diagnostic.config({
+    underline = true,
+    virtual_text = {
+        prefix = "■ ",
+        format = function(diagnostic)
+            return diagnostic.message
+        end,
+    },
+    signs = true,
+    update_in_insert = false,
+    severity_sort = true
+})
 
-    local uri = result.uri
-    local bufnr = vim.uri_to_bufnr(uri)
-
-    if not bufnr then
-        return
-    end
-
-    local client_id = context.client_id
-    local diagnostics = result.diagnostics
-
-    for i, v in ipairs(diagnostics) do
-        diagnostics[i].message = string.format("%s: %s", v.source, v.message)
-    end
-
-    vim.lsp.diagnostic.save(diagnostics, bufnr, client_id)
-
-    if not vim.api.nvim_buf_is_loaded(bufnr) then
-        return
-    end
-
-    vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
-end
 
 EOF
 
@@ -220,8 +194,8 @@ EOF
 "autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false })
 
 " Enable type inlay hints
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-    \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+"autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
+    "\ lua require('lsp_extensions').inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " Code navigation shortcuts
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
