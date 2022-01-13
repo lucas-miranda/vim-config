@@ -46,6 +46,7 @@ Plug 'nvim-telescope/telescope.nvim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'ray-x/lsp_signature.nvim'
 
 " Linters
 
@@ -468,6 +469,7 @@ call plugins#load_settings('nvim-compe')
 call plugins#load_settings('telescope.nvim')
 call plugins#load_settings('nvim-cmp')
 call plugins#load_settings('vim-colortemplate')
+call plugins#load_settings('lsp_signature.nvim')
 
 " .org
 " ------------- "
