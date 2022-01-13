@@ -82,6 +82,23 @@ nvim_lsp.omnisharp.setup {
     flags = {
         debounce_text_changes = 500,
     },
+    on_new_config = function(new_config, new_root_dir)
+        if new_root_dir then
+            -- skip it if root dir is already registered
+            for i, j in pairs(new_config.cmd) do
+                if j == new_root_dir then
+                    return
+                end
+            end
+
+            table.insert(new_config.cmd, '-s')
+            table.insert(new_config.cmd, new_root_dir)
+        end
+    end,
+    root_dir = function(fname)
+        return util.root_pattern '*.sln'(fname) or util.root_pattern '*.csproj'(fname)
+    end
+    --root_dir = util.root_pattern(".csproj")
 }
 
 -- * Rust
