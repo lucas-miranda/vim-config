@@ -336,8 +336,8 @@ map q: <Nop>
 nnoremap U <C-R>
 nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
 nnoremap Y yyp
-"nnoremap <C-S-k> ddkP
-"nnoremap <C-S-j> ddp
+nnoremap <C-A-k> ddkP
+nnoremap <C-A-j> ddp
 map <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Editor
