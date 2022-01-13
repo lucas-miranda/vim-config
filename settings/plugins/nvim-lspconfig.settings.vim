@@ -217,7 +217,7 @@ EOF
 
 " Code navigation shortcuts
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> D <cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false })<CR>
+nnoremap <silent> D <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <silent> f <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> Fr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> Fi <cmd>lua vim.lsp.buf.implementation()<CR>
@@ -231,5 +231,5 @@ nnoremap <silent> Fd <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> ga <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> <C-A-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> <C-A-n> <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> <C-n> <cmd>lua vim.diagnostic.goto_next()<CR>
