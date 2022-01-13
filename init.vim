@@ -383,7 +383,7 @@ nnoremap <Leader>b :ls<CR>
 
 " * edit
 "nnoremap <A-t> :tabnew<CR>
-nnoremap <A-x> :bd<CR>
+"nnoremap <A-x> :bd<CR>
 
 " * reallocate buffers
 "nnoremap <A-j> :tabm -1<CR>
@@ -394,30 +394,30 @@ nnoremap <A-x> :bd<CR>
 " =====================
 
 " * movements
-nnoremap <C-A-h> :tabprevious<CR>
-nnoremap <C-A-l> :tabnext<CR>
-inoremap <C-A-h> <Esc>:tabprevious<CR>i
-inoremap <C-A-l> <Esc>:tabnext<CR>i
-tnoremap <C-A-h> <C-\><C-N>:tabprevious<CR>
-tnoremap <C-A-l> <C-\><C-N>:tabnext<CR>
+nnoremap <A-h> :tabprevious<CR>
+nnoremap <A-l> :tabnext<CR>
+inoremap <A-h> <Esc>:tabprevious<CR>i
+inoremap <A-l> <Esc>:tabnext<CR>i
+tnoremap <A-h> <C-\><C-N>:tabprevious<CR>
+tnoremap <A-l> <C-\><C-N>:tabnext<CR>
 
 " * edit
-nnoremap <C-A-t> :call fzf#run(fzf#wrap({'sink': 'tabedit!'}))<CR>
-nnoremap <C-A-x> :tabclose<CR>
-inoremap <C-A-t> <Esc>:tabnew<CR>i
-inoremap <C-A-x> <Esc>:tabclose<CR>
-tnoremap <C-A-t> <C-\><C-N>:tabnew<CR>
-tnoremap <C-A-x> <C-\><C-N>:tabclose<CR>
+nnoremap <A-t> :call fzf#run(fzf#wrap({'sink': 'tabedit!'}))<CR>
+nnoremap <A-x> :tabclose<CR>
+inoremap <A-t> <Esc>:tabnew<CR>i
+inoremap <A-x> <Esc>:tabclose<CR>
+tnoremap <A-t> <C-\><C-N>:tabnew<CR>
+tnoremap <A-x> <C-\><C-N>:tabclose<CR>
 
 " * reallocate tabs
-nnoremap <C-A-j> :tabm -1<CR>
-nnoremap <C-A-k> :tabm +1<CR>
-tnoremap <C-A-j> :tabm -1<CR>
-tnoremap <C-A-k> :tabm +1<CR>
+nnoremap <A-j> :tabm -1<CR>
+nnoremap <A-k> :tabm +1<CR>
+tnoremap <A-j> :tabm -1<CR>
+tnoremap <A-k> :tabm +1<CR>
 
 " * sends current buffer to a new tab
-nnoremap <C-W>t <C-W>T
-nnoremap <C-W><C-T> <C-W>T
+nnoremap <A-w> <C-W>T
+"nnoremap <C-W><C-T> <C-W>T
 
 " Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -429,7 +429,7 @@ nnoremap <C-Q><C-G> :call Edit(g:vim_root_folder . '/ginit.vim')<CR>
 nnoremap <Leader>N :noh<CR>
 nnoremap <Leader>M :messages<CR>
 nnoremap <F3> :set hlsearch!<CR>
-nnoremap <buffer> <Leader>r :e <CR>
+nnoremap <buffer> <Leader>r :e<CR>
 
 " Language Opts
 " ------------- "
