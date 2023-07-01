@@ -58,9 +58,9 @@ function! s:lightline_current_detail_mode()
 
     let l:detail_mode = g:lightline_detail_modes[l:detail_mode_level]
 
-    return { 
-        \ 'level': l:detail_mode_level, 
-        \ 'name': l:detail_mode.name, 
+    return {
+        \ 'level': l:detail_mode_level,
+        \ 'name': l:detail_mode.name,
         \ 'mode': l:detail_mode
     \ }
 endfunction
@@ -81,14 +81,14 @@ let g:lightline = {
 	\	]
 	\ },
     \ 'inactive': {
-    \   'left': [ 
+    \   'left': [
     \       [ 'inactivemodeorfilename' ],
     \       [ ],
     \       [ 'lineinfo' ]
     \   ],
-    \   'right': [ 
+    \   'right': [
     \       [ 'filetype' ]
-    \   ] 
+    \   ]
     \ },
 	\ 'component_function': {
     \   'filename': 'LightlineFilename',
@@ -128,7 +128,7 @@ let g:lightline = {
     \ },
     \ 'subseparator': {
 	\   'left': '',
-    \   'right': '' 
+    \   'right': ''
     \ }
 \ }
 
@@ -146,7 +146,7 @@ endfunction
 function! LightlineCodeAnalysis()
     let l:detail_mode = s:lightline_current_detail_mode()
 
-    if l:detail_mode.name !=? 'full' 
+    if l:detail_mode.name !=? 'full'
         return ''
     endif
 
@@ -180,7 +180,7 @@ function! LightlineCodeAnalysis()
     endif
 
     if plugins#is_plugin_loaded('ale')
-        try 
+        try
             " ALE
             let l:ale_counts = ale#statusline#Count(bufnr(''))
 
@@ -248,17 +248,17 @@ let s:clock_full_display = 0
 function! LightlineCurrentTime()
     let l:detail_mode = s:lightline_current_detail_mode()
 
-    if l:detail_mode.name ==? 'minimal' 
+    if l:detail_mode.name ==? 'minimal'
         return ''
     endif
 
     let clock_text = ''
 
-    if l:detail_mode.name ==? 'simplified' 
+    if l:detail_mode.name ==? 'simplified'
         let clock_text = ' %H:%M'
     else
         if s:clock_full_display
-            let clock_text = ' %H:%M | %A, %d de %B de %Y' 
+            let clock_text = ' %H:%M | %A, %d de %B de %Y'
         else
             let clock_text = ' %H:%M | %a %d/%b'
         endif
@@ -280,7 +280,7 @@ function! LightlineModified()
 endfunction
 
 function! LightlineReadonly()
-    if &ft !~? 'help' && &readonly 
+    if &ft !~? 'help' && &readonly
         return ''
     endif
 

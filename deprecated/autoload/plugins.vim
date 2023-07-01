@@ -30,7 +30,7 @@ endfunction
 " args:
 "   #0 | plugin_name => plugin exactly name
 "   #1 | force => 0 or 1
-function! plugins#load_settings(plugin_name, ...) 
+function! plugins#load_settings(plugin_name, ...)
     let l:force = 0
 
     if a:0 > 0
@@ -54,7 +54,7 @@ function! plugins#load_settings(plugin_name, ...)
         echoerr "Plugin settings file '" . l:full_path . "' doesn't exists"
         return 0
     endif
-    
+
     execute 'so ' . l:full_path
     return 1
 endfunction

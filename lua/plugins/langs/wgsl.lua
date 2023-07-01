@@ -1,0 +1,4 @@
+
+return {
+    'DingDean/wgsl.vim',
+}

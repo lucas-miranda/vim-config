@@ -1,0 +1,21 @@
+{
+    "workspace.library": [
+        "/home/luke/.config/nvim",
+        "/home/luke/.local/share/nvim/lazy/lazy.nvim",
+        "/home/luke/.local/share/nvim/lazy/nvim-lspconfig",
+        "/home/luke/.local/share/nvim/lazy/wgsl.vim",
+        "/home/luke/.local/share/nvim/lazy/omnisharp-extended-lsp.nvim",
+        "/home/luke/.local/share/nvim/lazy/hlsl.vim",
+        "/home/luke/.local/share/nvim/lazy/vim-hexokinase",
+        "/home/luke/.local/share/nvim/lazy/nvim-treesitter",
+        "/home/luke/.local/share/nvim/lazy/vimwiki",
+        "/home/luke/.local/share/nvim/lazy/lspkind-nvim",
+        "/home/luke/.local/share/nvim/lazy/plenary.nvim",
+        "/home/luke/.local/share/nvim/lazy/popup.nvim",
+        "/home/luke/repos/vim-purple-martin",
+        "/usr/share/nvim/runtime",
+        "/usr/lib/nvim",
+        "/home/luke/.local/state/nvim/lazy/readme",
+        "${3rd}/luassert/library"
+    ]
+}

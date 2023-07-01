@@ -6,6 +6,8 @@ let b:format_plugin_type = 'rust'
 
 let $RUST_BACKTRACE = 1
 
+call lsp_config#load()
+
 "let g:LanguageClient_loggingLevel = 'INFO'
 "et g:LanguageClient_virtualTextPrefix = ''
 "et g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')

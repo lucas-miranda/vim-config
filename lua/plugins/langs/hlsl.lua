@@ -1,0 +1,4 @@
+
+return {
+    'beyondmarc/hlsl.vim',
+}

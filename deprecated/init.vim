@@ -27,7 +27,8 @@ Plug 'vimwiki/vimwiki'                  " A personal wiki
 Plug 'tpope/vim-fugitive'		        " Git integration
 
 " File manager interface
-Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
+"Plug 'rafaqz/ranger.vim'                " Interface to Ranger file manager
+Plug 'lstwn/broot.vim'
 
 " Fuzzyfinder
 Plug 'nvim-telescope/telescope.nvim'
@@ -54,7 +55,9 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'beyondmarc/hlsl.vim'
 
 " -> C#
-Plug 'nickspoons/vim-cs'
+"Plug 'nickspoons/vim-cs'
+Plug 'jlcrochet/vim-cs'
+Plug 'Hoffs/omnisharp-extended-lsp.nvim'
 
 " -> Rust
 Plug 'rust-lang/rust.vim'
@@ -329,24 +332,59 @@ augroup END
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
-" worthless command history navigation
-" I *always* type it isn't of :q
+" useless command history navigation
+" I *always* type this instead of :q
 map q: <Nop>
 
 " Text
+" -> Redo
 nnoremap U <C-R>
-nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
-nnoremap Y yyp
-nnoremap <C-A-k> ddkP
-nnoremap <C-A-j> ddp
-map <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-" Editor
-nnoremap <Leader>qq :q<CR>
-nnoremap <Leader>qw :wq<CR>
+" -> Insert 4 spaces
+nnoremap <Leader><Tab> i<Space><Space><Space><Space><C-\><C-n>
+
+" -> Duplicate line
+nnoremap Y yyp
+
+" -> Move line up
+nnoremap Dk ddkP
+nnoremap DK ddkP
+
+" -> Move line down
+nnoremap Dj ddp
+nnoremap DJ ddp
+
+" -> Highlight every word which is the same as which the cursor is above
+noremap <silent> * :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
+" -> Paste from clipboard register
+noremap \y "+y
+
+" -> Paste from clipboard register
+noremap \p "+p
+noremap \P "+P
+
+" -> Execute visual selected expression
+xnoremap \= c<C-R>=<C-R>"<CR>
 
 " Movement
+" -> Move to line first char
 nnoremap <A-0> ^
+
+" Macros
+nnoremap <Leader>m q
+nnoremap q <Nop>
+
+
+" Editor
+"nnoremap <Leader>qq :q<CR>
+"nnoremap <Leader>qw :wq<CR>
+nnoremap q :w<CR>
+
+" Marks
+" Go to it's position at line, instead only returning to the given line
+nnoremap ' `
+
 
 " =====================
 "   Splits
@@ -399,29 +437,32 @@ nnoremap <A-h> :tabprevious<CR>
 nnoremap <A-l> :tabnext<CR>
 inoremap <A-h> <Esc>:tabprevious<CR>i
 inoremap <A-l> <Esc>:tabnext<CR>i
-tnoremap <A-h> <C-\><C-N>:tabprevious<CR>
-tnoremap <A-l> <C-\><C-N>:tabnext<CR>
+"tnoremap <A-h> <C-\><C-N>:tabprevious<CR>
+"tnoremap <A-l> <C-\><C-N>:tabnext<CR>
 
 " * edit
 nnoremap <A-t> :call fzf#run(fzf#wrap({'sink': 'tabedit!'}))<CR>
-nnoremap <A-x> :tabclose<CR>
+nnoremap <A-X> :tabclose<CR>
+nnoremap <A-x> :x<CR>
+nnoremap <Leader><A-x> :q!<CR>
 inoremap <A-t> <Esc>:tabnew<CR>i
-inoremap <A-x> <Esc>:tabclose<CR>
-tnoremap <A-t> <C-\><C-N>:tabnew<CR>
-tnoremap <A-x> <C-\><C-N>:tabclose<CR>
+inoremap <A-X> <Esc>:tabclose<CR>
+nnoremap <A-x> <Esc>:x<CR>
+"tnoremap <A-t> <C-\><C-N>:tabnew<CR>
+"noremap <A-x> <C-\><C-N>:tabclose<CR>
 
 " * reallocate tabs
 nnoremap <A-j> :tabm -1<CR>
 nnoremap <A-k> :tabm +1<CR>
-tnoremap <A-j> :tabm -1<CR>
-tnoremap <A-k> :tabm +1<CR>
+"noremap <A-j> :tabm -1<CR>
+"noremap <A-k> :tabm +1<CR>
 
 " * sends current buffer to a new tab
 nnoremap <A-w> <C-W>T
 "nnoremap <C-W><C-T> <C-W>T
 
 " Terminal
-tnoremap <Esc> <C-\><C-n>
+noremap <C-BS> <C-\><C-n>
 
 " Others
 nnoremap <C-z> <nop>
@@ -447,9 +488,10 @@ call plugins#load_settings('ale')
 call plugins#load_settings('vim-illuminate')
 call plugins#load_settings('vim-wordmotion')
 call plugins#load_settings('vimwiki')
+call plugins#load_settings('broot.vim')
 call plugins#load_settings('ranger.vim')
 "call plugins#load_settings('fzf.vim')
-call plugins#load_settings('omnisharp-vim')
+"call plugins#load_settings('omnisharp-vim')
 call plugins#load_settings('vim-sharpenup')
 call plugins#load_settings('zeavim.vim')
 call plugins#load_settings('echodoc.vim')
