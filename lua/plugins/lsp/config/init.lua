@@ -17,6 +17,8 @@ return {
             ['kotlin']      = { enabled = true },
             ['lua']         = { enabled = true },
             ['rust']        = { enabled = true },
+            ['haxe']        = { enabled = true },
+            ['javascript']  = { enabled = false },
         }
 
         for lang_name, lang in pairs(langs) do

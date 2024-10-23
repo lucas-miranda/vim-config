@@ -19,8 +19,8 @@ o.cursorline = true
 o.hlsearch = true
 
 o.tabstop = 4
-o.softtabstop = 4
-o.shiftwidth = 4
+o.softtabstop = -1
+o.shiftwidth = 0
 o.autoindent = true
 o.copyindent = true
 o.smarttab = true
@@ -61,7 +61,7 @@ o.ssop:remove { "options", "folds" }
 o.completeopt = "longest,menuone"
 
 o.previewheight = 10
-o.cmdheight = 1
+o.cmdheight = 0
 
 o.updatetime = 300
 
@@ -72,6 +72,9 @@ o.signcolumn = "yes"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- Neovide
+vim.g.neovide_refresh_rate = 144
 
 -- Unix
 ---------------

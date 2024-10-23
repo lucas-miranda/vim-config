@@ -78,6 +78,9 @@ map({ 'n', 'x' }, '\\P', '"+P')
 --> Execute visual selected expression
 xmap('\\=', 'c<C-R>=<C-R>"<cr>')
 
+--> Sort lines at visual range
+xmap('S', ':\'<,\'>sort<cr>')
+
 -------------------------
 -- Movement
 
@@ -88,7 +91,7 @@ nmap('<A-0>', '^')
 -- Macros
 
 nmap('<leader>m', 'q')
-del_map('n', 'q')
+--del_map('n', 'q')
 
 -------------------------
 -- Editor

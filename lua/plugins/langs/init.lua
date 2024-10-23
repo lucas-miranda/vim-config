@@ -9,6 +9,7 @@ local langs = {
     'renpy',
     'rust',
     'wgsl',
+    'haxe',
 }
 
 for _, lang in ipairs(langs) do

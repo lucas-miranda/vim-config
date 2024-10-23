@@ -27,6 +27,15 @@ return {
         end,
     },
 
+    -- Root file handling
+    {
+        'lambdalisue/suda.vim',
+        lazy = true,
+        init = function()
+            vim.g['suda_smart_edit'] = 1
+        end,
+    },
+
     -- Sessions
     'tpope/vim-obsession',
 
@@ -65,19 +74,34 @@ return {
     --'joshdick/onedark.vim',
     --'ayu-theme/ayu-vim',
     --'rafalbromirski/vim-aurora',
-    'bluz71/vim-moonfly-colors',
-    'srcery-colors/srcery-vim',
+    --'bluz71/vim-moonfly-colors',
+    --'srcery-colors/srcery-vim',
     --'aonemd/kuroi.vim',
-    'folke/tokyonight.nvim',
+    --'folke/tokyonight.nvim',
+
+
+    --[[
     {
         'lucas-miranda/vim-purple-martin',
         dev = true,
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd([[colorscheme purple_martin]])
+            vim.cmd([[colorscheme purple_martin)
         end,
     },
+    ]]
+
+    {
+        'nvimdev/zephyr-nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            -- Optionally configure and load the colorscheme
+            -- directly inside the plugin declaration.
+            vim.cmd.colorscheme('zephyr')
+        end
+    }
 
     -- * Light
     --'NLKNguyen/papercolor-theme',

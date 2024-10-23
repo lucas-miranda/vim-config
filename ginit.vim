@@ -5,11 +5,14 @@ endif
 let g:ginit_loaded = 1
 
 if exists('g:neovide')
+    set guifont=Fira\ Code:h12
     "set guifont=FiraCode\ Nerd\ Font\ Mono:h11
     "set guifont=Ubuntu\ Mono\ R:h14
     "set guifont=Comic\ Code\ Ligatures:h10
     "set guifont=MonoLisa:h11
-    set guifont=Iosevka\ Curly\ Extended:h12
+    "set guifont=Iosevka\ Curly\ Extended:h12
+    "set guifont=Monoid\ HalfLoose:h11
+    "set guifont=Gintronic:h11
     "set guifont=PragmataPro\ Liga:h13
 
     "set guifont=Liga\ SFMono\ Nerd\ Font:h11

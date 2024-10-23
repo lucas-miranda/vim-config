@@ -33,9 +33,12 @@ local cmd_omnisharp_net6 = {
 nvim_lsp.omnisharp.setup {
     capabilities = capabilities,
     --cmd = { "dotnet", "/home/luke/.omnisharp/omnisharp-net6/OmniSharp.dll" },
-    --cmd = cmd_omnisharp_net6,
+
+    -- when working with dotnet core
+    cmd = cmd_omnisharp_net6,
+
     --cmd = cmd_omnisharp,
-    cmd = cmd_omnisharp_mono,
+    --cmd = cmd_omnisharp_mono,
 
     handlers = {
         ["textDocument/definition"] = require('omnisharp_extended').handler

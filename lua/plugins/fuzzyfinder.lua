@@ -12,6 +12,7 @@ return {
 
     --'junegunn/fzf.vim',
 
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     {
         'nvim-telescope/telescope.nvim',
         lazy = false,
@@ -23,6 +24,7 @@ return {
         },
         opts = {
             defaults = {
+                --[[
                 vimgrep_arguments = {
                     "ag",
                     "--vimgrep",
@@ -35,6 +37,7 @@ return {
                     "--smart-case",
                     "--literal",
                 },
+                ]]
                 prompt_prefix = "> ",
                 selection_caret = "> ",
                 entry_prefix = "  ",
@@ -99,6 +102,14 @@ return {
                     }
                 }
             },
+            extensions = {
+                fzf = {
+                  fuzzy = true,                    -- false will only do exact matching
+                  override_generic_sorter = true,  -- override the generic sorter
+                  override_file_sorter = true,     -- override the file sorter
+                  case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                }
+            }
         },
         config = function(_, opts)
             local telescope = require "telescope"
@@ -122,6 +133,7 @@ return {
 
             opts.defaults.buffer_previewer_maker = previewers.buffer_previewer_maker
 
+            telescope.load_extension('fzf')
             telescope.setup(opts)
         end,
     }
