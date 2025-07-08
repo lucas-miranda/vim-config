@@ -26,7 +26,7 @@ o.copyindent = true
 o.smarttab = true
 o.expandtab = true
 o.backspace = { "indent", "eol", "start" }
-o.hidden = true
+o.hidden = false
 
 o.ignorecase = true
 o.smartcase = true

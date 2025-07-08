@@ -37,4 +37,7 @@ augroup END
 "    autocmd!
 "    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 "augroup END
+
+" clear jumplist on vim opening
+autocmd VimEnter * exe 'tabdo windo clearjumps'
 ]])

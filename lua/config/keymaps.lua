@@ -88,17 +88,17 @@ xmap('S', ':\'<,\'>sort<cr>')
 nmap('<A-0>', '^')
 
 -------------------------
--- Macros
-
-nmap('<leader>m', 'q')
---del_map('n', 'q')
-
--------------------------
 -- Editor
 
 --nmap('<leader>qq', '<cmd>q<cr>')
 --nmap('<leader>qw', '<cmd>wq<cr>')
 nmap('q', '<cmd>w<cr>')
+
+-------------------------
+-- Macros
+
+nmap('<leader>m', 'q')
+--del_map('n', 'q')
 
 -------------------------
 -- Marks
