@@ -4,12 +4,13 @@ local plugins = {
 local langs = {
     'csharp',
     'gdscript',
+    'haxe',
     'hlsl',
+    'ink',
     'kotlin',
     'renpy',
     'rust',
     'wgsl',
-    'haxe',
 }
 
 for _, lang in ipairs(langs) do
