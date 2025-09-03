@@ -88,24 +88,22 @@ xmap('S', ':\'<,\'>sort<cr>')
 nmap('<A-0>', '^')
 
 -------------------------
--- Editor
-
---nmap('<leader>qq', '<cmd>q<cr>')
---nmap('<leader>qw', '<cmd>wq<cr>')
-nmap('q', '<cmd>w<cr>')
-
--------------------------
 -- Macros
 
-nmap('<leader>m', 'q')
---del_map('n', 'q')
+nmap('q', '<nop>', { noremap = true })
+nmap('<leader>m', 'q', { noremap = true, desc = 'Record macro' })
+nmap('<M-,>', 'Q', { noremap = true, desc = 'Replay last register as macro' })
+
+-------------------------
+-- Editor
+
+nmap('q', '<cmd>w<cr>')
 
 -------------------------
 -- Marks
 
 --> Go to it's position at line, instead only returning to the given line
 nmap("'", '`')
-
 
 -------------------------
 -- Splits
